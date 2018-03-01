@@ -12,7 +12,7 @@
 
 # Postgres Setup
  1. $ sudo su - postgres psql
- 2. # CREATE USER username WITH PASSWORD 'password';
- 3. # CREATE DATABASE databasename;
- 4. # GRANT ALL PRIVILEGES ON DATABASE databasename TO username;
+ 2. CREATE USER username WITH PASSWORD 'password';
+ 3. CREATE DATABASE databasename;
+ 4. GRANT ALL PRIVILEGES ON DATABASE databasename TO username;
 
