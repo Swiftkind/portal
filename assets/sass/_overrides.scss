@@ -1,0 +1,405 @@
+//button styles
+.btn {
+    border-radius: 50px;
+    padding: 13px 35px 12px;
+    line-height: 14px;
+    @include transition(all .3s ease-out);
+    &:hover {
+        @include transition(all .3s ease-out);
+    }
+    &:not([disabled]) {
+        &:not([disabled]) {
+            &:focus,
+            &:active {
+                @include transition(all .3s ease-out);
+                &:focus {
+                    @include transition(all .3s ease-out);
+                }
+            }
+        }
+    }
+}
+
+.btn-sm {
+    padding: 5px 35px 4px;
+    min-height: 40px;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to left, #5d58de, #4b45dd);
+    border: solid 2px transparent;
+    @include transition(all .3s ease-out);
+    &:hover {
+        background-image: linear-gradient(to left, #4944e0, #352fc1);
+        border: solid 2px transparent;
+        @include transition(all .3s ease-out);
+    }
+    &:active {
+        background-image: linear-gradient(to left, #5d58de, #4b45dd);
+        border: solid 2px transparent;
+    }
+    &:not([disabled]) {
+        &:not([disabled]) {
+            &:focus,
+            &:active {
+                @include transition(all .3s ease-out);
+                background-image: linear-gradient(to left, #3a36b7, #2b26a5);
+                border: solid 2px transparent;
+                &:focus {
+                    @include transition(all .3s ease-out);
+                    background-image: linear-gradient(to left, #3a36b7, #2b26a5);
+                    border: solid 2px transparent;
+                    @include box-shadow(0px, 0px, 1rem, rgba($primary-blue, .5));
+                }
+            }
+        }
+    }
+}
+
+.btn-danger {
+    background-image: linear-gradient(to left, $danger, darken($danger, 5%));
+    border: solid 2px transparent;
+    @include transition(all .3s ease-out);
+    &:hover {
+        background-image: linear-gradient(to left, darken($danger, 5%), darken($danger, 10%));
+        border: solid 2px transparent;
+        @include transition(all .3s ease-out);
+    }
+    &:active {
+        background-image: linear-gradient(to left, darken($danger, 15%), darken($danger, 20%));
+        border: solid 2px transparent;
+    }
+    &:not([disabled]) {
+        &:not([disabled]) {
+            &:focus,
+            &:active {
+                @include transition(all .3s ease-out);
+                background-image: linear-gradient(to left, darken($danger, 15%), darken($danger, 20%));
+                border: solid 2px transparent;
+                &:focus {
+                    @include transition(all .3s ease-out);
+                    background-image: linear-gradient(to left, darken($danger, 15%), darken($danger, 20%));
+                    border: solid 2px transparent;
+                    @include box-shadow(0px, 0px, 1rem, rgba($danger, .5));
+                }
+            }
+        }
+    }
+}
+
+.btn-success {
+    background-image: linear-gradient(to left, $success, darken($success, 5%));
+    border: solid 2px transparent;
+    @include transition(all .3s ease-out);
+    &:hover {
+        background-image: linear-gradient(to left, darken($success, 5%), darken($success, 10%));
+        border: solid 2px transparent;
+        @include transition(all .3s ease-out);
+    }
+    &:active {
+        background-image: linear-gradient(to left, darken($success, 15%), darken($success, 20%));
+        border: solid 2px transparent;
+    }
+    &:not([disabled]) {
+        &:not([disabled]) {
+            &:focus,
+            &:active {
+                @include transition(all .3s ease-out);
+                background-image: linear-gradient(to left, darken($success, 15%), darken($success, 20%));
+                border: solid 2px transparent;
+                &:focus {
+                    @include transition(all .3s ease-out);
+                    background-image: linear-gradient(to left, darken($success, 15%), darken($success, 20%));
+                    border: solid 2px transparent;
+                    @include box-shadow(0px, 0px, 1rem, rgba($success, .5));
+                }
+            }
+        }
+    }
+}
+
+.btn-icon {
+    display: -webkit-box!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    -webkit-box-align: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+    &-left {
+        @extend .btn-icon;
+        .feather,
+        i[class*="dripicons-"] {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+
+.btn-link {
+    background-color: transparent;
+    border: none;
+    color: $pinkish-grey;
+    text-decoration: none;
+    padding: 0;
+    &:hover {
+        @extend .btn-link;
+        color: $blue-grey;
+    }
+    &:active {
+        @extend .btn-link;
+        color: $blue-grey;
+    }
+    &:not([disabled]) {
+        &:not([disabled]) {
+            &:focus,
+            &:active {
+                @extend .btn-link;
+                color: $blue-grey;
+                &:focus {
+                    @extend .btn-link;
+                    color: $blue-grey;
+                    @include box-shadow(0px, 0px, 0, 0);
+                }
+            }
+        }
+    }
+}
+
+
+//default dropdown styling
+.dropdown {
+    &.show {
+        .dropdown-menu {
+            @include box-shadow(0, 0, 10px, rgba(0, 0, 0, 0.06));
+            border: solid 1px #eef1f5;
+            min-width: 200px;
+            margin-top: 2rem;
+            border-radius: 10px;
+            border-top-right-radius: 0;
+            .dropdown-item {
+                padding: 0.75rem 1.5rem;
+                color: $steel;
+                &:hover,
+                &:active {
+                    background-color: $soft-blue;
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+
+.bootstrap-select.btn-group .dropdown-menu.inner {
+    display: block;
+}
+
+
+//to hide default dropdown-toggle arrow
+.dropdown-toggle {
+    cursor: pointer;
+    color: $pinkish-grey;
+    svg {
+        stroke: $pinkish-grey;
+    }
+    &::after {
+        display: none;
+    }
+}
+
+
+.select-options {
+    width: 100% !important;
+
+    .dropdown-toggle {
+        border-radius: 0;
+        border-bottom: solid 1px #e1e1e1;
+        text-align: left;
+        padding-left: 0;
+        padding-top: 7px;
+        padding-bottom: 8px;
+        cursor: pointer;
+        color: $pinkish-grey;
+        svg {
+            stroke: $pinkish-grey;
+        }
+        &::after {
+            display: inline-block;
+        }
+        .filter-option {
+            color: $dark-grey;
+        }
+        &:not([disabled]) {
+            &:not([disabled]) {
+                outline: none !important;
+                &:focus,
+                &:active {
+                    outline: none !important;
+                    &:focus {
+                        outline: none !important;
+                        @include box-shadow(0px, 0px, 0, 0);
+                    }
+                }
+            }
+        }
+        &.bs-placeholder {
+            .filter-option {
+                color: $pinkish-grey;
+            }
+        }
+    }
+    .dropdown-menu {
+        @include box-shadow(0, 0, 10px, rgba(0, 0, 0, 0.06));
+        border: solid 1px #eef1f5;
+        min-width: 200px;
+        margin-top: 2rem;
+        border-radius: 10px;
+        border-top-right-radius: 0;
+
+        li {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%;
+            a {
+                padding: 0.75rem 1.5rem;
+                width: 100%;
+                color: $steel;
+                &:hover,
+                &:active {
+                    background-color: $soft-blue;
+                    color: $white;
+                }
+                &:focus {
+                    outline: none;
+                }
+                span {
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+            &.selected,
+            &.active {
+                .glyphicon-ok {
+                    position: absolute;
+                    display: inline-block !important;
+                    right: 15px;
+                    margin-top: 5px;
+                    &:before {
+                        content: url(../node_modules/dripicons/SVG/checkmark-sm.svg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//datepicker
+.datepicker {
+    padding: 0px 0px 12px;
+}
+
+.gj-datepicker {
+    .input-group-append {
+        border: none;
+        .input-group-text {
+            padding: 10px 30px 12px;
+            background-color: transparent;
+            border: none;
+            .gj-icon {
+                color: rgba($steel, 0.8)
+            }
+        }
+    }
+}
+
+//typography
+h2 {
+    font-size: 2.57rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+h4 {
+    font-size: 1.14rem;
+    letter-spacing: normal;
+}
+
+a {
+    color: $primary-blue;
+    @include transition(all .3s ease-out);
+    &:hover {
+        text-decoration: none;
+        color: darken($primary-blue, 30%);
+        @include transition(all .3s ease-out);
+    }
+}
+
+.strong {
+    font-family: $Roboto-Medium;
+}
+
+//icons
+.feather {
+    width: 1.1rem;
+}
+
+
+//input styles
+.form-control {
+    border: none;
+    border-bottom: solid 1px #e1e1e1;
+    border-radius: 0;
+    @include transition(all .3s ease-out);
+    &:focus {
+        @include box-shadow(0, 0, 0, 0);
+        border-color: $primary-blue;
+        @include transition(all .3s ease-out);
+    }
+    @include placeholder {
+        color: #b8c0dc;
+    }
+}
+
+label {
+    color: #b8c0dc;
+}
+
+.input-group {
+    .no-bg {
+        background-color: transparent;
+        border: none;
+    }
+}
+
+.input-group {
+    &.icon-absolute {
+        .input-group-append {
+            background: none;
+            border: none;
+            position: absolute;
+            right: 0;
+            .input-group-text {
+                background: none;
+                border: none;
+            }
+        }
+    }
+}
+
+//shapes and radius
+.circle {
+    border-radius: 50%;
+}
+
+
+//dividers
+.v-divider {
+    border-left: solid 1px #eaeef7;
+    min-height: 8px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

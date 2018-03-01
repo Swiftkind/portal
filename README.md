@@ -9,10 +9,13 @@
  1. Activate your environment
  2. Install requirements:
     - $ pip install -r requirements.txt
+ 3. Go to assets/ and install the frontend packages:
+    - $ cd assets/
+    - $ npm install
 
 # Postgres Setup
  1. $ sudo su - postgres psql
- 2. # CREATE USER username WITH PASSWORD 'password';
- 3. # CREATE DATABASE databasename;
- 4. # GRANT ALL PRIVILEGES ON DATABASE databasename TO username;
+ 2. CREATE USER username WITH PASSWORD 'password';
+ 3. CREATE DATABASE databasename;
+ 4. GRANT ALL PRIVILEGES ON DATABASE databasename TO username;
 

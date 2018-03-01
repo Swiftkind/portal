@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="main-content">
+    <div class="invoice-page h-100 no-gutters">
+      <div class="row no-gutters invoice-wrapper justify-content-center h-100">
+        <div class="col-3 invoice-side-bar ">
+          <ul class="invoice-list list-unstyled">
+            {% for invoice in invoices %}
+            <li>
+              <div class="invoice-item"
+                id="{{ invoice.id }}"
+                onclick="InvoiceController.detail(this.id)">
+                <a href="#" class="delete-item">
+                  <i data-feather="x"></i>
+                </a>
+                <div class="d-flex justify-content-between">
+                  <h4 class="strong">{{ invoice.customer.company }}</h4>
+                  <h4 class="strong">${{ invoice.total_amount }}</h4>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p>{{ invoice.order_id }}</p>
+                  <p> {{ invoice.invoice_date }} | <strong>Draft</strong></p>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-9 invoice-page-details-wrapper">
+          <div class="mx-auto invoice-page-details">
+            <div class="container">
+              <div class="main-content-header d-flex align-items-center justify-content-between">
+                <div >
+                  <h3>New invoice</h3>
+                  <div class="invoice-actions d-flex ">
+                    <button class="btn btn-icon-left btn-link">
+                      <i data-feather="check-circle"></i>
+                      Saved as draft
+                    </button>
+                    <button class="btn btn-icon-left btn-link">
+                      <i data-feather="maximize-2"></i>
+                      Preview
+                    </button>
+                    <button class="btn btn-icon-left btn-link">
+                      <i data-feather="x"></i>
+                      Discard this document
+                    </button>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-primary btn-icon ">
+                  Send <i data-feather="arrow-right"></i>
+                </button>
+              </div>
+              <hr>
+              <div class="invoice-container invoice-view-details invoice-detail">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="invoice-details">
+    
+  </div>
+{% endblock content %}
+
+{% block other_js %}
+
+  <script type="text/javascript" src="{% static 'js/invoice/invoice.services.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/invoice/invoice.controller.js' %}"></script>
+
+{% endblock %}

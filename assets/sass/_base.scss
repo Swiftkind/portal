@@ -1,0 +1,212 @@
+.main-nav {
+    height: 5.71rem;
+    border-bottom: solid 1px #f3f3f3;
+    background: $white;
+    .nav-item {
+        &.active {
+            background-color: rgba(201, 201, 201, 0.15);
+            a {
+                font-family: $Roboto-Regular;
+                color: $primary-blue;
+            }
+        }
+        .nav-link {
+            font-family: $Roboto-Regular;
+            color: $blue-grey;
+            padding-top: 2.05rem;
+            padding-bottom: 2.05rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+    .nav-serach {
+        margin-left: 3rem;
+        .input-group-text {
+            background-color: transparent;
+            svg {
+                stroke: $primary-blue;
+            }
+            border: none;
+        }
+        input {
+            border: none;
+            width: 17.86rem;
+            @include placeholder {
+                color: $pinkish-grey;
+            }
+        }
+    }
+    .create-invoice {
+        margin-right: 3.28rem;
+    }
+    .nav-account {
+        p {
+            margin-right: 1.66rem;
+            color: $blue-grey;
+        }
+    }
+    .dropdown-toggle {
+        .avatar-md {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+
+.avatar {
+    background: {
+        position: center center;
+        size: cover;
+    }
+    border-radius: 50%;
+    &-sm {
+        @extend .avatar;
+        width: 30px;
+        height: 30px
+    }
+    &-md {
+        @extend .avatar;
+        width: 35px;
+        height: 35px
+    }
+    &-lg {
+        @extend .avatar;
+        width: 70px;
+        height: 70px
+    }
+}
+
+
+.main-content {
+    background: #F9F9F9;
+    .main-content-header {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        h2 {}
+    }
+}
+
+
+//side-bar styles
+.side-bar {
+    width: 450px;
+    background: $white;
+    @include box-shadow(3px, 3px, 20px, rgba(0, 0, 0, 0.06));
+    padding: 3.6rem 3.2rem;
+    .side-bar-toggle {
+        position: absolute;
+        right: 3rem;
+        top: 3rem;
+
+        img {
+            width: 1.75rem;
+        }
+    }
+    .header-info {
+        margin-bottom: 2.5rem;
+    }
+    .side-bar-subtitle {
+        color: $pinkish-grey;
+        font-size: 12px;
+        line-height: 1.33;
+        letter-spacing: 2px;
+    }
+    form {
+        .form-group {
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.fixed-index {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    &-right {
+        @extend .fixed-index;
+        right: 0;
+    }
+}
+
+#profile-side-bar {
+    display: block;
+    width: 350px;
+    right:-350px;
+    transition: 0.2s ease right;
+    .profile-info {
+        margin: 4.14rem 0;
+
+        .avatar {
+            margin-bottom: 2.14rem;
+        }
+        .text-dark {
+            color: $dark-grey;
+        }
+        .designation {
+            color: $primary-blue;
+            font-weight: 600;
+        }
+    }
+    label {
+        font-size: 12px;
+        color: $pinkish-grey;
+    }
+    &.active {
+        right: 0;
+        transition: 0.2s ease all;
+    }
+}
+
+#filter-side-bar {
+    padding: 3.6rem 5rem;
+}
+
+
+
+//custom panels
+.panel-container {
+	height: 100vh;
+	padding-top: 10vh;
+    .panel-body {
+        width: 500px;
+        border-radius: 4px;
+        background-color: $white;
+        padding: 2.8rem 6rem;
+        margin-bottom: 3.5rem;
+        @include box-shadow( 0, 2px, 6px, rgba(153, 170, 190, 0.16));
+        .panel-title {
+            letter-spacing: 0.03rem;
+            color: $primary-blue;
+            font-family: 'Roboto-Medium';
+            margin-bottom: 1.5rem;
+        }
+    }
+}
+
+.modal{
+	.modal-dialog{
+	.modal-content{
+		border:none;
+		border-radius: 6px;
+
+		.modal-header{
+			border-bottom:none;
+		}
+		.modal-body{
+			padding: 2rem 3rem;
+			h3{
+				font-family: 'Roboto-Medium', sans-serif;
+				color: $cobalt;
+				margin-bottom: 3rem;
+			}
+			min-height: 200px;
+		}
+		.modal-footer{
+			border-top: none;
+			padding-bottom: 4rem;
+		}
+	}
+	}
+}
