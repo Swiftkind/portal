@@ -2,11 +2,7 @@
 *.pyc
 *db.sqlite3
 *local_settings.py
-*media/
-*manage.py-oauth2.json
-*migrations/
-*static/
 
-# Env folders
-venv/
-env/
+media/
+static/
+assets/node_modules/

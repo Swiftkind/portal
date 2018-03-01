@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Portal | Swiftkind</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/dripicons/webfont/webfont.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/dripicons/webfont/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/datepicker-bootstrap/css/core.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/datepicker-bootstrap/css/datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap/dist/css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+
+    <script type="text/javascript" src="{% static 'node_modules/bootstrap/dist/js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/datepicker-bootstrap/js/core.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/datepicker-bootstrap/js/datepicker.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/feather-icons/dist/feather.min.js' %}"></script>
+    <script type="text/javascript">
+        feather.replace();
+    </script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
