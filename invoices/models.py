@@ -4,15 +4,23 @@ from django.db import models
 class Invoice(models.Model):
     """ Model for invoices
     """
+
+    DUE_RECEIPT = 'Due of Receipt'
+    DUE_END_NEXT_MONTH = 'Due End of Next Month'
+    DUE_END_MONTH = 'Due End of Month'
+
+    SENT = 'Sent'
+    DRAFT = 'Draft'
+
     TERMS = (
-            ('Due of Receipt', 'Due of Receipt'),
-            ('Due End of Next Month', 'Due End of Next Month'),
-            ('Due End of Month', 'Due End of Month')
+            (DUE_RECEIPT, 'Due of Receipt'),
+            (DUE_END_NEXT_MONTH, 'Due End of Next Month'),
+            (DUE_END_MONTH, 'Due End of Month')
         )
 
     STATUS = (
-            ('Sent', 'Sent'),
-            ('Draft', 'Draft')
+            (SENT, 'Sent'),
+            (DRAFT, 'Draft')
         )
 
     code = models.CharField(max_length=16)
