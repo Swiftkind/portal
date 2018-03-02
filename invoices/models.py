@@ -25,3 +25,13 @@ class Invoice(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=16, choices=STATUS)
+
+
+class Item(models.Model):
+    """ Model for items in invoice
+    """
+
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    details = models.CharField(max_length=255)
+    quantity = models.IntegerField()
+    rate = models.IntegerField()
