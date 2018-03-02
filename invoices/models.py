@@ -26,6 +26,9 @@ class Invoice(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=16, choices=STATUS)
 
+    def __str__(self):
+        return '{}'.format(self.code)
+
 
 class Item(models.Model):
     """ Model for items in invoice
@@ -35,3 +38,6 @@ class Item(models.Model):
     details = models.CharField(max_length=255)
     quantity = models.IntegerField()
     rate = models.IntegerField()
+
+    def __str__(self):
+        return '{}'.format(self.invoice)
