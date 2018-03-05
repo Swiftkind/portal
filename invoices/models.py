@@ -35,3 +35,15 @@ class Invoice(models.Model):
 
     def __str__(self):
         return f'{self.code}'
+
+
+class Item(models.Model):
+    """ Model for items in invoice
+    """
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    details = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=0)
+    rate = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.invoice}'
