@@ -7,14 +7,23 @@ from django.db import models
 class UserManager(BaseUserManager):
     """ Manage user
     """
-    def create_user(self, email, password, **kwargs):
-        """ Set default for user
+    def _create_user(self, email, password, **extra_fields):
+        """ save user account using email and password
         """
-        user = self.model(email=email, is_active=True, **kwargs)
+        if not email:
+            raise ValueError('The given Email must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
-        
         return user
+
+    def create_user(self, email, password, **extra_fields):
+        """ sets the defaults for user account
+        """
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **kwargs):
         """ Set default for superuser
