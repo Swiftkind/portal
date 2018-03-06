@@ -1,15 +1,16 @@
 from django.db import models
+from decimal import Decimal
 
 
 class Invoice(models.Model):
-    """ Model for invoices
+    """ Model that contains invoice data
     """
-    DUE_RECEIPT = 'Due of Receipt'
-    DUE_END_NEXT_MONTH = 'Due End of Next Month'
-    DUE_END_MONTH = 'Due End of Month'
+    DUE_RECEIPT = 'due_receipt'
+    DUE_END_NEXT_MONTH = 'due_end_next_month'
+    DUE_END_MONTH = 'due_end_month'
 
-    SENT = 'Sent'
-    DRAFT = 'Draft'
+    SENT = 'sent'
+    DRAFT = 'draft'
 
     TERMS = (
             (DUE_RECEIPT, 'Due of Receipt'),
@@ -31,7 +32,7 @@ class Invoice(models.Model):
     conditions = models.CharField(max_length=28, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=16, choices=STATUS, default=SENT)
+    status = models.CharField(max_length=16, choices=STATUS, default=DRAFT)
 
     def __str__(self):
         return f'{self.code}'
@@ -42,8 +43,11 @@ class Item(models.Model):
     """
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
     details = models.CharField(max_length=255)
-    quantity = models.IntegerField(default=0)
-    rate = models.IntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
+    rate = models.DecimalField(max_digits=15,
+                               decimal_places=2,
+                               default=Decimal('0.0')
+                              )
 
     def __str__(self):
         return f'{self.invoice}'

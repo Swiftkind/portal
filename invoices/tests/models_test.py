@@ -1,7 +1,7 @@
 import datetime
 from django.test import TestCase
 from django.db import IntegrityError
-from django.contrib.auth.models import User
+from users.models import User
 from invoices.models import Invoice, Item
 
 
@@ -50,7 +50,7 @@ class InvoiceTestCase(TestCase):
 
         self.assertTrue(isinstance(invoice, Invoice))
 
-        order_id = '43'
+        order_id = 'abc43'
         invoice.order_id = order_id
         invoice.save()
 
@@ -99,8 +99,8 @@ class InvoiceTestCase(TestCase):
         self.assertTrue(isinstance(invoice, Invoice))
 
         with self.assertRaises(Invoice.DoesNotExist):
-            fake_invoice = Invoice.objects.get(code="fake_code")
-            fake_invoice.delete()
+            new_invoice = Invoice.objects.get(code="aasd345")
+            new_invoice.delete()
 
 
 class ItemTestCase(TestCase):
@@ -131,7 +131,7 @@ class ItemTestCase(TestCase):
 
         self.assertTrue(isinstance(item, Item))
 
-        new_detail = "this is the new detail"
+        new_detail = "Front end design"
         item.details = new_detail
         item.save()
 
@@ -164,8 +164,7 @@ class ItemTestCase(TestCase):
         self.assertTrue(isinstance(item, Item))
 
         with self.assertRaises(IntegrityError):
-            item.details = None
-            item.quantity = None
+            item.quantity = -1
             item.save()
 
     def test_delete_item_fail(self):
@@ -176,6 +175,6 @@ class ItemTestCase(TestCase):
         self.assertTrue(isinstance(item, Item))
 
         with self.assertRaises(Item.DoesNotExist):
-            fake_invoice = Invoice(code="fake_code", **invoice_data) 
-            item = Item.objects.get(invoice=fake_invoice)
+            new_invoice = Invoice(code="asdfdf123", **invoice_data) 
+            item = Item.objects.get(invoice=new_invoice)
             item.delete()
