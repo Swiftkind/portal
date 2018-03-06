@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from decimal import Decimal
 
@@ -23,6 +25,8 @@ class Invoice(models.Model):
             (DRAFT, 'Draft')
         )
 
+    NO_INVOICE = 'No invoice yet.'
+
     code = models.CharField(max_length=16)
     order_id = models.CharField(max_length=16,null=True, blank=True)
     invoice_date = models.DateTimeField()
@@ -36,6 +40,12 @@ class Invoice(models.Model):
 
     def __str__(self):
         return f'{self.code}'
+
+    def is_due(self):
+        return datetime.date.today() > self.due_date.date()
+
+    def get_absolute_url(self):
+        return "/invoice/%i/" % self.id
 
 
 class Item(models.Model):

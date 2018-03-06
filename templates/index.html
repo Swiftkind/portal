@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- MAIN START -->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="main-dashboard">
+      <div class="main-content-header">
+        <h3>My invoices</h3>
+        <p>
+          {{ invoices.count }} invoices total with 
+          {{ dues }} on due and 
+          {{ drafts }} drafts
+        </p>
+      </div>
+      <div class="list-invoice-client table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>
+                <a href="#" class="d-flex align-items-center">
+                  Invoice number
+                </a>
+              </th>
+              <th>
+                <a href="#" class="d-flex align-items-center">
+                  Due date
+                </a>
+              </th>
+              <th>
+                <a href="#" class="d-flex align-items-center">
+                  Payment Status
+                </a>
+              </th>
+              <th>
+                <a href="#" class="d-flex align-items-center">
+                  Amount
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if invoices %}
+              {% for invoice in invoices %}
+                <tr>
+                  <td>
+                    <a href="{{ invoice.get_absolute_url }}">
+                    <span>INV - {{ invoice.code }}</span>
+                     </a>
+                  </td>
+                  <td>
+                    {% if invoice.is_due %}
+                      <span class="due">
+                        {{ invoice.due_date|date:"F d, Y" }}
+                        &nbsp;
+                        <span>Due</span>
+                      </span>
+                    {% else %}
+                      <span>
+                        {{ invoice.due_date|date:"F d, Y" }}
+                      </span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <span>{{ invoice.status|title }}</span>
+                  </td>
+                  <td>
+                    <span>${{ invoice.amount }}</span>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td>
+                  <span>{{ no_invoice }}</span>
+                </td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MAIN END -->
+{% endblock %}
