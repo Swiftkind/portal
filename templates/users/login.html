@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="col p-0">
+        <div class="signup-form authenticate-form h-100 d-flex align-items-center justify-content-center ">
+          <div>
+            <h3 class="mb-4">Login</h3>
+            <form method="POST" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              <p class="text-danger">{{ form.non_field_errors }}</p>
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" name="email" class="form-control">
+                {{form.email.errors.as_text}}
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
+              </div>
+              <button class="btn btn-primary btn-sm btn-icon m-auto">
+                Log in
+                <i data-feather="arrow-right"></i>
+              </button>
+            </form>
+            {% if error %}
+              <p class="text-danger">{{ error.error }}</p>
+            {% endif %}
+            <p class="text-center">
+              I don't have an account. <a href="#">Sign up.</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col p-0">
+        
+        <div class="img-bg-full d-flex align-items-end">
+          <h2>Automate your invoices</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
