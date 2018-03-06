@@ -7,6 +7,7 @@ from users.forms import LoginForm
 class DashboardView(TemplateView):
     template_name = 'index.html'
 
+
 class LoginView(TemplateView):
     """ View for user login
     """
@@ -14,6 +15,7 @@ class LoginView(TemplateView):
 
     def get(self, *args, **kwargs):
         form = LoginForm()
+
         if self.request.user.is_authenticated:
             return redirect('dashboard')
 
@@ -21,8 +23,10 @@ class LoginView(TemplateView):
 
     def post(self, *args, **kwargs):
         form = LoginForm(self.request.POST)
+
         if form.is_valid():
             login(self.request, form.user)
             return redirect('dashboard')
 
-        return render(self.request, self.template_name, {'form':form})
+        return render(self.request, self.template_name,
+                      {'form':form}, status=400)
