@@ -33,6 +33,7 @@ class UserManager(BaseUserManager):
             password=password,
             is_staff=True,
             is_superuser=True,
+            is_active=True,
             **kwargs,
         )
 
