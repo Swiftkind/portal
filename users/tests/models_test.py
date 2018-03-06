@@ -57,7 +57,7 @@ class UserTestCase(TestCase):
         """ Create user account with invalid data
         """
         new_user_data = user_data.copy()
-        new_user_data['first_name'] = None
+        new_user_data.update({'first_name': None})
 
         with self.assertRaises(IntegrityError):
             User.objects.create_user(**new_user_data)
@@ -68,12 +68,10 @@ class UserTestCase(TestCase):
         user = User.objects.create_user(**user_data)
         self.assertIsInstance(user, User)
 
-        new_first_name = None
-        user.first_name = new_first_name
+        user.first_name = None
 
         with self.assertRaises(IntegrityError):
             user.save()
-            
 
     def test_delete_user_fail(self):
         """ Delete a non-existing user
