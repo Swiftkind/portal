@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="main-content">
+    <div class="invoice-page h-100 no-gutters">
+      <div class="row no-gutters invoice-wrapper justify-content-center h-100">
+        <div class="col-3 invoice-side-bar ">
+          <h4 class="side-bar-subtitle">Invoices</h4>
+          <ul class="invoice-list list-unstyled">
+            {% for invoice in invoices %}
+            <li>
+              <div class="invoice-item">
+                <a href="#" class="delete-item">
+                  <i data-feather="x"></i>
+                </a>
+                <div class="d-flex justify-content-between">
+                  <h4 class="strong">Super Company, Inc.</h4>
+                  <h4 class="strong">$3,579.37</h4>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p>{{ invoice.order_id }}</p>
+                  <p> {{ invoice.invoice_date }} | <strong>Draft</strong></p>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-9 invoice-page-details-wrapper">
+          <div class="mx-auto invoice-page-details">
+            <div class="container">
+              <div class="main-content-header d-flex align-items-center justify-content-between">
+                <div >
+                  <h3>New invoice</h3>
+                  <div class="invoice-actions d-flex ">
+                    <button class="btn btn-icon-left btn-link">
+                      <i data-feather="check-circle"></i>
+                      Saved as draft
+                    </button>
+                    <button class="btn btn-icon-left btn-link">
+                      <i data-feather="maximize-2"></i>
+                      Preview
+                    </button>
+                    <button class="btn btn-icon-left btn-link">
+                      <i data-feather="x"></i>
+                      Discard this document
+                    </button>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-primary btn-icon ">
+                  Send <i data-feather="arrow-right"></i>
+                </button>
+              </div>
+              <hr>
+              <div class="invoice-container invoice-view-details">
+                <div class="row d-flex no-gutters align-items-end justify-content-between mb-5">
+                  <div>
+                    <h3>Invoice</h3>
+                  </div>
+                  <div>
+                    <label>Invoice number</label>
+                    <h3>
+                      Jan - 345 - 234
+                    </h3>
+                  </div>
+                </div>
+                <div class="row d-flex align-items-start mb-5">
+                  <div class="col-8">
+                    <label>Bill to</label>
+                    <h3 class="">Super Corporation</h3>
+                    <p>Door #1, 3rd floor, Consuelo Bldg. J.P. Laurel Avenue, Davao City, Philippines, 8000</p>
+                  </div>
+                  <div class="col-4 text-right">
+                    <label>Service type</label>
+                    <p>Hourly</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <table class="table order-summary">
+                    <thead>
+                      <tr>
+                        <th>
+                          Item and Description
+                        </th>
+                        <th>
+                          Qty
+                        </th>
+                        <th>
+                          Rate
+                        </th>
+                        <th class="text-right">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="main-tbody-row">
+                        <td class="svc-description">
+                          <h4>
+                            Website development
+                          </h4>
+                        </td>
+                        <td>
+                          <h4>300.10</h4>
+                        </td>
+                        <td>
+                          <h4>$15.00</h4>
+                        </td>
+                        <td class="text-right">
+                          <h4>$4,501.50</h4>
+                        </td>
+                      </tr>
+                      <tr class="main-tbody-row">
+                        <td class="svc-description">
+                          <h4>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. 
+                          </h4>
+                        </td>
+                        <td>
+                          <h4>300.10</h4>
+                        </td>
+                        <td>
+                          <h4>$15.00</h4>
+                        </td>
+                        <td class="text-right">
+                          <h4>$4,501.50</h4>
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="mb-5">
+                    <label>Remarks:</label>
+                    <h4>Williamsburg farm-to-table kogi, cloud bread salvia</h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <table class="table summary-table">
+                      <tbody>
+                        <tr>
+                          <td>
+                            Subtotal
+                          </td>
+                          <td>
+                            $ 4,507.50
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>
+                            Less
+                          </td>
+                          <td>
+                            $ 0.00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h3>Total</h3>
+                          </td>
+                          <td>
+                            <h3>$ 4,507.50</h3>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
