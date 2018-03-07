@@ -1,13 +1,28 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
+from invoices.models import Invoice
 from users.forms import LoginForm
 from users.decorators import user_is_logged
 
 
-class DashboardView(TemplateView):
-    template_name = 'index.html'
+class DashboardView(LoginRequiredMixin, TemplateView):
+    """ Dashboard view for portal details
+    """
+    template_name = 'dashboard.html'
+
+    def get(self, *args, **kwargs):
+        """ Display portal summary details
+        """
+        invoices = Invoice.invoice_objects
+        context = {
+            'drafts': invoices.drafts().count(),
+            'due_dates': invoices.count_due_date(), 
+            'invoices': invoices.all(),
+        }
+        return render(self.request, self.template_name, context)
 
 
 @method_decorator(user_is_logged, name='dispatch')
