@@ -1,19 +1,17 @@
-import datetime
-
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.urls import reverse
+from django.utils import timezone
 
-
-from invoices.models import Invoice
 from users.models import User
+from invoices.models import Invoice
 
 
-date = datetime.datetime.now()
+date = timezone.now().date()
 invoice_data = {
     'order_id':"12",
     'invoice_date':date,
     'terms':"Due of Receipt",
-    'due_date':date + datetime.timedelta(days=5),
+    'due_date':date + timezone.timedelta(days=5),
     'notes':"sample notes",
     'conditions':"condition 1",
     'date_created':date,
@@ -22,62 +20,45 @@ invoice_data = {
 }
 
 
+user_data = {
+    'email': "john@doe.com",
+    'first_name': "John",
+    'last_name': "Doe",
+    'password': 'password'
+}
+
+
 class DashboardTestCase(TestCase):
     """ Test dashboard
     """
     def setUp(self):
-        """ Setup dashboard url
-        """
-        self.url = reverse('dashboard')
+        user = User.objects.create_user(**user_data)
+        self.client = Client()
+        self.client.login(email=user_data['email'], password=user_data['password'])
 
-    def test_dashboard(self):
-        """ Test dashboard accessibility
+    def test_dashboard_not_authenticated(self):
+        """ Test dashboard with user not authenticated
         """
-        response = self.client.get(self.url)
+        self.client.logout()
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_dashboard_authenticated(self):
+        """ Test dashboard with user authenticated
+        """
+        response = self.client.get(reverse('dashboard'))
         self.assertEqual(response.status_code, 200)
 
-    def test_no_invoice(self):
-        """ Test dashboard with empty invoice
+    def test_invoice_empty(self):
+        """ Test 
         """
-        response = self.client.get(self.url)
-        self.assertContains(response, Invoice.NO_INVOICE)
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.context['invoices'].count(), 0)
 
-    def test_one_invoice(self):
-        """ Test dashboard with added invoice
+    def test_invoice_count(self):
+        """ Test the invoice number of users
         """
-        code = User.objects.make_random_password()
-        Invoice.objects.create(code=code, **invoice_data)
-
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, code)
-
-    def test_two_invoice(self):
-        """ Test dashboard with multiple added invoice
-        """
-        code_1 = User.objects.make_random_password()
-        Invoice.objects.create(code=code_1, **invoice_data)
-        code_2 = User.objects.make_random_password()
-        Invoice.objects.create(code=code_2, **invoice_data)
-
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, code_1)
-        self.assertContains(response, code_2)
-
-    def test_invoice_url(self):
-        """ Test dashboard with invoice url.
-            In this example, it will raise 404 since viewing invoice
-            is not created yet.
-        """
-        code = User.objects.make_random_password()
-        invoice = Invoice.objects.create(code=code, **invoice_data)
-
-        response = self.client.get(invoice.get_absolute_url())
-        self.assertEqual(response.status_code, 404)
-
-
-
-
-
+        Invoice.invoice_objects.create(code='abcd', **invoice_data)
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.context['invoices'].count(), 1)
 
