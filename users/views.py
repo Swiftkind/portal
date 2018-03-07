@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import login
+from django.utils.decorators import method_decorator
 from users.forms import LoginForm
+from users.decorators import user_is_logged
 
 
 class DashboardView(TemplateView):
     template_name = 'index.html'
 
 
+@method_decorator(user_is_logged, name='dispatch')
 class LoginView(TemplateView):
     """ View for user login
     """
@@ -15,11 +18,7 @@ class LoginView(TemplateView):
 
     def get(self, *args, **kwargs):
         form = LoginForm()
-
-        if self.request.user.is_authenticated:
-            return redirect('dashboard')
-
-        return render(self.request, self.template_name,{'form':form})
+        return render(self.request, self.template_name, {'form':form})
 
     def post(self, *args, **kwargs):
         form = LoginForm(self.request.POST)
