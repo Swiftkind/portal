@@ -17,7 +17,8 @@ class LoginForm(forms.Form):
 
         self.user = authenticate(email=email, password=password)
 
-        if self.user is None or not self.user.is_active:
-            raise forms.ValidationError(self.error_msg, code='400')
+        if not self.user or not self.user.is_active:
+            raise forms.ValidationError(self.error_msg,
+                                        code='invalid_credentials')
 
         return self.cleaned_data
