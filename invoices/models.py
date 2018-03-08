@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.utils import timezone
 from decimal import Decimal
 
@@ -62,9 +63,7 @@ class Invoice(models.Model):
     def total_amount(self):
         """ Get the total amount of items per invoice
         """
-        if self.item_set.first():
-            return self.item_set.first().amount
-        return 0
+        return sum([item.amount for item in self.item_set.all()])
 
 
 class Item(models.Model):
