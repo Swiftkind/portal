@@ -68,7 +68,7 @@
                         span {
                             color: $white;
                         }
-                        .due {
+                        .is_due {
                             color: #ffbfbf;
                             span {
                                 border: solid 1px #ffbfbf;
@@ -102,7 +102,7 @@
                             color: $warning;
                         }
                     }
-                    .due {
+                    .is_due {
                         color: $danger;
                         span {
                             border: solid 1px $danger;

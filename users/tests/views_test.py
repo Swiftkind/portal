@@ -5,17 +5,18 @@ from invoices.models import Invoice
 from users.models import User
 
 
-date = timezone.now().date()
+date_now = timezone.now().date()
+
 invoice_data = {
     'order_id':"12",
-    'invoice_date':date,
-    'terms':"Due of Receipt",
-    'due_date':date + timezone.timedelta(days=5),
+    'invoice_date':date_now,
+    'terms':Invoice.DUE_RECEIPT,
+    'due_date':date_now + timezone.timedelta(days=5),
     'notes':"sample notes",
     'conditions':"condition 1",
-    'date_created':date,
-    'date_updated':date,
-    'status':"Sent"
+    'date_created':date_now,
+    'date_updated':date_now,
+    'status':Invoice.SENT
 }
 
 
@@ -31,8 +32,8 @@ class DashboardTestCase(TestCase):
     """ Test dashboard
     """
     def setUp(self):
-        user = User.objects.create_user(**user_data)
         self.client = Client()
+        user = User.objects.create_user(**user_data)
         self.client.login(email=user_data['email'], password=user_data['password'])
 
     def test_dashboard_not_authenticated(self):
@@ -57,7 +58,7 @@ class DashboardTestCase(TestCase):
     def test_invoice_count(self):
         """ Test the invoice number of users
         """
-        Invoice.invoice_objects.create(code='abcd', **invoice_data)
+        Invoice.objects.create(code='abcd', **invoice_data)
         response = self.client.get(reverse('dashboard'))
         self.assertEqual(response.context['invoices'].count(), 1)
 
