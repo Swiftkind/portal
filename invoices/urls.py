@@ -3,5 +3,5 @@ from invoices.views import InvoiceView
 
 
 urlpatterns = [
-    path('invoice/', InvoiceView.as_view(), name='invoice'),
+    path('invoices/', InvoiceView.as_view(), name='invoice'),
 ]
