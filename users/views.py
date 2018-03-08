@@ -16,11 +16,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get(self, *args, **kwargs):
         """ Display portal summary details
         """
-        invoices = Invoice.invoice_objects
         context = {
-            'drafts': invoices.drafts().count(),
-            'due_dates': invoices.count_due_date(), 
-            'invoices': invoices.all(),
+            'drafts': Invoice.objects.drafts().count(),
+            'due_dates': Invoice.objects.past_due().count(), 
+            'invoices': Invoice.objects.all(),
         }
         return render(self.request, self.template_name, context)
 

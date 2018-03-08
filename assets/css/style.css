@@ -902,11 +902,11 @@ label {
   color: #fff;
 }
 /* line 71, ../sass/_pages.scss */
-.list-invoice-client table tbody tr:hover td .due {
+.list-invoice-client table tbody tr:hover td .is_due {
   color: #ffbfbf;
 }
 /* line 73, ../sass/_pages.scss */
-.list-invoice-client table tbody tr:hover td .due span {
+.list-invoice-client table tbody tr:hover td .is_due span {
   border: solid 1px #ffbfbf;
   border-radius: 2px;
   padding: 3px 6px;
@@ -944,11 +944,11 @@ label {
   color: #fcce8e;
 }
 /* line 105, ../sass/_pages.scss */
-.list-invoice-client table tbody tr td .due {
+.list-invoice-client table tbody tr td .is_due {
   color: #FC4467;
 }
 /* line 107, ../sass/_pages.scss */
-.list-invoice-client table tbody tr td .due span {
+.list-invoice-client table tbody tr td .is_due span {
   border: solid 1px #FC4467;
   border-radius: 2px;
   padding: 3px 6px;

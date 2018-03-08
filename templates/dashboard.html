@@ -35,13 +35,11 @@
             {% for invoice in invoices %}
               <tr>
                 <td>
-                  <a href="{{ invoice.get_absolute_url }}">
-                  <span>INV - {{ invoice.code }}</span>
-                   </a>
+                  <span>{{ invoice.code }}</span>
                 </td>
                 <td>
                   {% if invoice.is_due %}
-                    <span class="due">
+                    <span class="is_due">
                       {{ invoice.due_date|date:"F d, Y" }}
                       &nbsp;
                       <span>Due</span>
@@ -62,7 +60,7 @@
             {% empty %}
               <tr>
                 <td>
-                <span>{{ no_invoice }}</span>
+                <span>No invoice yet.</span>
                 </td>
               </tr>
             {% endfor %}
