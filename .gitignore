@@ -6,3 +6,4 @@
 media/
 static/
 assets/node_modules/
+*.sass-cache/
