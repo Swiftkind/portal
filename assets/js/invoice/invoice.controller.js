@@ -6,11 +6,10 @@ var InvoiceController = function () {
       detail:displayDetail,
     }
 
-  function displayDetail (id) {
+  $('#invoice-detail').load('/static/js/invoice/templates/invoice_detail.html');
+  function displayDetail (inv_id) {
     // Handle the invoice detail
-    var inv_id = id;
     var invoiceDetail = InvoiceService.detail(inv_id);
-    var itemTbody = $("items-tbody");
 
     invoiceDetail
       .done(function (response) {

@@ -63,116 +63,14 @@
       </div>
     </div>
   </div>
+  <div id="invoice-detail">
+    
+  </div>
 {% endblock content %}
 
 {% block other_js %}
-  
+
   <script type="text/javascript" src="{% static 'js/invoice/invoice.services.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/invoice/invoice.controller.js' %}"></script>
-
-  {% comment %} Template for invoice detail {% endcomment %}
-  <script type="text/template" id="invoiceTemplate">
-  <div class="row d-flex no-gutters align-items-end justify-content-between mb-5">
-    <div>
-      <h3>Invoice</h3>
-    </div>
-    <div>
-      <label>Invoice number</label>
-      <h3>
-        <%= code %>
-      </h3>
-    </div>
-  </div>
-  <div class="row d-flex align-items-start mb-5">
-    <div class="col-8">
-      <label>Bill to</label>
-      <h3 class="">Super Corporation</h3>
-      <p>Door #1, 3rd floor, Consuelo Bldg. J.P. Laurel Avenue, Davao City, Philippines, 8000</p>
-    </div>
-    <div class="col-4 text-right">
-      <label>Service type</label>
-      <p>Hourly</p>
-    </div>
-  </div>
-  <div class="row">
-    <table class="table order-summary">
-      <thead>
-        <tr>
-          <th>fields
-            Item and Description
-          </th>
-          <th>
-            Qty
-          </th>
-          <th>
-            Rate
-          </th>
-          <th class="text-right">
-            Amount
-          </th>
-        </tr>
-      </thead>
-      <tbody id="items-tbody">
-        <% _.each(items, function(item){ %>
-        <tr class="main-tbody-row">
-          <td class="svc-description">
-            <h4>
-              <%= item.details %>
-            </h4>
-          </td>
-          <td>
-            <h4><%= item.quantity %></h4>
-          </td>
-          <td>
-            <h4><%= item.rate %></h4>
-          </td>
-          <td class="text-right">
-            <h4><%= item.total_amount %></h4>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  </div>
-  <div class="row">
-    <div class="mb-5">
-      <label>Notes:</label>
-      <h4><%= notes %></h4>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 offset-6">
-      <table class="table summary-table">
-        <tbody>
-          <tr>
-            <td>
-              Subtotal
-            </td>
-            <td>
-              $ 4,507.50
-            </td>
-
-          </tr>
-          <tr>
-            <td>
-              Less
-            </td>
-            <td>
-              $ 0.00
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h3>Total</h3>
-            </td>
-            <td>
-              <h3><%= total_item %></h3>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</script>
 
 {% endblock %}
