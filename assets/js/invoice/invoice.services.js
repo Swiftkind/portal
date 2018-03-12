@@ -2,7 +2,7 @@ var InvoiceService = function () {
 
   // Fetch data from backend
 
-  var INVOICE_URL = '/api/invoice/';
+  var INVOICE_URL = '/api/invoices/';
 
   var services = {
     detail:getDetail,

@@ -3,5 +3,5 @@ from invoices.api import InvoiceDetailView
 
 
 urlpatterns = [
-    path('invoice/<int:id>/', InvoiceDetailView.as_view(), name='invoice-detail')
+    path('invoices/<int:id>/', InvoiceDetailView.as_view(), name='invoice-detail')
 ]
