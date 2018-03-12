@@ -9,8 +9,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
         fields = ('id','code','order_id','invoice_date','terms','due_date',
-                  'notes','conditions','date_created','date_updated','status',
-                  'items')
+                  'notes','conditions','status','items')
 
     def get_items(self, obj):
         serializer = ItemSerializer(Item.objects.filter(invoice=obj), many=True)
@@ -19,6 +18,11 @@ class InvoiceSerializer(serializers.ModelSerializer):
 
 class ItemSerializer(serializers.ModelSerializer):
 
+    total_amount = serializers.SerializerMethodField()
+
     class Meta:
         model = Item
-        fields = ('id','invoice','details','quantity','rate')
+        fields = ('id','invoice','details','quantity','rate','total_amount')
+
+    def get_total_amount(self, obj):
+        return obj.quantity * obj.rate
