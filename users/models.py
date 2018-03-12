@@ -13,7 +13,7 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, is_active=True, **kwargs)
         user.set_password(password)
         user.save()
-        
+
         return user
 
     def create_superuser(self, email, password, **kwargs):
@@ -34,6 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
+    profile_pic = models.ImageField('Profile picture', upload_to='profiles', blank=True, null=True)
 
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -53,3 +54,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         """ User full name
         """
         return f"{self.first_name} {self.last_name}"
+
+    def get_profile_pic(self):
+        """
+        Get users profile pictures
+        """
+        if not self.profile_pic:
+            return f"{('/static/images/profile-default.png')}"
+        else:
+            return f"{self.profile_pic.url}"
