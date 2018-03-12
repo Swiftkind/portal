@@ -14,9 +14,11 @@ var InvoiceController = function () {
 
     invoiceDetail
       .done(function (response) {
+        console.log(response);
         var context = {
           code: response.code,
           items: response.items,
+          notes: response.notes
         };
         var tmpl = _.template($('#invoiceTemplate').html());
         $('.invoice-view-details').html(tmpl(context));
