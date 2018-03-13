@@ -11,7 +11,7 @@
             <li>
               <div class="invoice-item"
                 id="{{ invoice.id }}"
-                onclick="invoiceCtrl.detail(this.id)">
+                onclick="InvoiceController.detail(this.id)">
                 <a href="#" class="delete-item">
                   <i data-feather="x"></i>
                 </a>
@@ -54,7 +54,7 @@
                 </button>
               </div>
               <hr>
-              <div class="invoice-container invoice-view-details">
+              <div class="invoice-container invoice-view-details invoice-detail">
                 
               </div>
             </div>
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div id="invoice-detail">
+  <div id="invoice-details">
     
   </div>
 {% endblock content %}
