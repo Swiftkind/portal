@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <img src="{{ user.get_profile_pic }}" width="250" height="250" class="rounded-circle">
+            </div>
+            <div class="col-sm-6">
+                <p><strong>FIRST NAME:</strong> {{ user.email }}</p>
+                <p><strong>FIRST NAME:</strong> {{ user.first_name }}</p>
+                <p><strong>LAST NAME:</strong> {{ user.last_name }}</p>
+                <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
