@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h3 class="mb-4">Update Profile</h3>
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="col-md-8 col-md-offset-3">
+                    <div id="profile-container">
+                        <img src="{{user.get_profile_pic}}" width="120" height="120" class="rounded-circle">
+                    </div><br>
+                    <div class="col-md-offset-2">
+                    <input type="file" name="profile_pic" class="image-upload">
+                    </div>
+                </div>
+                <p class="danger">{{ form.non_field_errors }}</p>
+                <div class="fieldWrapper">
+                    {{ form.email.errors }}
+                    <label for="form.email.id_for_label">Email Address:</label>
+                    {{ form.email }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.first_name.errors }}
+                    <label for="form.first_name.id_for_label">First Name:</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.last_name.errors }}
+                    <label for="form.last_name.id_for_label">Last Name:</label>
+                    {{ form.last_name }}
+                </div><br />
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

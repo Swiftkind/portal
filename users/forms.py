@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import authenticate
 
+from users.models import User
+
 
 class LoginForm(forms.Form):
     """ Form for login user view
@@ -22,3 +24,16 @@ class LoginForm(forms.Form):
                                         code='invalid_credentials')
 
         return self.cleaned_data
+
+
+class UserProfileForm(forms.ModelForm):
+    """ Form for users profile
+    """
+    class Meta:
+        model = User
+        fields = (
+                'email',
+                'first_name',
+                'last_name',
+                'profile_pic',
+            )
