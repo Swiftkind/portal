@@ -13,8 +13,8 @@
   <div class="row d-flex align-items-start mb-5">
     <div class="col-8">
       <label>Bill to</label>
-      <h3 class="">Super Corporation</h3>
-      <p>Door #1, 3rd floor, Consuelo Bldg. J.P. Laurel Avenue, Davao City, Philippines, 8000</p>
+      <h3 class=""><%= invoice.customer.company %></h3>
+      <p><%= invoice.customer.billing_address %></p>
     </div>
   </div>
   <div class="row">

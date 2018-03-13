@@ -4,6 +4,7 @@ from django.utils import timezone
 from decimal import Decimal
 from customers.models import Customer
 
+
 class InvoiceManager(models.Manager):
     """ Manager for invoice
     """
