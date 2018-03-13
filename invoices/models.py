@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Sum
 from django.utils import timezone
 from decimal import Decimal
-
+from customers.models import Customer
 
 class InvoiceManager(models.Manager):
     """ Manager for invoice
@@ -49,6 +49,7 @@ class Invoice(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=16, choices=STATUS, default=DRAFT)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     objects = InvoiceManager()
 
