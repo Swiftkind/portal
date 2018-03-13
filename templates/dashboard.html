@@ -8,15 +8,19 @@
       <div class="main-content-header">
         <h3>My invoices</h3>
         <p>
-          {{ invoices.count }} invoices total with 
-          {{ due_dates }} on due and 
+          {{ invoices.count }} invoices total with
+          {{ due_dates }} on due and
           {{ drafts }} drafts
         </p>
       </div>
       <div class="list-invoice-client table-responsive">
         <table class="table table-hover">
+        {% if user.is_authenticated %}
           <thead>
             <tr>
+              <th>
+                  Client
+              </th>
               <th>
                   Invoice number
               </th>
@@ -34,6 +38,11 @@
           <tbody>
             {% for invoice in invoices %}
               <tr>
+                <td>
+                  <span>
+                    <img class="rounded-circle" src="{{ user.get_profile_pic }}" height="30" width="30" />
+                  </span>
+                </td>
                 <td>
                   <span>{{ invoice.code }}</span>
                 </td>
@@ -65,10 +74,45 @@
               </tr>
             {% endfor %}
           </tbody>
+          {% endif %}
         </table>
       </div>
     </div>
   </div>
 </div>
 <!-- MAIN END -->
+{% endblock %}
+{% block profile %}
+<div class="side-bar fixed-index-right active" id="profile-side-bar">
+    <a href="#" class="side-bar-toggle">
+      <img src="assets/images/svg/arrow-right.svg">
+    </a>
+
+    <div class="profile-info">
+      <div class="avatar">
+        <div class="avatar-lg" style="background-image: url('assets/images/avatar.jpg');">
+        </div>
+      </div>
+      <h3 class="text-dark">Scarlette</h3>
+      <p>
+        <span class="text-dark">
+          Johnson
+        </span>,
+        <span class="designation">
+          Chief Operations Officer
+        </span>
+      </p>
+    </div>
+    <div class="contact-info">
+      <p class="side-bar-subtitle">PROFILE</p>
+      <div>
+        <label>username</label>
+        <p class="text-dark">@scarlettejohnson</p>
+      </div>
+      <div>
+        <label>e-mail</label>
+        <p class="text-dark">@scarlettejohnson@gmail.com</p>
+      </div>
+    </div>
+</div>
 {% endblock %}
