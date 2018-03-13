@@ -131,8 +131,10 @@
 }
 
 #profile-side-bar {
-    display: none;
+    display: block;
     width: 350px;
+    right:-350px;
+    transition: 0.2s ease right;
     .profile-info {
         margin: 4.14rem 0;
 
@@ -150,6 +152,10 @@
     label {
         font-size: 12px;
         color: $pinkish-grey;
+    }
+    &.active {
+        right: 0;
+        transition: 0.2s ease all;
     }
 }
 

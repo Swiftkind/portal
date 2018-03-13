@@ -740,43 +740,50 @@ label {
 
 /* line 133, ../sass/_base.scss */
 #profile-side-bar {
-  display: none;
+  display: block;
   width: 350px;
+  right: -350px;
+  transition: 0.2s ease right;
 }
-/* line 136, ../sass/_base.scss */
+/* line 138, ../sass/_base.scss */
 #profile-side-bar .profile-info {
   margin: 4.14rem 0;
 }
-/* line 139, ../sass/_base.scss */
+/* line 141, ../sass/_base.scss */
 #profile-side-bar .profile-info .avatar, #profile-side-bar .profile-info .avatar-sm, #profile-side-bar .profile-info .avatar-md, #profile-side-bar .profile-info .avatar-lg {
   margin-bottom: 2.14rem;
 }
-/* line 142, ../sass/_base.scss */
+/* line 144, ../sass/_base.scss */
 #profile-side-bar .profile-info .text-dark {
   color: #222222;
 }
-/* line 145, ../sass/_base.scss */
+/* line 147, ../sass/_base.scss */
 #profile-side-bar .profile-info .designation {
   color: #5d58de;
   font-weight: 600;
 }
-/* line 150, ../sass/_base.scss */
+/* line 152, ../sass/_base.scss */
 #profile-side-bar label {
   font-size: 12px;
   color: #b8c0dc;
 }
-
 /* line 156, ../sass/_base.scss */
+#profile-side-bar.active {
+  right: 0;
+  transition: 0.2s ease all;
+}
+
+/* line 162, ../sass/_base.scss */
 #filter-side-bar {
   padding: 3.6rem 5rem;
 }
 
-/* line 163, ../sass/_base.scss */
+/* line 169, ../sass/_base.scss */
 .panel-container {
   height: 100vh;
   padding-top: 10vh;
 }
-/* line 166, ../sass/_base.scss */
+/* line 172, ../sass/_base.scss */
 .panel-container .panel-body {
   width: 500px;
   border-radius: 4px;
@@ -787,7 +794,7 @@ label {
   -moz-box-shadow: 0 2px 6px rgba(153, 170, 190, 0.16);
   box-shadow: 0 2px 6px rgba(153, 170, 190, 0.16);
 }
-/* line 173, ../sass/_base.scss */
+/* line 179, ../sass/_base.scss */
 .panel-container .panel-body .panel-title {
   letter-spacing: 0.03rem;
   color: #5d58de;
@@ -795,27 +802,27 @@ label {
   margin-bottom: 1.5rem;
 }
 
-/* line 184, ../sass/_base.scss */
+/* line 190, ../sass/_base.scss */
 .modal .modal-dialog .modal-content {
   border: none;
   border-radius: 6px;
 }
-/* line 188, ../sass/_base.scss */
+/* line 194, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-header {
   border-bottom: none;
 }
-/* line 191, ../sass/_base.scss */
+/* line 197, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-body {
   padding: 2rem 3rem;
   min-height: 200px;
 }
-/* line 193, ../sass/_base.scss */
+/* line 199, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-body h3 {
   font-family: 'Roboto-Medium', sans-serif;
   color: #221d76;
   margin-bottom: 3rem;
 }
-/* line 200, ../sass/_base.scss */
+/* line 206, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-footer {
   border-top: none;
   padding-bottom: 4rem;

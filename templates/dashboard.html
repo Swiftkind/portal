@@ -83,23 +83,22 @@
 <!-- MAIN END -->
 {% endblock %}
 {% block profile %}
-<div class="side-bar fixed-index-right active" id="profile-side-bar">
+<div class="side-bar fixed-index-right" id="profile-side-bar">
     <a href="#" class="side-bar-toggle">
-      <img src="assets/images/svg/arrow-right.svg">
+      <img src="/static/images/svg/arrow-right.svg">
     </a>
-
+    {% if user.is_authenticated %}
     <div class="profile-info">
       <div class="avatar">
-        <div class="avatar-lg" style="background-image: url('assets/images/avatar.jpg');">
-        </div>
+          <img class="avatar-lg rounded-circle" src="{{ user.get_profile_pic }}"/>
       </div>
-      <h3 class="text-dark">Scarlette</h3>
+      <h3 class="text-dark">{{ user.first_name }}</h3>
       <p>
         <span class="text-dark">
-          Johnson
+          {{ user.first_name }}
         </span>,
         <span class="designation">
-          Chief Operations Officer
+          {{ user.last_name }}
         </span>
       </p>
     </div>
@@ -107,12 +106,13 @@
       <p class="side-bar-subtitle">PROFILE</p>
       <div>
         <label>username</label>
-        <p class="text-dark">@scarlettejohnson</p>
+        <p class="text-dark">{{ user.get_full_name }}</p>
       </div>
       <div>
         <label>e-mail</label>
-        <p class="text-dark">@scarlettejohnson@gmail.com</p>
+        <p class="text-dark">{{ user.email }}</p>
       </div>
     </div>
+  {% endif %}
 </div>
 {% endblock %}
