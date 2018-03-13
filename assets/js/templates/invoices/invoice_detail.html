@@ -6,7 +6,7 @@
     <div>
       <label>Invoice number</label>
       <h3>
-        <%= code %>
+        <%= invoice.code %>
       </h3>
     </div>
   </div>
@@ -15,10 +15,6 @@
       <label>Bill to</label>
       <h3 class="">Super Corporation</h3>
       <p>Door #1, 3rd floor, Consuelo Bldg. J.P. Laurel Avenue, Davao City, Philippines, 8000</p>
-    </div>
-    <div class="col-4 text-right">
-      <label>Service type</label>
-      <p>Hourly</p>
     </div>
   </div>
   <div class="row">
@@ -40,7 +36,7 @@
         </tr>
       </thead>
       <tbody id="items-tbody">
-        <% _.each(items, function(item){ %>
+        <% _.each(invoice.items, function(item){ %>
         <tr class="main-tbody-row">
           <td class="svc-description">
             <h4>
@@ -64,7 +60,7 @@
   <div class="row">
     <div class="mb-5">
       <label>Remarks:</label>
-      <h4><%= notes %></h4>
+      <h4><%= invoice.notes %></h4>
     </div>
   </div>
   <div class="row">
@@ -76,7 +72,7 @@
               Subtotal
             </td>
             <td>
-              <%= total_amount %>
+              <%= invoice.total_amount %>
             </td>
 
           </tr>
@@ -93,7 +89,7 @@
               <h3>Total</h3>
             </td>
             <td>
-              <h3><%= total_amount %></h3>
+              <h3><%= invoice.total_amount %></h3>
             </td>
           </tr>
         </tbody>

@@ -55,7 +55,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'portal.urls'
 
-LOGIN_URL= '/users/login/'
+LOGIN_URL= '/login/'
 
 TEMPLATES = [
     {

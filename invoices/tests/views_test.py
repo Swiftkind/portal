@@ -29,8 +29,9 @@ user_data = {
 
 
 class InvoiceListTestCase(TestCase):
-    """ Test case for list of invoices
+    """ Test case for invoice list page and invoice detail
     """
+
     def setUp(self):
         self.client = Client()
         user = User.objects.create_user(**user_data)
