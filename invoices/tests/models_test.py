@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.db import IntegrityError
 from users.models import User
 from invoices.models import Invoice, Item
+from customers.models import Customer
 
 
 date = datetime.datetime.now()
@@ -24,6 +25,11 @@ item_data = {
     'rate':45
 }
 
+customer_data = {
+    'email':'dwayne@wade.com',
+    'billing_address':'Davao city'
+}
+
 class InvoiceTestCase(TestCase):
     """ Test the model Invoice
     """
@@ -36,8 +42,9 @@ class InvoiceTestCase(TestCase):
     def test_create_invoice(self):
         """ Create invoice and save to database
         """
+        customer = Customer.objects.create(**customer_data)
         code = User.objects.make_random_password()
-        invoice = Invoice.objects.create(code=code, **invoice_data)
+        invoice = Invoice.objects.create(code=code, **invoice_data, customer=customer)
 
         self.assertTrue(isinstance(invoice, Invoice))
         self.assertEqual(invoice.__str__(), code)
@@ -45,8 +52,9 @@ class InvoiceTestCase(TestCase):
     def test_update_invoice(self):
         """ Updates the existing invoice and save to database
         """
+        customer = Customer.objects.create(**customer_data)
         code = User.objects.make_random_password()
-        invoice = Invoice.objects.create(code=code, **invoice_data)
+        invoice = Invoice.objects.create(code=code, **invoice_data, customer=customer)
 
         self.assertTrue(isinstance(invoice, Invoice))
 
@@ -60,8 +68,9 @@ class InvoiceTestCase(TestCase):
     def test_delete_invoice(self):
         """ Deletes an existing invoice in database
         """
+        customer = Customer.objects.create(**customer_data)
         code = User.objects.make_random_password()
-        invoice = Invoice.objects.create(code=code, **invoice_data)
+        invoice = Invoice.objects.create(code=code, **invoice_data, customer=customer)
 
         self.assertTrue(isinstance(invoice, Invoice))
 
@@ -74,15 +83,17 @@ class InvoiceTestCase(TestCase):
     def test_create_invoice_fails(self):
         """ Creates an invoice with no code
         """
+        customer = Customer.objects.create(**customer_data)
         with self.assertRaises(IntegrityError):
-            invoice = Invoice.objects.create(code=None,**invoice_data)
+            Invoice.objects.create(code=None,**invoice_data, customer=customer)
 
     def test_update_invoice_fails(self):
         """ Updates the existing invoice with blank terms
             and save to database
         """
+        customer = Customer.objects.create(**customer_data)
         code = User.objects.make_random_password()
-        invoice = Invoice.objects.create(code=code, **invoice_data)
+        invoice = Invoice.objects.create(code=code, **invoice_data, customer=customer)
 
         self.assertTrue(isinstance(invoice, Invoice))
 
@@ -93,8 +104,9 @@ class InvoiceTestCase(TestCase):
     def test_delete_invoice_fail(self):
         """ Deletes an item that doesn't exist
         """
+        customer = Customer.objects.create(**customer_data)
         code = User.objects.make_random_password()
-        invoice = Invoice.objects.create(code=code, **invoice_data)
+        invoice = Invoice.objects.create(code=code, **invoice_data, customer=customer)
 
         self.assertTrue(isinstance(invoice, Invoice))
 
@@ -107,8 +119,9 @@ class ItemTestCase(TestCase):
     """ For Item model test cases
     """
     def setUp(self):
+        customer = Customer.objects.create(**customer_data)
         code = User.objects.make_random_password()
-        self.invoice = Invoice.objects.create(code=code, **invoice_data)
+        self.invoice = Invoice.objects.create(code=code, **invoice_data, customer=customer)
 
     def test_string_repr(self):
         """ check the string representation of the model

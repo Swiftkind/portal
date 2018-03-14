@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.test import TestCase, Client
 from invoices.models import Invoice, Item
 from users.models import User
+from customers.models import Customer
 
 
 date_now = timezone.now().date()
@@ -21,10 +22,27 @@ invoice_data = {
 }
 
 user_data = {
-    'email': 'john@john.com',
-    'first_name': "John",
-    'last_name': "Doe",
-    'password': User.objects.make_random_password()
+    'email':'john@john.com',
+    'first_name':"John",
+    'last_name':"Doe",
+    'password':User.objects.make_random_password()
+}
+
+customer_data = {
+    'email':'dwayne@wade.com',
+    'billing_address':'Davao City'
+}
+
+api_invoice_data = {
+    'order_id':"12",
+    'invoice_date':'2018-03-04 06:00:00.000000',
+    'terms':Invoice.DUE_RECEIPT,
+    'due_date':'2018-03-04 06:00:00.000000',
+    'notes':"sample notes",
+    'conditions':"condition 1",
+    'date_created':'2018-03-04 06:00:00.000000',
+    'date_updated':'2018-03-04 06:00:00.000000',
+    'status':Invoice.SENT
 }
 
 
@@ -34,10 +52,11 @@ class InvoiceListTestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.customer = Customer.objects.create(**customer_data)
         user = User.objects.create_user(**user_data)
         self.client.login(email=user_data['email'], password=user_data['password'])
         self.code = User.objects.make_random_password()
-        Invoice.objects.create(code=self.code, **invoice_data)
+        self.invoice = Invoice.objects.create(code=self.code, **invoice_data, customer=self.customer)
 
     def test_invoice_page_authenticated_success(self):
         """ Test for invoice list page with authenticated user
@@ -61,11 +80,27 @@ class InvoiceListTestCase(TestCase):
     def test_invoice_get_detail_success(self):
         """ Test for the getting the detail of invoice
         """
-        response = self.client.get(reverse('invoice-detail', kwargs={'id':2}))
+        response = self.client.get(reverse('api_invoice', kwargs={'id':self.invoice.id}))
         self.assertEqual(json.loads(response.content)['code'], self.code)
 
     def test_invoice_get_detail_not_existing_fail(self):
         """ Test for getting detail of invoice but not existing
         """
-        response = self.client.get(reverse('invoice-detail', kwargs={'id':34}))
+        response = self.client.get(reverse('api_invoice', kwargs={'id':34}))
         self.assertEqual(response.status_code, 404)
+
+    def test_invoice_create_success(self):
+        """ Test for creating invoice endpoint
+        """
+        api_invoice_data['code'] = self.code
+        api_invoice_data['customer'] = self.customer.pk
+        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        self.assertEqual(response.status_code, 201)
+
+    def test_invoice_create_fail(self):
+        """ Test for creating invoice endpoint with no customer 
+        """
+        api_invoice_data['code'] = self.code
+        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        self.assertEqual(json.loads(response.content)['customer'][0], "This field is required.")
+        self.assertEqual(response.status_code, 400)

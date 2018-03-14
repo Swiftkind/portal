@@ -1,99 +1,167 @@
 <script type="text/template" id="invoiceTemplate">
-  <div class="row d-flex no-gutters align-items-end justify-content-between mb-5">
-    <div>
-      <h3>Invoice</h3>
-    </div>
+  <div class="invoice-header d-flex justify-content-between align-items-end">
+    <h3>
+      Invoice
+    </h3>
     <div>
       <label>Invoice number</label>
       <h3>
-        <%= invoice.code %>
+        Jan - 345 - 234
       </h3>
     </div>
   </div>
-  <div class="row d-flex align-items-start mb-5">
-    <div class="col-8">
-      <label>Bill to</label>
-      <h3 class=""><%= invoice.customer.company %></h3>
-      <p><%= invoice.customer.billing_address %></p>
+  <div class="invoice-create-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label class="d-flex align-items-center justify-content-between">
+            <span>Bill to</span>
+            <a href="#">+ New Client</a>
+          </label>
+          <select class="selectpicker select-options" data-live-search="true" title="Select Client">
+            <option data-tokens="">Super Corp.</option>
+            <option data-tokens="">Google Inc.</option>
+            <option data-tokens="">Mcdonalds Corp.</option>
+            <option data-tokens="">Super Corp.</option>
+            <option data-tokens="">Google Inc.</option>
+            <option data-tokens="">Mcdonalds Corp.</option>
+            <option data-tokens="">Super Corp.</option>
+            <option data-tokens="">Google Inc.</option>
+            <option data-tokens="">Mcdonalds Corp.</option>
+            <option data-tokens="">Super Corp.</option>
+            <option data-tokens="">Google Inc.</option>
+            <option data-tokens="">Mcdonalds Corp.</option>
+            <option data-tokens="">Super Corp.</option>
+            <option data-tokens="">Google Inc.</option>
+            <option data-tokens="">Mcdonalds Corp.</option>
+          </select>
+        </div>
+      </div>
+      
     </div>
-  </div>
-  <div class="row">
-    <table class="table order-summary">
-      <thead>
-        <tr>
-          <th>fields
-            Item and Description
-          </th>
-          <th>
-            Qty
-          </th>
-          <th>
-            Rate
-          </th>
-          <th class="text-right">
-            Amount
-          </th>
-        </tr>
-      </thead>
-      <tbody id="items-tbody">
-        <% _.each(invoice.items, function(item){ %>
-        <tr class="main-tbody-row">
-          <td class="svc-description">
-            <h4>
-              <%= item.details %>
-            </h4>
-          </td>
-          <td>
-            <h4><%= item.quantity %></h4>
-          </td>
-          <td>
-            <h4><%= item.rate %></h4>
-          </td>
-          <td class="text-right">
-            <h4><%= item.amount %></h4>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  </div>
-  <div class="row">
-    <div class="mb-5">
-      <label>Remarks:</label>
-      <h4><%= invoice.notes %></h4>
+    <div class="row">
+
+      <div class="col-6">
+        <div class="form-group">
+          <label>Order number</label>
+          <p>345 - 2324 - 232</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-6 offset-6">
-      <table class="table summary-table">
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label> Invoice Date</label>
+          <input type="" name="" id="startDate" class="datepicker" placeholder="Select date ">
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label>Terms</label>
+          <input type="" name="" id="endDate" class="datepicker" placeholder="Select term"> 
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label>Due Date</label>
+          <input type="" name="" id="endDate" class="datepicker" placeholder="Select Due date"> 
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="desc">Item and Description</th>
+            <th class="rate">Rate</th>
+            <th class="qty">Qty</th>
+            <th class="amt">Amount</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <td>
-              Subtotal
+            <td class="desc">
+              
+              <div class="input-container">
+                <span>
+                  <div>
+                    <textarea class="form-control" placeholder="Type of an item"></textarea>
+                  </div>
+                </span>
+              </div>
             </td>
-            <td>
-              <%= invoice.total_amount %>
+            <td class="rate">
+              <div class="input-container">
+                <span>
+                  <div>
+                    <input type="number" name="" placeholder="$0.00" class="form-control">
+                  </div>
+                </span>
+              </div>
             </td>
-
-          </tr>
-          <tr>
-            <td>
-              Less
+            <td class="qty">
+              <div class="input-container">
+                <span>
+                  <div>
+                    <input type="number" name="" placeholder="0" class="form-control">
+                  </div>
+                </span>
+              </div>
             </td>
-            <td>
-              $ 0.00
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h3>Total</h3>
-            </td>
-            <td>
-              <h3><%= invoice.total_amount %></h3>
+            <td class="amt">
+              <div class="input-container">
+                <span>
+                  <div>
+                    <input type="number" name="" placeholder="$0.00" class="form-control">
+                  </div>
+                </span>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <div>
+        <a href="#">+ Add item</a>
+      </div>
+    </div>
+    <div class="row md-8 invoice-summary">
+      <div class="col-6 offset-6">
+        <div class="">
+          <div class="d-flex justify-content-between">
+            <p>Subtotal</p>
+            <p class="text-right strong">$ 4,507.50</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p>Less (discount)</p>
+            <p class="text-right strong">$0.00</p>
+          </div>
+          
+          <div class="d-flex justify-content-between">
+            <h3 class="strong">Total</h3>
+            <h3 class="strong">$ 4,507.50</h3>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="invoice-footer">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <button class="btn btn-icon-left btn-link">
+            <i data-feather="x"></i>
+            Discard this document
+          </button>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-primary btn-icon ">
+            Send <i data-feather="arrow-right"></i>
+          </button>
+        </div>
+      </div>
+      <p class="footnote">
+        * Payment will be sent to owner@company.com via paypal
+      </p>
     </div>
   </div>
 </script>
