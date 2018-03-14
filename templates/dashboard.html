@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 <!-- MAIN START -->
@@ -8,69 +9,146 @@
       <div class="main-content-header">
         <h3>My invoices</h3>
         <p>
-          {{ invoices.count }} invoices total with
-          {{ due_dates }} on due and
+          {{ invoices.paginator.count }} invoices total with 
+          {{ due_dates }} on due and 
           {{ drafts }} drafts
         </p>
       </div>
-      <div class="list-invoice-client table-responsive">
+      <div class="invoices">
+       <div class="list-invoice-client table-responsive">
         <table class="table table-hover">
         {% if user.is_authenticated %}
           <thead>
             <tr>
-              <th>
+              <th id="invoice-number" onclick="InvoiceController.sort(this.id)">
+                <a class="d-flex align-items-center" >
                   Invoice number
+                  <i data-feather="chevron-down"></i>
+                </a>
               </th>
-              <th>
+              <th id="due-date" onclick="InvoiceController.sort(this.id)">
+                <a class="d-flex align-items-center">
                   Due date
+                  <i data-feather="chevron-down"></i>
+                </a>
               </th>
-              <th>
+              <th id="payment-status" onclick="InvoiceController.sort(this.id)">
+                <a class="d-flex align-items-center">
                   Payment Status
+                  <i data-feather="chevron-down"></i>
+                </a>
               </th>
-              <th>
+              <th id="amount" onclick="InvoiceController.sort(this.id)">
+                <a class="d-flex align-items-center">
                   Amount
+                  <i data-feather="chevron-down"></i>
+                </a>
               </th>
             </tr>
           </thead>
           <tbody>
-            {% for invoice in invoices %}
-              <tr>
-                <td>
-                  <span>{{ invoice.code }}</span>
-                </td>
-                <td>
-                  {% if invoice.is_due %}
-                    <span class="is_due">
-                      {{ invoice.due_date|date:"F d, Y" }}
-                      &nbsp;
-                      <span>Due</span>
-                    </span>
-                  {% else %}
-                    <span>
-                      {{ invoice.due_date|date:"F d, Y" }}
-                    </span>
-                  {% endif %}
-                </td>
-                <td>
-                  <span>{{ invoice.status|title }}</span>
-                </td>
-                <td>
-                  <span>${{ invoice.total_amount }}</span>
-                </td>
-              </tr>
-            {% empty %}
-              <tr>
-                <td>
-                <span>No invoice yet.</span>
-                </td>
-              </tr>
-            {% endfor %}
+          {% for invoice in invoices %}
+            <tr>
+              <td>
+                <span>{{ invoice.code }}</span>
+              </td>
+              <td>
+                {% if invoice.is_due %}
+                  <span class="is_due">
+                    {{ invoice.due_date|date:"F d, Y" }}
+                    &nbsp;
+                    <span>Due</span>
+                  </span>
+                {% else %}
+                  <span>
+                    {{ invoice.due_date|date:"F d, Y" }}
+                  </span>
+                {% endif %}
+              </td>
+              <td>
+                <span>{{ invoice.status|title }}</span>
+              </td>
+              <td>
+                <span>${{ invoice.total_amount }}</span>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td>
+              <span>No invoice yet.</span>
+              </td>
+            </tr>
+          {% endfor %}
           </tbody>
           {% endif %}
         </table>
       </div>
     </div>
+    <div id="invoices"></div>
+
+    {% if invoices.has_other_pages %}
+      <div class="bottom-pagination">
+        <nav>
+          <ul class="pagination justify-content-center">
+
+          {% if invoices.has_previous %}
+            <li class="page-item ">
+              <a href="?page={{ invoices.previous_page_number }}"  class="page-link">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-left"></i>
+                </span>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a href="#" onclick="return false;" class="page-link">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-left"></i>
+                </span>
+              </a>
+            </li>
+          {% endif %} 
+
+          {% for range in invoices.paginator.page_range %} 
+            {% if invoices.number == range %}
+              <li class="page-item active">
+                <a href="?page={{ range }}" class="page-link">
+                  <span aria-hidden="true">{{ range }} 
+                    <span aria-hidden="true" class="sr-only">(current)</span>
+                  </span>
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a href="?page={{ range }}" class="page-link">{{ range }}</a></li>
+                  {% endif %}
+          {% endfor %}
+
+          {% if invoices.has_next %}
+            <li class="page-item">
+              <a href="?page={{ invoices.next_page_number }}" class="page-link">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-right"></i>
+                </span>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a href="#" onclick="return false;" class="page-link">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-right"></i>
+                </span>
+                </a>
+            </li>
+          {% endif %}
+          </ul>
+        </nav>
+      </div>
+    {% endif %}
+    </div>
   </div>
 </div>
+
 <!-- MAIN END -->
 {% endblock %}
+
