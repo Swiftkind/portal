@@ -90,7 +90,7 @@ class InvoiceListTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_invoice_create_success(self):
-        """ Test for creating invoice endpoint
+        """ Test for creating invoice
         """
         api_invoice_data['code'] = self.code
         api_invoice_data['customer'] = self.customer.pk
@@ -98,9 +98,39 @@ class InvoiceListTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_invoice_create_fail(self):
-        """ Test for creating invoice endpoint with no customer 
+        """ Test for creating invoice with no customer 
         """
         api_invoice_data['code'] = self.code
         response = self.client.post(reverse('api_invoices'), api_invoice_data)
         self.assertEqual(json.loads(response.content)['customer'][0], "This field is required.")
+        self.assertEqual(response.status_code, 400)
+
+    def test_invoice_update_success(self):
+        """ Test for updating invoice
+        """
+        api_invoice_data['code'] = self.code
+        api_invoice_data['customer'] = self.customer.pk
+        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        invoice = json.loads(response.content)
+        self.assertEqual(response.status_code, 201)
+
+        new_condition = 'condition 2'
+        invoice['conditions'] = new_condition
+        url = reverse('api_invoice', kwargs={'id':self.invoice.id})
+        response = self.client.put(url, data=json.dumps(invoice), content_type='application/json')
+        self.assertEqual(json.loads(response.content)['conditions'], new_condition)
+
+    def test_invoice_update_fail(self):
+        """ Test for updating invoice no code
+        """
+        api_invoice_data['code'] = self.code
+        api_invoice_data['customer'] = self.customer.pk
+        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        invoice = json.loads(response.content)
+        self.assertEqual(response.status_code, 201)
+
+        invoice['code'] = None
+        url = reverse('api_invoice', kwargs={'id':self.invoice.id})
+        response = self.client.put(url, data=json.dumps(invoice), content_type='application/json')
+        self.assertEqual(json.loads(response.content)['code'][0], 'This field may not be null.')
         self.assertEqual(response.status_code, 400)

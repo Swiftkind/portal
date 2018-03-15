@@ -4,8 +4,8 @@
 var InvoiceController = function () {
   // Local variable
   var controller = {
-      detail:displayDetail,
-      defaultInvoice:defaultDisplay
+      detail         : displayDetail,
+      defaultInvoice : defaultDisplay,
     }
 
    /* Load Invoice Default Details
@@ -16,12 +16,14 @@ var InvoiceController = function () {
     if (invoiceId) controller.detail(invoiceId);
   }
 
-  /* Load Invoice Details
+  function addItemRow () {}
+
+   /* Load Invoice Details
    * @desc : Loads the invoice information into the template
    */
   function displayDetail (invoiceId) {
-    // This will load html javacsript template
     $('#invoice-details').load(templateURL + 'invoices/invoice_detail.html');
+
     // Initialized the invoice service getDetail function
     var invoiceDetail = InvoiceService.detail(invoiceId);
 
@@ -31,7 +33,11 @@ var InvoiceController = function () {
         // Loads the data in the template
         var tmpl = _.template($('#invoiceTemplate').html());
         $('.invoice-detail').html(tmpl({invoice:response}));
-      })
+        $('.invoice-detail').find('#startDate').datepicker({uiLibrary: 'bootstrap4'});
+        $('.invoice-detail').find('#endDate').datepicker({uiLibrary: 'bootstrap4'});
+        $('.invoice-detail').find('#dueDate').datepicker({uiLibrary: 'bootstrap4'});
+        $('.invoice-detail').find('.selectpicker').selectpicker();
+      });
   }
 
   return controller;
