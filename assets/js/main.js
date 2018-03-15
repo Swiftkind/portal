@@ -3,7 +3,15 @@ $(document).ready(function () {
 	  liveSearchPlaceholder: 'Search Clients'
 	});
 
-	$('.datepicker').datepicker({
+    $('#startDate').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+
+    $('#endDate').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+
+    $('#dueDate').datepicker({
         uiLibrary: 'bootstrap4'
     });
 

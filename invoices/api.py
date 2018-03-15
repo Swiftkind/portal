@@ -16,12 +16,22 @@ class InvoiceAPI(LoginRequiredMixin, APIView):
         serializer = InvoiceSerializer(invoice)
         return Response(serializer.data)
 
+    def put(self, request, id, format=None):
+        invoice = get_object_or_404(Invoice, id=id)
+        serializer = InvoiceSerializer(invoice, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class InvoicesAPI(LoginRequiredMixin, APIView):
     """ View for adding new invoice
     """
     def post(self, request, format=None):
         serializer = InvoiceSerializer(data=request.data)
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

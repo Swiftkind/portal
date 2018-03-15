@@ -52,19 +52,19 @@
       <div class="col-4">
         <div class="form-group">
           <label> Invoice Date</label>
-          <input type="" name="" id="startDate" class="datepicker" placeholder="Select date ">
+          <input type="" name="" id="startDate" class="startDate" placeholder="Select date ">
         </div>
       </div>
       <div class="col-4">
         <div class="form-group">
           <label>Terms</label>
-          <input type="" name="" id="endDate" class="datepicker" placeholder="Select term"> 
+          <input type="" name="" id="endDate" class="endDate" placeholder="Select term"> 
         </div>
       </div>
       <div class="col-4">
         <div class="form-group">
           <label>Due Date</label>
-          <input type="" name="" id="endDate" class="datepicker" placeholder="Select Due date"> 
+          <input type="" name="" id="dueDate" class="dueDate" placeholder="Select Due date"> 
         </div>
       </div>
     </div>
@@ -164,4 +164,44 @@
       </p>
     </div>
   </div>
+</script>
+
+
+<script type="text/template" id="addItem">
+  <td class="desc">
+    <div class="input-container">
+      <span>
+        <div>
+          <textarea class="form-control" placeholder="Type of an item"></textarea>
+        </div>
+      </span>
+    </div>
+  </td>
+  <td class="rate">
+    <div class="input-container">
+      <span>
+        <div>
+          <input type="number" name="" placeholder="$0.00" class="form-control">
+        </div>
+      </span>
+    </div>
+  </td>
+  <td class="qty">
+    <div class="input-container">
+      <span>
+        <div>
+          <input type="number" name="" placeholder="0" class="form-control">
+        </div>
+      </span>
+    </div>
+  </td>
+  <td class="amt">
+    <div class="input-container">
+      <span>
+        <div>
+          <input type="number" name="" placeholder="$0.00" class="form-control">
+        </div>
+      </span>
+    </div>
+  </td>
 </script>

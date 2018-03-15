@@ -59,19 +59,17 @@
 
     {% block content %}{% endblock %}
 
-    <div class="profile-detail"></div>
-    {% csrf_token %}
-
-    <script type="text/javascript" src="{% static 'js/constants.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/datepicker-bootstrap/js/core.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/datepicker-bootstrap/js/datepicker.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/feather-icons/dist/feather.min.js' %}"></script>
     <script type="text/javascript">
         feather.replace();
     </script>
+    <script type="text/javascript" src="{% static 'js/constants.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/underscore/underscore-min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/users/users.controller.js' %}"></script>
