@@ -12,7 +12,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Invoice
-        fields = ('id','code','order_id','invoice_date', ,'is_due', 'terms','due_date',
+        fields = ('id','code','order_id','invoice_date', 'is_due', 'terms','due_date',
                   'notes','conditions','status','items','total_amount','customer',
                   'customer_detail','customers')
 

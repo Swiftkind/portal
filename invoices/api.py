@@ -37,7 +37,10 @@ class InvoicesAPI(LoginRequiredMixin, ListAPIView):
 
     def get_queryset(self):
         selected = self.request.GET.get('ordering')
-        return Invoice.objects.all().order_by(selected)
+        if selected:
+            return Invoice.objects.all().order_by(selected)
+        else:
+            return Invoice.objects.all()
 
     def post(self, request, format=None):
         serializer = InvoiceSerializer(data=request.data)
