@@ -37,15 +37,15 @@
                 <ul class="navbar-nav">
                     <li class="d-flex align-items-center nav-account">
                         <p class="mb-0">
-                            Hello, {{ user.first_name|title }}!
+                            Hello, <span id="user-name">{{ user.first_name|title }}</span>!
                         </p>
                         <div class="dropdown ">
                             <a  class="dropdown-toggle d-flex align-items-center" id="navProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="avatar-md"><img class="rounded-circle" src="{{ user.get_profile_pic }}" height="30" width="30" /></div>
+                            <div class="avatar-md"><img class="rounded-circle" src="{{ user.image.url }}" height="30" width="30" /></div>
                             <i data-feather="chevron-down" ></i>
                         </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item" id="profile">Profile</a>
+                                <a href="javascript:;" class="dropdown-item" id="profile" onclick="UserController.detail({{ user.id }})">Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
                                 <a href="#" class="dropdown-item">Log out</a>
                             </div>
@@ -59,7 +59,8 @@
 
     {% block content %}{% endblock %}
 
-    {% block profile %}{% endblock %}
+    <div class="profile-detail"></div>
+    {% csrf_token %}
 
     <script type="text/javascript" src="{% static 'js/constants.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
@@ -73,6 +74,11 @@
     </script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/underscore/underscore-min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/users/users.controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/users/users.services.js'%}"></script>
+    <script type="text/javascript">
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    </script>
     {% block other_js %}{% endblock %}
 </body>
 
