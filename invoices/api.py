@@ -9,7 +9,7 @@ from invoices.serializers import InvoiceSerializer
 
 
 class InvoiceAPI(LoginRequiredMixin, APIView):
-    """ Show the detail of selected invoice
+    """ Show the detail of selected invoice and for editing invoice
     """
     def get(self, request, id, format=None):
         invoice = get_object_or_404(Invoice, id=id)
@@ -27,8 +27,13 @@ class InvoiceAPI(LoginRequiredMixin, APIView):
 
 
 class InvoicesAPI(LoginRequiredMixin, APIView):
-    """ View for adding new invoice
+    """ View for adding new invoice and gets the list of all invoices
     """
+    def get(self, request, format=None):
+        invoice = Invoice.objects.all()
+        serializer = InvoiceSerializer(invoice, many=True)
+        return Response(serializer.data)
+
     def post(self, request, format=None):
         serializer = InvoiceSerializer(data=request.data)
 

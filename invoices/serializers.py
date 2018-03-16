@@ -8,12 +8,13 @@ class InvoiceSerializer(serializers.ModelSerializer):
 
     items = serializers.SerializerMethodField()
     customer_detail = serializers.SerializerMethodField()
+    customers = serializers.SerializerMethodField()
 
     class Meta:
         model = Invoice
         fields = ('id','code','order_id','invoice_date','terms','due_date',
                   'notes','conditions','status','items','total_amount','customer',
-                  'customer_detail')
+                  'customer_detail','customers')
 
     def get_items(self, obj):
         serializer = ItemSerializer(Item.objects.filter(invoice=obj), many=True)
@@ -21,6 +22,10 @@ class InvoiceSerializer(serializers.ModelSerializer):
 
     def get_customer_detail(self, obj):
         serializer = CustomerSerializer(Customer.objects.get(email=obj.customer.email))
+        return serializer.data
+
+    def get_customers(self, obj):
+        serializer = CustomerSerializer(Customer.objects.all(), many=True)
         return serializer.data
 
 
