@@ -19,9 +19,6 @@
           <thead>
             <tr>
               <th>
-                  Client
-              </th>
-              <th>
                   Invoice number
               </th>
               <th>
@@ -38,11 +35,6 @@
           <tbody>
             {% for invoice in invoices %}
               <tr>
-                <td>
-                  <span>
-                    <img class="rounded-circle" src="{{ user.get_profile_pic }}" height="30" width="30" />
-                  </span>
-                </td>
                 <td>
                   <span>{{ invoice.code }}</span>
                 </td>
@@ -81,38 +73,4 @@
   </div>
 </div>
 <!-- MAIN END -->
-{% endblock %}
-{% block profile %}
-<div class="side-bar fixed-index-right" id="profile-side-bar">
-    <a href="#" class="side-bar-toggle">
-      <img src="/static/images/svg/arrow-right.svg">
-    </a>
-    {% if user.is_authenticated %}
-    <div class="profile-info">
-      <div class="avatar">
-          <img class="avatar-lg rounded-circle" src="{{ user.get_profile_pic }}"/>
-      </div>
-      <h3 class="text-dark">{{ user.first_name }}</h3>
-      <p>
-        <span class="text-dark">
-          {{ user.first_name }}
-        </span>,
-        <span class="designation">
-          {{ user.last_name }}
-        </span>
-      </p>
-    </div>
-    <div class="contact-info">
-      <p class="side-bar-subtitle">PROFILE</p>
-      <div>
-        <label>username</label>
-        <p class="text-dark">{{ user.get_full_name }}</p>
-      </div>
-      <div>
-        <label>e-mail</label>
-        <p class="text-dark">{{ user.email }}</p>
-      </div>
-    </div>
-  {% endif %}
-</div>
 {% endblock %}
