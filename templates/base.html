@@ -20,45 +20,7 @@
     <base href="/">
 </head>
 
-<body>
-     <!-- NAV START -->
-    <nav class="main-nav navbar navbar-expand-lg">
-      <a href="#" class="navbar-brand">Portal</a>
-      <div class="collapse navbar-collapse justify-content-between" id="mainNav">
-        <div class="d-flex">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a href="{% url 'invoice' %}" class="nav-link">Invoices</a>
-            </li>
-          </ul>
-        </div>
-         <div class="">
-                <ul class="navbar-nav">
-                    <li class="d-flex align-items-center nav-account">
-                        <p class="mb-0">
-                            Hello, <span id="user-name">{{ user.first_name|title }}</span>!
-                        </p>
-                        <div class="dropdown ">
-                            <a  class="dropdown-toggle d-flex align-items-center" id="navProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="avatar-md"><img class="rounded-circle" src="{{ user.image.url }}" height="30" width="30" /></div>
-                            <i data-feather="chevron-down" ></i>
-                        </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="javascript:;" class="dropdown-item" id="profile" onclick="UserController.detail({{ user.id }})">Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Log out</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-      </div>
-    </nav>
-    <!-- NAV END -->
-
+<body ng-app="portal">
     <ui-view></ui-view>
 
     <script type="text/javascript" src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
@@ -73,6 +35,9 @@
     </script>
     
     <script type="text/javascript" src="{% static 'node_modules/angular/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/@uirouter/angularjs/release/angular-ui-router.min.js' %}"></script>
+
+    {% include 'includes/angular_modules.html' %}
 </body>
 
 </html>
