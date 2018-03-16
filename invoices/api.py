@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
-from rest_framework import filters
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from invoices.models import Invoice
-from customers.models import Customer
+from invoices.pagination import CustomPagination
 from invoices.serializers import InvoiceSerializer
 
 
@@ -28,13 +28,16 @@ class InvoiceAPI(LoginRequiredMixin, APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class InvoicesAPI(LoginRequiredMixin, APIView):
+
+class InvoicesAPI(LoginRequiredMixin, ListAPIView):
     """ View for adding new invoice and gets the list of all invoices
     """
-    def get(self, request, format=None):
-        invoice = Invoice.objects.all()
-        serializer = InvoiceSerializer(invoice, many=True)
-        return Response(serializer.data)
+    serializer_class = InvoiceSerializer
+    pagination_class = CustomPagination
+
+    def get_queryset(self):
+        selected = self.request.GET.get('ordering')
+        return Invoice.objects.all().order_by(selected)
 
     def post(self, request, format=None):
         serializer = InvoiceSerializer(data=request.data)
