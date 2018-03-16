@@ -1,13 +1,13 @@
 $(document).ready(function () {
-	$('.selectpicker').selectpicker({
+	$('.selectpickerClient').selectpicker({
 	  liveSearchPlaceholder: 'Search Clients'
 	});
 
-    $('#startDate').datepicker({
-        uiLibrary: 'bootstrap4'
+    $('.selectpickerTerms').selectpicker({
+      liveSearchPlaceholder: 'Search Clients'
     });
 
-    $('#endDate').datepicker({
+    $('#invoiceDate').datepicker({
         uiLibrary: 'bootstrap4'
     });
 
