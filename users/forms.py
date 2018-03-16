@@ -24,16 +24,3 @@ class LoginForm(forms.Form):
                                         code='invalid_credentials')
 
         return self.cleaned_data
-
-
-class UserProfileForm(forms.ModelForm):
-    """ Form for users profile
-    """
-    class Meta:
-        model = User
-        fields = (
-                'email',
-                'first_name',
-                'last_name',
-                'profile_pic',
-            )
