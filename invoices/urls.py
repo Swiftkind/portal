@@ -1,4 +1,5 @@
 from django.urls import path
+<<<<<<< HEAD
 from invoices.views import (InvoicesAPI,
                             InvoiceAPI)
 
