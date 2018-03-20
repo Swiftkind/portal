@@ -4,7 +4,6 @@
     angular
         .module('portal', [
             'ui.router',
-            'ui.bootstrap',
             'invoices.portal',
             'users.portal',
         ])

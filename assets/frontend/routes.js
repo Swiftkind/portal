@@ -1,23 +1,20 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  angular
-    .module('portal')
-    .config(routes)
-  ;
+    angular
+        .module('portal')
+        .config(routes);
 
-  function routes ($stateProvider, $urlRouterProvider,
-    $urlMatcherFactoryProvider, TEMPLATE_URL) {
+    function routes($stateProvider, $urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, TEMPLATE_URL) {
 
-    $stateProvider
-      .state('legacy', {
-        abstract : true,
-      })
-    ;
+        $urlRouterProvider.otherwise('/');
+        $urlMatcherFactoryProvider.strictMode(false);
+        $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.otherwise('/login/');
-    $urlMatcherFactoryProvider.strictMode(false);
-    $locationProvider.html5Mode(true);
-  }
+        $stateProvider
+            .state('legacy', {
+                abstract: true,
+            });
+    }
 
 })();
