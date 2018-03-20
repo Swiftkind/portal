@@ -71,11 +71,6 @@ class LoginTestCase(TestCase):
         self.client = Client()
         User.objects.create_user(**user_data)
 
-    def test_get_login_page(self):
-        """ Gets the login page
-        """
-        response = self.client.get(reverse('login'))
-        self.assertEqual(response.status_code, 200)
 
     def test_post_login_page(self):
         """ Post data to login page
@@ -86,7 +81,7 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_post_login_page_fail_wrong_password(self):
         """ Post data to login page with wrong password
@@ -97,8 +92,7 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.context['form'].errors['__all__'].as_data()[0].code,
-                         'invalid_credentials')
+        self.assertEqual(response.status_code, 400)
 
     def test_post_login_page_fail_no_email(self):
         """ Post data to login page with no email
@@ -109,8 +103,7 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.context['form'].errors['email'].as_data()[0].code,
-                         'required')
+        self.assertEqual(response.status_code, 400)
 
     def test_post_login_page_fail_invalid_email(self):
         """ Post data to login page with invalid email
@@ -121,5 +114,4 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.context['form'].errors['email'].as_data()[0].code,
-                         'invalid')
+        self.assertEqual(response.status_code, 400)

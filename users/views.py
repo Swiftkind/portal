@@ -1,9 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-
-from users.models import User
+from users.serializers import LoginSerializer
 from users.serializers import UserSerializer
 
 
@@ -19,3 +18,13 @@ class UserAPI(LoginRequiredMixin, viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=200)
+
+
+class LoginView(APIView):
+    def post(self, request, format=None):
+        serializer = LoginSerializer(data=request.data)
+
+        if serializer.is_valid():
+            return Response(serializer.data, status=200)
+        return Response(serializer.errors, status=400)
+
