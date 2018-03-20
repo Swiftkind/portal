@@ -28,9 +28,9 @@
 
     self.UserServices = UserServices;
 
-    // self.onProfileClose = function () {
-    //   $rootScope.
-    // }
+    self.onProfileClose = function () {
+      $rootScope.isProfileBarActive = false;
+    }
 
   }; // end of aside Controller
 

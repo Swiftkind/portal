@@ -1,5 +1,5 @@
 <div class="side-bar fixed-index-right" ng-class="{'active': ctrl.active}" id="profile-side-bar">
-    <a href="#" class="side-bar-toggle">
+    <a href="#" class="side-bar-toggle" ng-click="ctrl.onProfileClose()">
         <img src="/static/images/svg/arrow-right.svg">
     </a>
 
@@ -7,7 +7,8 @@
         <div class="avatar">
             <img class="avatar-lg" ng-src="{{ ctrl.UserServices.user.image }}">
         </div>
-        <h3 class="text-dark">{{ ctrl.UserServices.user.first_name }}</h3>
+        <h3 class="text-dark">{{ ctrl.UserServices.user.first_name }} <i data-feather="chevron-down" ></i></h3>
+
         <p>
             <span class="text-dark">
                 {{ ctrl.UserServices.user.last_name }}
