@@ -24,7 +24,8 @@ user_data = {
     'email': 'john@john.com',
     'first_name': "John",
     'last_name': "Doe",
-    'password': User.objects.make_random_password()
+    'password': User.objects.make_random_password(),
+    'image': 'assets/images/profile-default.png'
 }
 
 

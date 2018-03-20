@@ -1,11 +1,11 @@
 from django.urls import path
 
-from users.views import LoginView, DashboardView
-
+from users.views import UserAPI
 
 
 urlpatterns = [
-    path('login/', LoginView.as_view(), name='login'),
-    path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('auth/', UserAPI.as_view({
+        'get': 'detail',
+        'post': 'update',
+        }), name='user-auth')
 ]
-

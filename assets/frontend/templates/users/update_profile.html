@@ -1,0 +1,33 @@
+<div class="side-bar fixed-index-right" ng-class="{'active': ctrl.active}" id="profile-side-bar">
+    <a href="#" class="side-bar-toggle" ng-click="ctrl.onProfileClose()">
+        <img src="/static/images/svg/arrow-right.svg">
+    </a>
+
+    <div class="profile-info">
+        <div class="avatar">
+            <img class="avatar-lg" ng-src="{{ ctrl.UserServices.user.image }}">
+        </div>
+        <h3 class="text-dark">{{ ctrl.UserServices.user.first_name }} <i data-feather="chevron-down" ></i></h3>
+
+        <p>
+            <span class="text-dark">
+                {{ ctrl.UserServices.user.last_name }}
+            </span>,
+            <span class="designation">
+
+            </span>
+        </p>
+    </div>
+    <div class="contact-info">
+        <p class="side-bar-subtitle">PROFILE</p>
+        <div>
+            <label>first_name</label>
+            <p class="text-dark">{{ ctrl.UserServices.user.first_name }}</p>
+        </div>
+        <div>
+            <label>e-mail</label>
+            <p class="text-dark">{{ ctrl.UserServices.user.email }}</p>
+        </div>
+    </div>
+</div>
+<!-- SIDEBAR END -->

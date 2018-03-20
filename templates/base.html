@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
     <link rel="stylesheet" type="text/css" href="{% static 'node_modules/dripicons/webfont/webfont.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'node_modules/dripicons/webfont/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
@@ -16,11 +15,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap/dist/css/bootstrap-reboot.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
     <base href="/">
 </head>
 
 <body ng-app="portal">
+    <nav-bar></nav-bar>
+    <profile-bar active="isProfileBarActive"></profile-bar>
     <ui-view></ui-view>
 
     <script type="text/javascript" src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
@@ -31,9 +31,9 @@
     <script type="text/javascript" src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/feather-icons/dist/feather.min.js' %}"></script>
     <script type="text/javascript">
-        feather.replace();
+    feather.replace();
     </script>
-    
+
     <script type="text/javascript" src="{% static 'node_modules/angular/angular.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/@uirouter/angularjs/release/angular-ui-router.min.js' %}"></script>
 
