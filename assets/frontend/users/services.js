@@ -17,7 +17,7 @@
 
         // Returns a users detail data from the API
         function usersDetail() {
-            return $http.get(API_URL + 'users/current/')
+            return $http.get(API_URL + 'users/auth/')
             .then(function (resp) {
                 service.user = resp.data;
             });

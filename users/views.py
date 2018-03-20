@@ -7,15 +7,15 @@ from users.models import User
 from users.serializers import UserSerializer
 
 
-class UserViewSet(LoginRequiredMixin, viewsets.ViewSet):
+class UserAPI(LoginRequiredMixin, viewsets.ViewSet):
     """ User profile viewset
     """
-    def users_detail(self, *args, **kwargs):
+    def detail(self, *args, **kwargs):
         serializer = UserSerializer(self.request.user)
-        return Response(serializer.data)
+        return Response(serializer.data, status=200)
 
-    def update_users(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
         serializer = UserSerializer(self.request.user, data=self.request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=201)
+        return Response(serializer.data, status=200)
