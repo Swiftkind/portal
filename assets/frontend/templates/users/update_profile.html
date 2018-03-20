@@ -7,25 +7,25 @@
         <div class="avatar">
             <img class="avatar-lg" ng-src="{{ ctrl.UserServices.user.image }}">
         </div>
-        <h3 class="text-dark">Scarlette</h3>
+        <h3 class="text-dark">{{ ctrl.UserServices.user.first_name }}</h3>
         <p>
             <span class="text-dark">
-                Johnson
+                {{ ctrl.UserServices.user.last_name }}
             </span>,
             <span class="designation">
-                Chief Operations Officer
+
             </span>
         </p>
     </div>
     <div class="contact-info">
         <p class="side-bar-subtitle">PROFILE</p>
         <div>
-            <label>username</label>
-            <p class="text-dark">@scarlettejohnson</p>
+            <label>first_name</label>
+            <p class="text-dark">{{ ctrl.UserServices.user.first_name }}</p>
         </div>
         <div>
             <label>e-mail</label>
-            <p class="text-dark">@scarlettejohnson@gmail.com</p>
+            <p class="text-dark">{{ ctrl.UserServices.user.email }}</p>
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@
     .controller('asideController', asideController);
 
   /* navBarController
-   * @desc:
+   * @desc: This will display the navigation bar
    */
   function navBarController($scope, $rootScope, UserServices) {
     var self = this;
@@ -21,12 +21,16 @@
   }; // end of NavBarCtrl
 
   /* aside Controller
-   * @desc:
+   * @desc: This will display the user profile in sidebar
    */
   function asideController($scope, $rootScope, UserServices) {
     var self = this;
 
-    self.UserServices = UserServices
+    self.UserServices = UserServices;
+
+    // self.onProfileClose = function () {
+    //   $rootScope.
+    // }
 
   }; // end of aside Controller
 
