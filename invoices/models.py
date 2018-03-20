@@ -43,7 +43,7 @@ class Invoice(models.Model):
     code = models.CharField(max_length=16)
     order_id = models.CharField(max_length=16,null=True, blank=True)
     invoice_date = models.DateTimeField()
-    terms = models.CharField(max_length=16, choices=TERMS, default=DUE_RECEIPT)
+    terms = models.CharField(max_length=20, choices=TERMS, default=DUE_RECEIPT)
     due_date = models.DateTimeField()
     notes = models.TextField(null=True, blank=True)
     conditions = models.CharField(max_length=28, null=True, blank=True)
