@@ -1,12 +1,14 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  angular
-    .module('portal', [
-      'ui.router',
-      'invoices.portal'
-    ])
-    .constant('TEMPLATE_URL', '/static/frontend/templates/')
-  ;
+    angular
+        .module('portal', [
+            'ui.router',
+            'ui.bootstrap',
+            'invoices.portal',
+            'users.portal',
+        ])
+        .constant('TEMPLATE_URL', '/static/frontend/templates/')
+        .constant('API_URL', '/api/users/');
 
 })();
