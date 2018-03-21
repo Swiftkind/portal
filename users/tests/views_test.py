@@ -1,22 +1,26 @@
 from django.urls import reverse
-from django.utils import timezone
 from django.test import TestCase, Client
+from customers.models import Customer
 from invoices.models import Invoice
 from users.models import User
 
 
-date_now = timezone.now().date()
-
-invoice_data = {
+api_invoice_data = {
     'order_id':"12",
-    'invoice_date':date_now,
+    'invoice_date':'2018-03-04 06:00:00.000000',
     'terms':Invoice.DUE_RECEIPT,
-    'due_date':date_now + timezone.timedelta(days=5),
+    'due_date':'2018-03-04 06:00:00.000000',
     'notes':"sample notes",
     'conditions':"condition 1",
-    'date_created':date_now,
-    'date_updated':date_now,
+    'date_created':'2018-03-04 06:00:00.000000',
+    'date_updated':'2018-03-04 06:00:00.000000',
     'status':Invoice.SENT
+}
+
+
+customer_data = {
+    'email':'dwayne@wade.com',
+    'billing_address':'Davao City'
 }
 
 
@@ -41,27 +45,31 @@ class DashboardTestCase(TestCase):
         """ Test dashboard with user not authenticated
         """
         self.client.logout()
-        response = self.client.get(reverse('dashboard'))
+        response = self.client.get(reverse('api_invoices'))
         self.assertEqual(response.status_code, 302)
 
     def test_dashboard_authenticated(self):
         """ Test dashboard with user authenticated
         """
-        response = self.client.get(reverse('dashboard'))
+        response = self.client.get(reverse('api_invoices'))
         self.assertEqual(response.status_code, 200)
 
     def test_invoice_empty(self):
         """ Test empty invoice
         """
-        response = self.client.get(reverse('dashboard'))
-        self.assertEqual(response.context['invoices'].count(), 0)
+        response = self.client.get(reverse('api_invoices'))
+        self.assertEqual(response.data, None)
 
     def test_invoice_count(self):
         """ Test the invoice number of users
         """
-        Invoice.objects.create(code='abcd', **invoice_data)
-        response = self.client.get(reverse('dashboard'))
-        self.assertEqual(response.context['invoices'].count(), 1)
+        Invoice.objects.create(
+            code='abcd', 
+            **api_invoice_data, 
+            customer=Customer.objects.create(**customer_data)
+        )
+        response = self.client.get(reverse('api_invoices'))
+        self.assertEqual(len(response.data['results']), 1)
 
 
 class LoginTestCase(TestCase):
