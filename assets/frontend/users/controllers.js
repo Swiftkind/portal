@@ -1,10 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('users.portal')
     .controller('navBarController', navBarController)
-    .controller('asideController', asideController);
+    .controller('asideController', asideController)
+    .controller('dashboardController', dashboardController)
 
   /* navBarController
    * @desc: This will display the navigation bar
@@ -34,4 +35,13 @@
 
   }; // end of aside Controller
 
+
+  /* Dashboard Controller
+  * @desc: This will display the paginated invoices
+  */
+  function dashboardController ($scope, InvoiceService) {
+    this.InvoiceService = InvoiceService;
+  };
+
 })();
+

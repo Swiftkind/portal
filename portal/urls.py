@@ -8,8 +8,8 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('invoices.endpoints')),
     path('api/users/', include('users.urls')),
+    path('api/invoices/', include('invoices.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
