@@ -4,7 +4,8 @@
   angular
     .module('users.portal')
     .controller('navBarController', navBarController)
-    .controller('asideController', asideController);
+    .controller('asideController', asideController)
+  ;
 
   /* navBarController
    * @desc: This will display the navigation bar
@@ -21,16 +22,28 @@
   }; // end of NavBarCtrl
 
   /* aside Controller
-   * @desc: This will display the user profile in sidebar
+   * @desc: This will display the user profile detail in sidebar
    */
   function asideController($scope, $rootScope, UserService) {
     var self = this;
+    var enableEdit = false;
+    feather.replace();
 
     self.UserService = UserService;
 
     self.onProfileClose = function () {
       $rootScope.isProfileBarActive = false;
-    }
+    };
+
+    self.editProfile = function () {
+      self.enableEdit = true;
+    };
+
+    self.saveUser = function () {
+      self.enableEdit = false;
+
+      UserServices.updateProfile(UserServices.user);
+    };
 
   }; // end of aside Controller
 

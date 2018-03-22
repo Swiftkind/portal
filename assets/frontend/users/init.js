@@ -3,6 +3,7 @@
 
     angular
         .module('users.portal', [])
-        .constant('TEMPLATE_URL', '/static/frontend/templates/users/');
+        .constant('TEMPLATE_URL', '/static/frontend/templates/users/')
+    ;
 
 })();
