@@ -3,12 +3,12 @@
 
     angular
         .module('users.portal')
-        .service('UserServices', UserServices);
+        .service('UserService', UserService);
 
     /* User Services
      * @desc: A function that gets the user data from the endpoint
      */
-    function UserServices($http, API_URL) {
+    function UserService($http, API_URL) {
         var service = {
             user: null,
         };

@@ -20,9 +20,9 @@ class UserAPI(LoginRequiredMixin, ViewSet):
 
 
 class LoginAPI(ViewSet):
-    """ Login viewset. 
+    """ Login viewset.
     """
     def post(self, *args, **kwargs):
         serializer = LoginSerializer(data=self.request.data)
-        serializer.is_valid(raise_exception=True):
+        serializer.is_valid(raise_exception=True)
         return Response(token, status=200)

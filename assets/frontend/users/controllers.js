@@ -9,10 +9,10 @@
   /* navBarController
    * @desc: This will display the navigation bar
    */
-  function navBarController($scope, $rootScope, UserServices) {
+  function navBarController($scope, $rootScope, UserService) {
     var self = this;
 
-    self.UserServices = UserServices;
+    self.UserService = UserService;
 
     self.onProfileClick = function() {
       $rootScope.isProfileBarActive = true;
@@ -23,10 +23,10 @@
   /* aside Controller
    * @desc: This will display the user profile in sidebar
    */
-  function asideController($scope, $rootScope, UserServices) {
+  function asideController($scope, $rootScope, UserService) {
     var self = this;
 
-    self.UserServices = UserServices;
+    self.UserService = UserService;
 
     self.onProfileClose = function () {
       $rootScope.isProfileBarActive = false;
