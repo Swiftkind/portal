@@ -61,32 +61,32 @@ class InvoiceListTestCase(TestCase):
     def test_invoice_page_authenticated_success(self):
         """ Test for invoice list page with authenticated user
         """
-        response = self.client.get(reverse('invoice'))
+        response = self.client.get(reverse('invoices'))
         self.assertEqual(response.status_code, 200)
 
     def test_invoice_page_not_authenticated_fail(self):
         """ Test for the invoice list page with unathenticated user
         """
         self.client.logout()
-        response = self.client.get(reverse('invoice'))
+        response = self.client.get(reverse('invoices'))
         self.assertEqual(response.status_code, 302)
 
     def test_invoice_page_with_1_invoice_success(self):
         """ Test for the invoice list with 1 existing invoice
         """
-        response = self.client.get(reverse('invoice'))
-        self.assertEqual(response.context['invoices'].count(), 1)
+        response = self.client.get(reverse('invoices'))
+        self.assertEqual(json.loads(response.content)['result'][0]['order_id'], '12')
 
     def test_invoice_get_detail_success(self):
         """ Test for the getting the detail of invoice
         """
-        response = self.client.get(reverse('api_invoice', kwargs={'id':self.invoice.id}))
+        response = self.client.get(reverse('invoice', kwargs={'inv_id':self.invoice.id}))
         self.assertEqual(json.loads(response.content)['code'], self.code)
 
     def test_invoice_get_detail_not_existing_fail(self):
         """ Test for getting detail of invoice but not existing
         """
-        response = self.client.get(reverse('api_invoice', kwargs={'id':34}))
+        response = self.client.get(reverse('invoice', kwargs={'inv_id':34}))
         self.assertEqual(response.status_code, 404)
 
     def test_invoice_create_success(self):
@@ -94,14 +94,14 @@ class InvoiceListTestCase(TestCase):
         """
         api_invoice_data['code'] = self.code
         api_invoice_data['customer'] = self.customer.pk
-        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        response = self.client.post(reverse('invoices'), api_invoice_data)
         self.assertEqual(response.status_code, 201)
 
     def test_invoice_create_fail(self):
         """ Test for creating invoice with no customer 
         """
         api_invoice_data['code'] = self.code
-        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        response = self.client.post(reverse('invoices'), api_invoice_data)
         self.assertEqual(json.loads(response.content)['customer'][0], "This field is required.")
         self.assertEqual(response.status_code, 400)
 
@@ -110,14 +110,14 @@ class InvoiceListTestCase(TestCase):
         """
         api_invoice_data['code'] = self.code
         api_invoice_data['customer'] = self.customer.pk
-        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        response = self.client.post(reverse('invoices'), api_invoice_data)
         invoice = json.loads(response.content)
         self.assertEqual(response.status_code, 201)
 
         new_condition = 'condition 2'
         invoice['conditions'] = new_condition
-        url = reverse('api_invoice', kwargs={'id':self.invoice.id})
-        response = self.client.put(url, data=json.dumps(invoice), content_type='application/json')
+        url = reverse('invoice', kwargs={'inv_id':self.invoice.id})
+        response = self.client.patch(url, data=json.dumps(invoice), content_type='application/json')
         self.assertEqual(json.loads(response.content)['conditions'], new_condition)
 
     def test_invoice_update_fail(self):
@@ -125,12 +125,12 @@ class InvoiceListTestCase(TestCase):
         """
         api_invoice_data['code'] = self.code
         api_invoice_data['customer'] = self.customer.pk
-        response = self.client.post(reverse('api_invoices'), api_invoice_data)
+        response = self.client.post(reverse('invoices'), api_invoice_data)
         invoice = json.loads(response.content)
         self.assertEqual(response.status_code, 201)
 
         invoice['code'] = None
-        url = reverse('api_invoice', kwargs={'id':self.invoice.id})
-        response = self.client.put(url, data=json.dumps(invoice), content_type='application/json')
+        url = reverse('invoice', kwargs={'inv_id':self.invoice.id})
+        response = self.client.patch(url, data=json.dumps(invoice), content_type='application/json')
         self.assertEqual(json.loads(response.content)['code'][0], 'This field may not be null.')
         self.assertEqual(response.status_code, 400)
