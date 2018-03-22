@@ -3,34 +3,56 @@
 
   angular
     .module('invoices.portal')
-    .service('InvoicesServices', InvoicesServices)
+    .service('InvoiceService', InvoiceService)
   ;
+
   /* INVOICE SERVICE: this wil fetch data from the backend
    */
-  function InvoicesServices($http) {
+  function InvoiceService($http, $httpParamSerializer, API_URL) {
 
     // Local variable
     var services = {
       list: [],
-      getDetail:getDetail
+      getDetail:getDetail,
+      getList: getList,
+      terms: [],
+      getLatest:getLatest
     }
 
-    getLists();
+    getList();
+    getTerms();
 
     return services;
 
-    /* Gets all list of invoices
+    /* Gets list of all invoices
      */
-    function getLists () {
-      return $http.get('api/invoices/')
-        .then(function (resp) {
-          services.list = resp.data;
+    function getList (params) {
+      return $http.get(API_URL + 'invoices/?' + $httpParamSerializer(params))
+        .then(function (response) {
+          services.list = response.data;
         });
     }
+
    /* Gets detail of the invoice by id
     */
     function getDetail (id) {
-      return $http.get('api/invoices/' + id + '/');
+      return $http.get(API_URL + 'invoices/' + id + '/');
+    }
+
+   /* Gets the terms of the invoice
+    */
+    function getTerms () {
+      return $http.get(API_URL + 'invoices/terms/')
+        .then(function (response){
+          services.terms = response.data;
+        });
+    }
+
+   /* Gets the latest invoice
+    */
+    function getLatest () {
+      
+      return $http.get(API_URL + 'invoices/latest/');
     }
 
   }

@@ -36,23 +36,21 @@
           <div class="col-4">
             <div class="form-group">
               <label> Invoice Date</label>
-              <input type="date" name="" id="startDate" class="" placeholder="Select date" ng-model="invoice_date">
+              <input type="date" name="" id="startDate" class="" placeholder="Select date" ng-model="ctrl.invoice.invoice_date">
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label>Terms</label>
               <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.terms">
-                  <option value="due_receipt">Due of Receipt</option>
-                  <option value="due_end_next_month">Due End of Next Month</option>
-                  <option value="due_end_month">Due End of Month</option>
+                  <option ng-repeat="term in ctrl.invoiceService.terms" value="{{term[0]}}">{{term[1]}}</option>
               </select>
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label>Due Date</label>
-              <input type="date" name="" id="endDate" class="" placeholder="Select Due date" ng-model="ctrl.due_date"> 
+              <input type="date" name="" id="endDate" class="" placeholder="Select Due date" ng-model="ctrl.invoice.due_date"> 
             </div>
           </div>
         </div>

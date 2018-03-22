@@ -11,12 +11,11 @@
       var directive = {
         restrict: 'EA',
         templateUrl: TEMPLATE_URL + '/invoices/invoice_form.html',
-        controller: 'InvoiceUpdateController',
+        controller: 'InvoiceController',
         controllerAs: 'ctrl',
         bindToController: true
       };
       return directive;
-    } 
-
+    }
 
 })();

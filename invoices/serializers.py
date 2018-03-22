@@ -10,6 +10,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
     customer_detail = serializers.SerializerMethodField()
     customers = serializers.SerializerMethodField()
 
+
     class Meta:
         model = Invoice
         fields = ('id','code','order_id','invoice_date', 'is_due', 'terms','due_date',

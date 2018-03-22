@@ -3,37 +3,29 @@
 
   angular
     .module('invoices.portal')
-    .controller('InvoicesAddController', InvoicesAddController)
-    .controller('InvoiceUpdateController', InvoiceUpdateController)
+    .controller('InvoiceController', InvoiceController)
   ;
 
-  /* INVOICE CONTROLLER: displays the data of invoice from the service
-   */
-  function InvoicesAddController($scope, InvoicesServices) {
+   /* INVOICE CONTROLLER: this will handle the data of the invoice lists
+     from the service
+    */
+  function InvoiceController($scope, InvoiceService, $stateParams) {
     var self = this;
+    self.invoiceService = InvoiceService;
 
-    self.InvoicesServices = InvoicesServices;
+    detail()
 
-    console.log(InvoicesServices.list);
-  }
-
-  /* INVOICE CONTROLLER: displays the detail of the invoice
-   */
-  function InvoiceUpdateController($scope, InvoicesServices, $stateParams) {
-    var self = this;
-    self.InvoicesServices = InvoicesServices;
-
-      detail();
-
-      function detail (){
-        InvoicesServices
-          .getDetail($stateParams['id'])
-          .then(function (response) {
-            self.invoice_date = new Date(response.data.invoice_date);
-            self.due_date = new Date(response.data.due_date);
-            self.invoice = response.data;
-        });
-      };
+    /* Get the detail of invoice by ID
+     */
+    function detail (){
+      InvoiceService
+        .getDetail(invId)
+        .then(function (response) {
+          self.invoice = response.data;
+          self.invoice.invoice_date = new Date(self.invoice.invoice_date);
+          self.invoice.due_date = new Date(self.invoice.due_date);
+      });
+    };
 
   }
 
