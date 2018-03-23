@@ -68,6 +68,8 @@ class LoginTestCase(TestCase):
     """ Test case for user login view
     """
     def setUp(self):
+        """ Setting up test
+        """
         self.client = Client()
         User.objects.create_user(**user_data)
 
@@ -95,6 +97,7 @@ class LoginTestCase(TestCase):
 
         response = self.client.post(reverse('login'), creds)
         self.assertIn('password', response.json())
+        self.assertEqual('Ensure this field has at least 8 characters.', response.json().get('password')[0])
         self.assertEqual(response.status_code, 400)
 
 

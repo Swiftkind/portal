@@ -6,7 +6,7 @@ from users.serializers import LoginSerializer, UserSerializer
 
 
 class UserAPI(LoginRequiredMixin, ViewSet):
-    """ User profile viewset
+    """ User profile viewset.
     """
     def detail(self, *args, **kwargs):
         serializer = UserSerializer(self.request.user)
