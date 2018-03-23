@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework.views import APIView
-from rest_framework import viewsets, status
+from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from users.serializers import LoginSerializer
-from users.serializers import UserSerializer
+from users.serializers import LoginSerializer, UserSerializer
 
 
-class UserAPI(LoginRequiredMixin, viewsets.ViewSet):
+
+class UserAPI(LoginRequiredMixin, ViewSet):
     """ User profile viewset
     """
     def detail(self, *args, **kwargs):
@@ -20,11 +19,13 @@ class UserAPI(LoginRequiredMixin, viewsets.ViewSet):
         return Response(serializer.data, status=200)
 
 
-class LoginView(APIView):
-    def post(self, request, format=None):
-        serializer = LoginSerializer(data=request.data)
+class LoginAPI(ViewSet):
+    """ Login viewset. 
+    """
+    def post(self, *args, **kwargs):
+        serializer = LoginSerializer(data=self.request.data)
 
-        if serializer.is_valid():
-            return Response(serializer.data, status=200)
+        if serializer.is_valid(raise_exception=True):
+            return Response(token, status=200)
+
         return Response(serializer.errors, status=400)
-
