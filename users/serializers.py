@@ -33,7 +33,7 @@ class LoginSerializer(serializers.Serializer):
         if not user:
             raise serializers.ValidationError('Invalid Email or Password.')
             
-        token = Token.objects.get(user=user)
+        token = Token.objects.get_or_create(user=user)
         user_data['token']= token.key
         return user_data
 

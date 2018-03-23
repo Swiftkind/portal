@@ -29,39 +29,39 @@ user_data = {
 }
 
 
-# class DashboardTestCase(TestCase):
-#     """ Test dashboard
-#     """
-#     def setUp(self):
-#         self.client = Client()
-#         user = User.objects.create_user(**user_data)
-#         self.client.login(email=user_data['email'], password=user_data['password'])
+class DashboardTestCase(TestCase):
+    """ Test dashboard
+    """
+    def setUp(self):
+        self.client = Client()
+        user = User.objects.create_user(**user_data)
+        self.client.login(email=user_data['email'], password=user_data['password'])
 
-#     def test_dashboard_not_authenticated(self):
-#         """ Test dashboard with user not authenticated
-#         """
-#         self.client.logout()
-#         response = self.client.get(reverse('dashboard'))
-#         self.assertEqual(response.status_code, 302)
+    def test_dashboard_not_authenticated(self):
+        """ Test dashboard with user not authenticated
+        """
+        self.client.logout()
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.status_code, 302)
 
-#     def test_dashboard_authenticated(self):
-#         """ Test dashboard with user authenticated
-#         """
-#         response = self.client.get(reverse('dashboard'))
-#         self.assertEqual(response.status_code, 200)
+    def test_dashboard_authenticated(self):
+        """ Test dashboard with user authenticated
+        """
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.status_code, 200)
 
-#     def test_invoice_empty(self):
-#         """ Test empty invoice
-#         """
-#         response = self.client.get(reverse('dashboard'))
-#         self.assertEqual(response.context['invoices'].count(), 0)
+    def test_invoice_empty(self):
+        """ Test empty invoice
+        """
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.context['invoices'].count(), 0)
 
-#     def test_invoice_count(self):
-#         """ Test the invoice number of users
-#         """
-#         Invoice.objects.create(code='abcd', **invoice_data)
-#         response = self.client.get(reverse('dashboard'))
-#         self.assertEqual(response.context['invoices'].count(), 1)
+    def test_invoice_count(self):
+        """ Test the invoice number of users
+        """
+        Invoice.objects.create(code='abcd', **invoice_data)
+        response = self.client.get(reverse('dashboard'))
+        self.assertEqual(response.context['invoices'].count(), 1)
 
 
 class LoginTestCase(TestCase):

@@ -24,8 +24,5 @@ class LoginAPI(ViewSet):
     """
     def post(self, *args, **kwargs):
         serializer = LoginSerializer(data=self.request.data)
-
-        if serializer.is_valid(raise_exception=True):
-            return Response(token, status=200)
-
-        return Response(serializer.errors, status=400)
+        serializer.is_valid(raise_exception=True):
+        return Response(token, status=200)
