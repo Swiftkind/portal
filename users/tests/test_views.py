@@ -71,11 +71,6 @@ class LoginTestCase(TestCase):
         self.client = Client()
         User.objects.create_user(**user_data)
 
-    def test_get_login_page(self):
-        """ Gets the login page
-        """
-        response = self.client.get(reverse('login'))
-        self.assertEqual(response.status_code, 200)
 
     def test_post_login_page(self):
         """ Post data to login page
@@ -86,21 +81,37 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.status_code, 302)
+        self.assertIn('token', response.json())
+        self.assertEqual(response.status_code, 200)
 
-    def test_post_login_page_fail_wrong_password(self):
+
+    def test_post_login_invalid_password_fails(self):
         """ Post data to login page with wrong password
         """
         creds = {
             'email':user_data['email'],
-            'password':'1234567890'
+            'password':'123456'
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.context['form'].errors['__all__'].as_data()[0].code,
-                         'invalid_credentials')
+        self.assertIn('password', response.json())
+        self.assertEqual(response.status_code, 400)
 
-    def test_post_login_page_fail_no_email(self):
+
+    def test_login_invalid_credentials_fails(self):
+        """ Post request to login page with invalid credentials.
+        """
+        creds = {
+            'email': 'john@mail.com',
+            'password': '132542351'
+        }
+        response = self.client.post(reverse('login'), creds)
+        self.assertIn('non_field_errors', response.json())
+        self.assertEqual('Invalid Email or Password.', response.json().get('non_field_errors')[0])
+        self.assertEqual(response.status_code, 400)
+
+
+    def test_post_login_no_email_fails(self):
         """ Post data to login page with no email
         """
         creds = {
@@ -109,10 +120,12 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.context['form'].errors['email'].as_data()[0].code,
-                         'required')
+        self.assertIn('email', response.json())
+        self.assertEqual('This field may not be blank.', response.json().get('email')[0])
+        self.assertEqual(response.status_code, 400)
 
-    def test_post_login_page_fail_invalid_email(self):
+
+    def test_post_login_invalid_email_fails(self):
         """ Post data to login page with invalid email
         """
         creds = {
@@ -121,5 +134,6 @@ class LoginTestCase(TestCase):
         }
 
         response = self.client.post(reverse('login'), creds)
-        self.assertEqual(response.context['form'].errors['email'].as_data()[0].code,
-                         'invalid')
+        self.assertIn('email', response.json())
+        self.assertEqual('Enter a valid email address.', response.json().get('email')[0])
+        self.assertEqual(response.status_code, 400)
