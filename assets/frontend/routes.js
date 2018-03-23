@@ -5,15 +5,16 @@
         .module('portal')
         .config(routes);
 
-    function routes($stateProvider, $urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, TEMPLATE_URL) {
+  function routes ($stateProvider, $urlRouterProvider,
+                   $urlMatcherFactoryProvider, $locationProvider) {
 
-        $urlRouterProvider.otherwise('/');
-        $urlMatcherFactoryProvider.strictMode(false);
-        $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
+    $urlMatcherFactoryProvider.strictMode(false);
+    $locationProvider.html5Mode(true);
 
-        $stateProvider
-            .state('legacy', {
-                abstract: true,
+    $stateProvider
+        .state('legacy', {
+            abstract: true,
             });
     }
 

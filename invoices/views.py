@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ViewSet
@@ -20,7 +21,6 @@ class InvoiceAPI(LoginRequiredMixin, ViewSet):
 
     def update(self, *args, **kwargs):
         invoice = get_object_or_404(Invoice, id=kwargs.get('inv_id'))
-
         serializer = InvoiceSerializer(data=self.request.data, instance=invoice)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -45,3 +45,14 @@ class InvoicesAPI(LoginRequiredMixin, Paginate ,ViewSet):
         serializer.save()
 
         return Response(serializer.data, status=201)
+
+    def terms(self, *args, **kwargs):
+        terms = json.dumps(self.serializer_class.Meta.model.TERMS)
+
+        return Response(json.loads(terms))
+
+    def latest(self, *args, **kwargs):
+        serializer = self.serializer_class(
+                self.serializer_class.Meta.model.objects.order_by('date_created').last())
+
+        return Response(serializer.data)
