@@ -34,6 +34,6 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError('Invalid Email or Password.')
             
         token = Token.objects.get_or_create(user=user)
-        user_data['token']= token.key
+        user_data['token']= token[0].key
         return user_data
 
