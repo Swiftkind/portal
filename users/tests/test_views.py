@@ -136,4 +136,36 @@ class LoginTestCase(TestCase):
         response = self.client.post(reverse('login'), creds)
         self.assertIn('email', response.json())
         self.assertEqual('Enter a valid email address.', response.json().get('email')[0])
+
+
+class UserprofileTestCase(TestCase):
+    """ Test for user profile details
+    """
+    def setUp(self):
+        self.Client = Client()
+        user = User.objects.create_user(**user_data)
+        self.client.login(email=user_data['email'], password=user_data['password'])
+
+    def test_profile_detail_successful(self):
+        response = self.client.get(reverse('user-auth'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_profile_detail_not_authenticated_fail(self):
+        self.client.logout()
+        response = self.client.get(reverse('user-auth'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_profile_update_successful(self):
+        user_data['email'] = 'test@gmail.com'
+        response = self.client.post(reverse('user-auth'), user_data)
+        self.assertEqual(response.status_code, 200)
+
+    def test_profile_update_fail(self):
+        user = User.objects.get(email=user_data['email'])
+        user_data['email'] = user
+        response = self.client.post(reverse('user-auth'), user_data)
+        self.assertEqual(response.status_code, 200)
+
+        user_data['email'] = None
+        response = self.client.post(reverse('user-auth'), user_data)
         self.assertEqual(response.status_code, 400)
