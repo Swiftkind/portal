@@ -12,8 +12,11 @@
   function InvoiceController($scope, InvoiceService, $stateParams) {
     var self = this;
     self.invoiceService = InvoiceService;
+    var invId = $stateParams.id;
 
-    detail()
+    if (typeof invId != 'undefined') {
+      detail()
+    }
 
     /* Get the detail of invoice by ID
      */

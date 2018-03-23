@@ -27,9 +27,9 @@
     /* Gets list of all invoices
      */
     function getList (params) {
-      return $http.get(API_URL + 'invoices/?' + $httpParamSerializer(params))
+      return $http.get(API_URL + 'invoices/' + $httpParamSerializer(params))
         .then(function (response) {
-          services.list = response.data;
+          services.list = response.data.result;
         });
     }
 
@@ -51,7 +51,6 @@
    /* Gets the latest invoice
     */
     function getLatest () {
-      
       return $http.get(API_URL + 'invoices/latest/');
     }
 

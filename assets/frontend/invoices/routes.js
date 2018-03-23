@@ -12,17 +12,24 @@
         url: '/invoices/',
         onEnter: function (InvoiceService, $q, $state) {
 
-          $q.all([InvoiceService.getLatest()])
+            $q.all([InvoiceService.getLatest()])
             .then(function (response) {
               var invoice = response[0].data;
-              $state.go('invoiceDetail', {id: invoice.id});
+
+              if (invoice.code) {
+                $state.go('invoiceDetail', {id: invoice.id});
+              }
+
             });
 
-        }
+        },
+        templateUrl  : TEMPLATE_URL + 'invoice.html',
+        controller   : 'InvoiceController',
+        controllerAs : 'ctrl'
       })
       .state('invoiceDetail', {
         url          : '/invoices/:id/',
-        templateUrl : TEMPLATE_URL + 'invoice.html',
+        templateUrl  : TEMPLATE_URL + 'invoice.html',
         controller   : 'InvoiceController',
         controllerAs : 'ctrl'
       })

@@ -46,28 +46,13 @@ class InvoicesAPI(LoginRequiredMixin, Paginate ,ViewSet):
 
         return Response(serializer.data, status=201)
 
-
-class InvoiceTermsViewset(LoginRequiredMixin, ViewSet):
-    """ Gets the choices of invoice terms
-    """
-    serializer_class = InvoiceSerializer
-
-    def list(self, *args, **kwargs):
+    def terms(self, *args, **kwargs):
         terms = json.dumps(self.serializer_class.Meta.model.TERMS)
+
         return Response(json.loads(terms))
 
+    def latest(self, *args, **kwargs):
+        serializer = self.serializer_class(
+                self.serializer_class.Meta.model.objects.order_by('date_created').last())
 
-class LatestInvoice(LoginRequiredMixin, ViewSet):
-    """ Gets the latest invoice
-    """
-    serializer_class = InvoiceSerializer
-
-    def detail(self, *args, **kwargs):
-        queryset = self.serializer_class.Meta.model.objects.all()
-
-        if queryset.exists():
-            serializer = self.serializer_class(
-                queryset.latest('date_created'))
-
-            return Response(serializer.data)
-        return Response({})
+        return Response(serializer.data)
