@@ -42,7 +42,7 @@
     self.saveUser = function () {
       self.enableEdit = false;
 
-      UserServices.updateProfile(UserServices.user);
+      UserService.updateProfile(UserService.user);
     };
 
   }; // end of aside Controller

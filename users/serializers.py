@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'image',
         )
-        read_only_fields = ('image')
+        read_only_fields = ('image',)
 
 
 class LoginSerializer(serializers.Serializer):

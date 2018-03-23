@@ -5,11 +5,11 @@
 
     <div class="profile-info">
         <div class="avatar">
-            <img class="avatar-lg" ng-src="{{ ctrl.UserServices.user.image }}">
+            <img class="avatar-lg" ng-src="{{ ctrl.UserService.user.image }}">
         </div>
         <div class="dropdown">
             <a class="dropdown-toggle d-flex align-items-center" id="aside-profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <h3 class="text-dark">{{ ctrl.UserServices.user.first_name }} </h3>
+                <h3 class="text-dark">{{ ctrl.UserService.user.first_name }} </h3>
                 <i data-feather="chevron-down" class="arrow-down"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -19,7 +19,7 @@
         </div>
         <p>
             <span class="text-dark">
-                {{ ctrl.UserServices.user.last_name }}
+                {{ ctrl.UserService.user.last_name }}
             </span>,
             <span class="designation">
 
@@ -31,19 +31,19 @@
 
         <div class="form-group" ng-class="{ 'has-error' : updateProfileForm.first_name.$invalid && !updateProfileForm.first_name.$pristine }">
             <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" id="first_name" class="form-control" ng-model="ctrl.UserServices.user.first_name" required>
+            <input type="text" name="first_name" id="first_name" class="form-control" ng-model="ctrl.UserService.user.first_name" required>
             <p ng-show="updateProfileForm.first_name.$invalid && !updateProfileForm.first_name.$pristine" class="help-block">Your first name is required.</p>
         </div> <!-- end of first_name form-group -->
 
         <div class="form-group" ng-class="{ 'has-error' : updateProfileForm.last_name.$invalid && !updateProfileForm.last_name.$pristine }">
             <label for="last_name">Last Name:</label>
-            <input type="text" name="last_name" id="last_name" class="form-control" ng-model="ctrl.UserServices.user.last_name" required>
+            <input type="text" name="last_name" id="last_name" class="form-control" ng-model="ctrl.UserService.user.last_name" required>
             <p ng-show="updateProfileForm.last_name.$invalid && !updateProfileForm.last_name.$pristine" class="help-block">Your last name is required.</p>
         </div> <!-- end of last_name form-group -->
 
         <div class="form-group" ng-class="{ 'has-error' : updateProfileForm.email.$invalid && !updateProfileForm.email.$pristine && submitted }">
             <label for="first_name">Email:</label>
-            <input type="email" name="email" id="email" class="form-control" ng-model="ctrl.UserServices.user.email" required>
+            <input type="email" name="email" id="email" class="form-control" ng-model="ctrl.UserService.user.email" required>
             <p ng-show="updateProfileForm.email.$invalid && !updateProfileForm.email.$pristine" class="help-block">Enter a valid email.</p>
         </div> <!-- end of email form-group -->
 
@@ -56,11 +56,11 @@
         <p class="side-bar-subtitle">PROFILE</p>
         <div>
             <label>first_name</label>
-            <p class="text-dark">{{ ctrl.UserServices.user.first_name }}</p>
+            <p class="text-dark">{{ ctrl.UserService.user.first_name }}</p>
         </div>
         <div>
             <label>e-mail</label>
-            <p class="text-dark">{{ ctrl.UserServices.user.email }}</p>
+            <p class="text-dark">{{ ctrl.UserService.user.email }}</p>
         </div>
     </div>
 </div>
