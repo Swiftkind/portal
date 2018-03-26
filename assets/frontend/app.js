@@ -8,7 +8,6 @@
             'users.portal',
         ])
         .constant('TEMPLATE_URL', '/static/frontend/templates/')
-        .constant('API_URL', '/api/')
     ;
 
 })();
