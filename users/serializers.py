@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'image',
         )
-    read_only_fields = ('image', 'last_name')
+        read_only_fields = ('image',)
 
 
 class LoginSerializer(serializers.Serializer):
@@ -32,8 +32,7 @@ class LoginSerializer(serializers.Serializer):
 
         if not user:
             raise serializers.ValidationError('Invalid Email or Password.')
-            
+
         token = Token.objects.get_or_create(user=user)
         user_data['token']= token.key
         return user_data
-

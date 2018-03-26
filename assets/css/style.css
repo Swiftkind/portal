@@ -762,28 +762,33 @@ label {
   color: #5d58de;
   font-weight: 600;
 }
-/* line 152, ../sass/_base.scss */
+/* line 151, ../sass/_base.scss */
+#profile-side-bar .profile-info .arrow-down {
+  width: 154px;
+  height: 17px;
+}
+/* line 156, ../sass/_base.scss */
 #profile-side-bar label {
   font-size: 12px;
   color: #b8c0dc;
 }
-/* line 156, ../sass/_base.scss */
+/* line 160, ../sass/_base.scss */
 #profile-side-bar.active {
   right: 0;
   transition: 0.2s ease all;
 }
 
-/* line 162, ../sass/_base.scss */
+/* line 166, ../sass/_base.scss */
 #filter-side-bar {
   padding: 3.6rem 5rem;
 }
 
-/* line 169, ../sass/_base.scss */
+/* line 173, ../sass/_base.scss */
 .panel-container {
   height: 100vh;
   padding-top: 10vh;
 }
-/* line 172, ../sass/_base.scss */
+/* line 176, ../sass/_base.scss */
 .panel-container .panel-body {
   width: 500px;
   border-radius: 4px;
@@ -794,7 +799,7 @@ label {
   -moz-box-shadow: 0 2px 6px rgba(153, 170, 190, 0.16);
   box-shadow: 0 2px 6px rgba(153, 170, 190, 0.16);
 }
-/* line 179, ../sass/_base.scss */
+/* line 183, ../sass/_base.scss */
 .panel-container .panel-body .panel-title {
   letter-spacing: 0.03rem;
   color: #5d58de;
@@ -802,27 +807,27 @@ label {
   margin-bottom: 1.5rem;
 }
 
-/* line 190, ../sass/_base.scss */
+/* line 194, ../sass/_base.scss */
 .modal .modal-dialog .modal-content {
   border: none;
   border-radius: 6px;
 }
-/* line 194, ../sass/_base.scss */
+/* line 198, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-header {
   border-bottom: none;
 }
-/* line 197, ../sass/_base.scss */
+/* line 201, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-body {
   padding: 2rem 3rem;
   min-height: 200px;
 }
-/* line 199, ../sass/_base.scss */
+/* line 203, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-body h3 {
   font-family: 'Roboto-Medium', sans-serif;
   color: #221d76;
   margin-bottom: 3rem;
 }
-/* line 206, ../sass/_base.scss */
+/* line 210, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-footer {
   border-top: none;
   padding-bottom: 4rem;
