@@ -20,7 +20,7 @@ class UserAPI(LoginRequiredMixin, ViewSet):
 
 
 class LoginAPI(ViewSet):
-    """ Login viewset. 
+    """ Login viewset.
     """
     def post(self, *args, **kwargs):
         serializer = LoginSerializer(data=self.request.data)
