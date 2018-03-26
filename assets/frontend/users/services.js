@@ -18,7 +18,7 @@
 
         // Returns a users detail data from the API
         function usersDetail() {
-            return $http.get(API_URL + 'users/auth/')
+            return $http.get(API_URL)
             .then(function (resp) {
                 service.user = resp.data;
             });
@@ -26,7 +26,7 @@
 
         // Update the user data from the API
         function updateProfile(data) {
-            return $http.post(API_URL + 'users/auth/', data)
+            return $http.post(API_URL, data)
             .then(function (resp) {
                 service.updateProfile = resp.data;
             }).catch(function(error){
