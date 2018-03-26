@@ -1,3 +1,5 @@
+import json
+import requests
 from django.urls import reverse
 from django.utils import timezone
 from django.test import TestCase, Client
@@ -146,26 +148,32 @@ class UserprofileTestCase(TestCase):
         user = User.objects.create_user(**user_data)
         self.client.login(email=user_data['email'], password=user_data['password'])
 
-    def test_profile_detail_successful(self):
-        response = self.client.get(reverse('user-auth'))
-        self.assertEqual(response.status_code, 200)
+    def test_profile_detail_authenticated_success(self):
+        """ Test the data if it is really belong to the correct user
+        """
+        response = self.client.get(reverse('user_auth'), user_data)
+        self.assertEqual(response.json().get('email'), user_data.get('email'))
 
     def test_profile_detail_not_authenticated_fail(self):
+        """ Test for update profile with unauthenticated user
+        """
         self.client.logout()
-        response = self.client.get(reverse('user-auth'))
+        response = self.client.get(reverse('user_auth'))
         self.assertEqual(response.status_code, 302)
 
-    def test_profile_update_successful(self):
-        user_data['email'] = 'test@gmail.com'
-        response = self.client.post(reverse('user-auth'), user_data)
-        self.assertEqual(response.status_code, 200)
+    def test_profile_update_success(self):
+        """ Test for update user profile with new email
+        """
+        new_email = 'test@gmail.com'
+        user_data['email'] = new_email
+        response = self.client.post(reverse('user_auth'), user_data)
+        user = json.loads(response.content)
+        self.assertEqual(json.loads(response.content)['email'], new_email)
 
-    def test_profile_update_fail(self):
-        user = User.objects.get(email=user_data['email'])
-        user_data['email'] = user
-        response = self.client.post(reverse('user-auth'), user_data)
-        self.assertEqual(response.status_code, 200)
-
+    def test_profile_update_user_fail(self):
+        """ Test for update user profile no email
+        """
         user_data['email'] = None
-        response = self.client.post(reverse('user-auth'), user_data)
-        self.assertEqual(response.status_code, 400)
+        response = self.client.post(reverse('user_auth'), user_data)
+        user = json.loads(response.content)
+        self.assertEqual(json.loads(response.content)['email'][0], 'Enter a valid email address.')
