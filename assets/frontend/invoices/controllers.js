@@ -21,6 +21,7 @@
     /* Get the detail of invoice by ID
      */
     function detail(){
+
       InvoiceService
         .getDetail(invId)
         .then(function (response) {
@@ -28,6 +29,7 @@
           self.invoice.invoice_date = new Date(self.invoice.invoice_date);
           self.invoice.due_date = new Date(self.invoice.due_date);
       });
+
     };
 
     /* Update in invoice
@@ -69,11 +71,13 @@
     /* Add row to item
      */
      self.addRow = function(){
+
        self.invoice.items.push({
         details  : self.invoice.items.details,
         rate     : self.invoice.items.rate,
         quantity : self.invoice.items.quantity
        })
+
      };
 
     /* Total of all items
@@ -81,11 +85,13 @@
      self.total = function(){
       var total = 0;
       var inv = self.invoice.items;
+
       _.map(inv, function(item){
         total += item.rate * item.quantity;
         self.invoice.total_amount = total;
       });
-     }
+
+     };
 
   }
 
