@@ -15,12 +15,12 @@
     var invId = $stateParams.id;
 
     if (typeof invId != 'undefined') {
-      detail()
+      detail();
     }
 
     /* Get the detail of invoice by ID
      */
-    function detail (){
+    function detail(){
       InvoiceService
         .getDetail(invId)
         .then(function (response) {
@@ -29,6 +29,52 @@
           self.invoice.due_date = new Date(self.invoice.due_date);
       });
     };
+
+    /* Update in invoice
+     */
+     // TO DO: used underscore .each
+    self.update = function(){
+     var items = self.invoice.items; // Gets the existing items
+
+     InvoiceService
+       .update(invId, self.invoice)
+       .then(function (response) {
+
+            _.map(items, function(item){
+              if (item.id) {
+
+                InvoiceService
+                  .updateItems(item.id, item)
+                  .then(function (response) {
+
+                  });
+
+              } else {
+                item.invoice = response.data.id; // Updates the invoice data in item
+
+                InvoiceService
+                 .addItems(item)
+                 .then(function (response) {
+
+               });
+
+              }
+
+            });
+
+       });
+
+    };
+
+    /* Add row to item
+     */
+     self.addRow = function(){
+       self.invoice.items.push({
+        details  : self.invoice.items.details,
+        rate     : self.invoice.items.rate,
+        quantity : self.invoice.items.quantity
+       })
+     };
 
   }
 
