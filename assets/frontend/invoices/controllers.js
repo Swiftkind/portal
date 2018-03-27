@@ -76,6 +76,17 @@
        })
      };
 
+    /* Total of all items
+     */
+     self.total = function(){
+      var total = 0;
+      var inv = self.invoice.items;
+      _.map(inv, function(item){
+        total += item.rate * item.quantity;
+        self.invoice.total_amount = total;
+      });
+     }
+
   }
 
 })();

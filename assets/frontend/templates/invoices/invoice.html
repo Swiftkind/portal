@@ -73,8 +73,7 @@
                               <span>Bill to</span>
                               <a href="#">+ New Client</a>
                             </label>
-                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.customer">
-                                <option ng-repeat="customer in ctrl.invoice.customers" value="{{customer.id}}">{{ customer.company }}</option>
+                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.customer" ng-options="customer.id as customer.company for customer in ctrl.invoice.customers">
                             </select>
                           </div>
                         </div>
@@ -134,7 +133,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="text" name="" placeholder="$0.00" class="form-control" ng-model="item.rate">
+                                        <input type="text" name="" placeholder="$0.00" class="form-control" ng-model="item.rate" ng-change="ctrl.total()">
                                       </div>
                                     </span>
                                   </div>
@@ -143,7 +142,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="text" name="" placeholder="0" class="form-control" ng-model="item.quantity">
+                                        <input type="text" name="" placeholder="0" class="form-control" ng-model="item.quantity" ng-change="ctrl.total()">
                                       </div>
                                     </span>
                                   </div>
