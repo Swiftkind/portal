@@ -6,7 +6,7 @@ from users.serializers import LoginSerializer, UserSerializer
 
 
 class UserAPI(LoginRequiredMixin, ViewSet):
-    """ User profile viewset
+    """ User profile viewset.
     """
     def detail(self, *args, **kwargs):
         serializer = UserSerializer(self.request.user)
@@ -25,4 +25,4 @@ class LoginAPI(ViewSet):
     def post(self, *args, **kwargs):
         serializer = LoginSerializer(data=self.request.data)
         serializer.is_valid(raise_exception=True)
-        return Response(token, status=200)
+        return Response(serializer.data, status=200)
