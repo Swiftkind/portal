@@ -12,11 +12,16 @@
 
     // Local variable
     var services = {
-      list: [],
-      getDetail:getDetail,
-      getList: getList,
-      terms: [],
-      getLatest:getLatest
+      list       : [],
+      getDetail  : getDetail,
+      getList    : getList,
+      terms      : [],
+      getLatest  : getLatest,
+      create     : create,
+      update     : update,
+      addItems   : addItems,
+      updateItems: updateItems,
+      deleteInv     : deleteInv
     }
 
     getList();
@@ -53,6 +58,36 @@
     function getLatest () {
       return $http.get(API_URL + 'invoices/latest/');
     }
+
+    /* Create new invoice
+     */
+    function create (data) {
+      return $http.post(API_URL + 'invoices/', data);
+    }
+
+    /* Update invoice
+     */
+    function update (id, data) {
+      return $http.patch(API_URL + 'invoices/' + id + '/', data);
+    }
+
+    /* Delete invoice
+     */
+    function deleteInv (id) {
+      return $http.delete(API_URL + 'invoices/' + id + '/');
+    }
+
+    /* Add items in invoice
+     */
+     function addItems (data) {
+      return $http.post(API_URL + 'invoices/items/', data);
+     }
+
+    /* Edit items in invoice
+     */
+     function updateItems (id, data) {
+      return $http.patch(API_URL + 'invoices/items/' + id + '/', data);
+     }
 
   }
 

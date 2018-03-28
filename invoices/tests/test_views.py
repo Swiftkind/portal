@@ -129,8 +129,8 @@ class InvoiceListTestCase(TestCase):
         invoice = json.loads(response.content)
         self.assertEqual(response.status_code, 201)
 
-        invoice['code'] = None
+        invoice['customer'] = None
         url = reverse('invoice', kwargs={'inv_id':self.invoice.id})
         response = self.client.patch(url, data=json.dumps(invoice), content_type='application/json')
-        self.assertEqual(json.loads(response.content)['code'][0], 'This field may not be null.')
+        self.assertEqual(json.loads(response.content)['customer'][0], 'This field may not be null.')
         self.assertEqual(response.status_code, 400)

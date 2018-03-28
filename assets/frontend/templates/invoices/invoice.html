@@ -15,8 +15,8 @@
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                  <p>{{ inv.order_id }}</p>
-                  <p> {{ inv.invoice_date }} | <strong>{{ inv.status }}</strong></p>
+                  <p>{{ inv.code }}</p>
+                  <p> {{ inv.invoice_date | date: "mm/dd/yyyy" }} | <strong>{{ inv.status }}</strong></p>
                 </div>
               
               </div>
@@ -33,34 +33,41 @@
               <div >
                 <h3>New invoice</h3>
                 <div class="invoice-actions d-flex ">
-                  <button class="btn btn-icon-left btn-link">
+                  <button class="btn btn-icon-left btn-link" ng-click="ctrl.update()">
                     <i data-feather="check-circle"></i>
-                      Saved as draft
+                      Save as draft
                   </button>
                   <button class="btn btn-icon-left btn-link">
                     <i data-feather="maximize-2"></i>
                       Preview
                   </button>
-                  <button class="btn btn-icon-left btn-link">
+                  <button class="btn btn-icon-left btn-link" ng-click="ctrl.delete()">
                     <i data-feather="x"></i>
                       Discard this document
                   </button>
                 </div>
               </div>
-              <button class="btn btn-sm btn-primary btn-icon ">
-                  Send <i data-feather="arrow-right"></i>
+              <button class="btn btn-sm btn-primary btn-icon" ng-click="ctrl.update()">
+                  Save <i data-feather="arrow-right"></i>
               </button>
             </div>
               <hr>
+              <div class="alert alert-success" role="alert" ng-hide="ctrl.success">
+                Successfully save as draft.
+              </div>
+              <div class="alert alert-danger" role="alert" ng-hide="ctrl.errorItems">
+                Valid number is required in adding items.
+              </div>
                 <div class="invoice-container">
                   <div class="invoice-header d-flex justify-content-between align-items-end">
                     <h3>
                         Invoice
                     </h3>
-                    <div>
+                    <form>
+                      <div>
                         <label>Invoice number</label>
                         <h3>
-                            {{ ctrl.invoice.code }}
+                            <input type="text" name="" class="form-control" ng-model="ctrl.invoice.code">
                         </h3>
                     </div>
                   </div>
@@ -72,8 +79,7 @@
                               <span>Bill to</span>
                               <a href="#">+ New Client</a>
                             </label>
-                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.customer_detail.company">
-                                <option ng-repeat="customer in ctrl.invoice.customers">{{ customer.company }}</option>
+                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.customer" ng-options="customer.id as customer.company for customer in ctrl.invoice.customers">
                             </select>
                           </div>
                         </div>
@@ -82,7 +88,7 @@
                         <div class="col-6">
                           <div class="form-group">
                             <label>Order number</label>
-                            <p>{{ ctrl.invoice.order_id }}</p>
+                            <input type="text" name="" class="form-control" ng-model="ctrl.invoice.order_id">
                           </div>
                         </div>
                       </div>
@@ -124,7 +130,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <textarea class="form-control" placeholder="Type of an item">{{ item.details }}</textarea>
+                                        <textarea class="form-control" placeholder="Type of an item" ng-model="item.details">{{ item.details }}</textarea>
                                       </div>
                                     </span>
                                   </div>
@@ -133,7 +139,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="number" name="" placeholder="$0.00" class="form-control" value="{{ item.rate }}">
+                                        <input type="text" name="" placeholder="$0.00" class="form-control" ng-model="item.rate" ng-change="ctrl.total()">
                                       </div>
                                     </span>
                                   </div>
@@ -142,7 +148,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="number" name="" placeholder="0" class="form-control" value="{{ item.quantity }}">
+                                        <input type="text" name="" placeholder="0" class="form-control" ng-model="item.quantity" ng-change="ctrl.total()">
                                       </div>
                                     </span>
                                   </div>
@@ -151,7 +157,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="number" name="" placeholder="$0.00" class="form-control" value="{{ item.amount }}">
+                                        <input type="text" name="" placeholder="$0.00" class="form-control" value="{{item.rate * item.quantity || 0}}" disabled>
                                       </div>
                                     </span>
                                   </div>
@@ -160,9 +166,11 @@
                             </tbody>
                         </table>
                         <div>
-                          <a href="#">+ Add item</a>
+                          <a href="#" ng-click="ctrl.addRow()">+ Add item</a>
                         </div>
-                      </div>
+                       </div>
+                     </div>
+                    </form>
                       <div class="row md-8 invoice-summary">
                         <div class="col-6 offset-6">
                           <div class="">
@@ -191,8 +199,8 @@
                             </button>
                           </div>
                           <div>
-                            <button class="btn btn-sm btn-primary btn-icon ">
-                                Send <i data-feather="arrow-right"></i>
+                            <button class="btn btn-sm btn-primary btn-icon" ng-click="ctrl.update()">
+                                Save <i data-feather="arrow-right"></i>
                             </button>
                           </div>
                         </div>
