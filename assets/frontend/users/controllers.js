@@ -30,6 +30,7 @@
       InvoiceService
         .create(invoice)
         .then(function (response) {
+          InvoiceService.list.push(response.data);
           $state.go('invoiceDetail', {id: response.data.id});
         });
      }

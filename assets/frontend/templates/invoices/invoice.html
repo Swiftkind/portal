@@ -52,6 +52,12 @@
               </button>
             </div>
               <hr>
+              <div class="alert alert-success" role="alert" ng-hide="ctrl.success">
+                Successfully save as draft.
+              </div>
+              <div class="alert alert-danger" role="alert" ng-hide="ctrl.errorItems">
+                Valid number is required in adding items.
+              </div>
                 <div class="invoice-container">
                   <div class="invoice-header d-flex justify-content-between align-items-end">
                     <h3>
@@ -151,7 +157,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="text" name="" placeholder="$0.00" class="form-control" value="{{item.rate * item.quantity}}" disabled>
+                                        <input type="text" name="" placeholder="$0.00" class="form-control" value="{{item.rate * item.quantity || 0}}" disabled>
                                       </div>
                                     </span>
                                   </div>

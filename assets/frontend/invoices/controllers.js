@@ -13,6 +13,8 @@
     var self = this;
     self.invoiceService = InvoiceService;
     var invId = $stateParams.id;
+    self.success = true;
+    self.errorItems = true;
 
     if (typeof invId != 'undefined') {
       detail();
@@ -48,7 +50,9 @@
                 InvoiceService
                   .updateItems(item.id, item)
                   .then(function (response) {
-
+                    self.success = false;
+                  }).catch(function(error){
+                    self.errorItems = false;
                   });
 
               } else {
@@ -57,7 +61,9 @@
                 InvoiceService
                  .addItems(item)
                  .then(function (response) {
-
+                    self.success = false;
+               }).catch(function(error){
+                    self.errorItems = false;
                });
 
               }
@@ -84,11 +90,10 @@
      */
      self.total = function(){
       var total = 0;
-      var inv = self.invoice.items;
 
-      _.map(inv, function(item){
+      _.map(self.invoice.items, function(item){
         total += item.rate * item.quantity;
-        self.invoice.total_amount = total;
+        self.invoice.total_amount = total || 0;
       });
 
      };
