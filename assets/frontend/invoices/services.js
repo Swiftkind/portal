@@ -20,7 +20,8 @@
       create     : create,
       update     : update,
       addItems   : addItems,
-      updateItems: updateItems
+      updateItems: updateItems,
+      deleteInv     : deleteInv
     }
 
     getList();
@@ -68,6 +69,12 @@
      */
     function update (id, data) {
       return $http.patch(API_URL + 'invoices/' + id + '/', data);
+    }
+
+    /* Delete invoice
+     */
+    function deleteInv (id) {
+      return $http.delete(API_URL + 'invoices/' + id + '/');
     }
 
     /* Add items in invoice

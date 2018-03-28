@@ -11,6 +11,7 @@ urlpatterns = [
                                }), name='invoices'),
     path('<int:inv_id>/', InvoiceAPI.as_view({'get':'detail',
                                               'patch':'update',
+                                              'delete':'delete'
                                            }), name='invoice'),
     path('terms/', InvoicesAPI.as_view({'get':'terms'}), name='invoice_terms'),
     path('latest/', InvoicesAPI.as_view({'get':'latest'}), name='latest_invoice'),

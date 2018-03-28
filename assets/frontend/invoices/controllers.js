@@ -9,7 +9,8 @@
    /* INVOICE CONTROLLER: this will handle the data of the invoice lists
      from the service
     */
-  function InvoiceController($scope, InvoiceService, $stateParams) {
+  function InvoiceController($scope, InvoiceService, $stateParams, 
+        $q, $state) {
     var self = this;
     self.invoiceService = InvoiceService;
     var invId = $stateParams.id;
@@ -95,6 +96,21 @@
         total += item.rate * item.quantity;
         self.invoice.total_amount = total || 0;
       });
+
+     };
+
+    /* Delete invoice
+     */
+     self.delete = function(){
+
+      InvoiceService
+        .deleteInv(invId)
+        .then(function(response){
+          InvoiceService.list = _.filter(InvoiceService.list, function(item) {
+           return item.id != invId; });
+          var last = InvoiceService.list[InvoiceService.list.length-1].id;
+          $state.go('invoiceDetail', {id: last});
+        });
 
      };
 

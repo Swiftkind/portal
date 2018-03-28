@@ -27,6 +27,12 @@ class InvoiceAPI(LoginRequiredMixin, ViewSet):
 
         return Response(serializer.data, status=200)
 
+    def delete(self, *args, **kwargs):
+        invoice = get_object_or_404(Invoice, id=kwargs.get('inv_id'))
+        invoice.delete()
+
+        return Response(status=200)
+
 
 class InvoicesAPI(LoginRequiredMixin, Paginate ,ViewSet):
     """ Endpoint that manages invoice data

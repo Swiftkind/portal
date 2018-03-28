@@ -15,8 +15,8 @@
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                  <p>{{ inv.order_id }}</p>
-                  <p> {{ inv.invoice_date }} | <strong>{{ inv.status }}</strong></p>
+                  <p>{{ inv.code }}</p>
+                  <p> {{ inv.invoice_date | date: "mm/dd/yyyy" }} | <strong>{{ inv.status }}</strong></p>
                 </div>
               
               </div>
@@ -41,7 +41,7 @@
                     <i data-feather="maximize-2"></i>
                       Preview
                   </button>
-                  <button class="btn btn-icon-left btn-link">
+                  <button class="btn btn-icon-left btn-link" ng-click="ctrl.delete()">
                     <i data-feather="x"></i>
                       Discard this document
                   </button>
