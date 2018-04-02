@@ -1,0 +1,115 @@
+<!-- MAIN START -->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="main-dashboard" >
+      <div class="main-content-header">
+        <h3>My invoices</h3>
+        <p>
+          {{ ctrl.invoiceService.list.page.count }} invoices total with 
+          {{ ctrl.invoiceService.list.due_dates }} on due and 
+          {{ ctrl.invoiceService.list.drafts }} drafts
+        </p>
+      </div>
+      <div class="invoices">
+        <div class="list-invoice-client table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th id="client">
+                  <a class="d-flex align-items-center" >
+                    Client
+                    <i data-feather="chevron-down"></i>
+                  </a>
+                </th>
+                <th id="invoice-number">
+                  <a class="d-flex align-items-center" >
+                    Invoice number
+                    <i data-feather="chevron-down"></i>
+                  </a>
+                </th>
+                <th id="due-date">
+                  <a class="d-flex align-items-center">
+                    Due date
+                    <i data-feather="chevron-down"></i>
+                  </a>
+                </th>
+                <th id="payment-status">
+                  <a class="d-flex align-items-center">
+                    Payment Status
+                    <i data-feather="chevron-down"></i>
+                  </a>
+                </th>
+                <th id="amount">
+                  <a class="d-flex align-items-center">
+                    Amount
+                    <i data-feather="chevron-down"></i>
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="invoice in ctrl.invoiceService.list.result">
+                  <td>
+                    <span>{{ invoice.customer_detail.company }}</span>
+                  </td>
+                  <td>
+                    <span>{{ invoice.code }}</span>
+                  </td>
+                  <td>
+                    <span>
+                      {{ invoice.due_date | date: "MMMM d, y" }}
+                    </span>
+                  </td>
+                  <td>
+                    <span>{{ invoice.status }}</span>
+                  </td>
+                  <td>
+                    <span>{{ invoice.total_amount | currency }}</span>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="bottom-pagination" ng-if="ctrl.invoiceService.list.page.has_other_pages">
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item" ng-switch="ctrl.invoiceService.list.page.has_previous">
+              <a ng-click="ctrl.invoiceService.getList(ctrl.invoiceService.list.page.previous)" class="page-link" ng-switch-when="true">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-left"></i>
+                </span>
+              </a>
+              <a href="#" onclick="return false;" class="page-link" ng-switch-when="false">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-left"></i>
+                </span>
+              </a>
+            </li>
+            <li ng-class="ctrl.invoiceService.list.page.number==range?'page-item active':'page-item'" 
+                ng-repeat="range in ctrl.invoiceService.list.page.page_range | limitTo:3: ctrl.invoiceService.pageIndex(ctrl.invoiceService.list.page.number)">
+              <a ng-click="ctrl.invoiceService.getList({'page':range})" class="page-link">
+                <span aria-hidden="true">{{ range }}
+                  <span aria-hidden="true" class="sr-only">(current)</span>
+                </span>
+              </a>
+            </li>
+            <li class="page-item" ng-switch="ctrl.invoiceService.list.page.has_next">
+              <a ng-click="ctrl.invoiceService.getList(ctrl.invoiceService.list.page.next)" class="page-link" ng-switch-when="true">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-right"></i>
+                </span>
+              </a>
+              <a href="#" onclick="return false;" class="page-link" ng-switch-when="false">
+                <span aria-hidden="true">
+                  <i class="icon dripicons-chevron-right"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MAIN END -->

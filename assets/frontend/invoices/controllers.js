@@ -18,6 +18,7 @@
     self.success = true;
     self.errorItems = true;
     self.form = {};
+    feather.replace();
 
     if (typeof invId != 'undefined') {
       detail();

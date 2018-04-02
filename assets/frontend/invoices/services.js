@@ -32,9 +32,9 @@
     /* Gets list of all invoices
      */
     function getList (params) {
-      return $http.get(API_INVOICE_URL + $httpParamSerializer(params))
+      return $http.get(API_INVOICE_URL + '?' + $httpParamSerializer(params))
         .then(function (response) {
-          services.list = response.data.result;
+          services.list = response.data;
         });
     }
 
