@@ -11,11 +11,13 @@
     */
   function InvoiceController($scope, InvoiceService, $stateParams, 
         $q, $state) {
+
     var self = this;
     self.invoiceService = InvoiceService;
     var invId = $stateParams.id;
     self.success = true;
     self.errorItems = true;
+    self.form = {};
 
     if (typeof invId != 'undefined') {
       detail();
@@ -31,45 +33,47 @@
           self.invoice = response.data;
           self.invoice.invoice_date = new Date(self.invoice.invoice_date);
           self.invoice.due_date = new Date(self.invoice.due_date);
+          self.form = angular.copy(self.invoice);
       });
 
     };
 
     /* Update in invoice
      */
-     // TO DO: used underscore .each
     self.update = function(){
      var items = self.invoice.items; // Gets the existing items
+     self.invoice = angular.copy(self.form);
 
      InvoiceService
        .update(invId, self.invoice)
        .then(function (response) {
+          self.success = false;
 
-            _.map(items, function(item){
-              if (item.id) {
+          _.map(items, function(item){
+            if (item.id) {
 
-                InvoiceService
-                  .updateItems(item.id, item)
-                  .then(function (response) {
-                    self.success = false;
-                  }).catch(function(error){
-                    self.errorItems = false;
-                  });
+              InvoiceService
+                .updateItems(item.id, item)
+                .then(function (response) {
+                  self.success = false;
+                }).catch(function(error){
+                  self.errorItems = false;
+                });
 
-              } else {
-                item.invoice = response.data.id; // Updates the invoice data in item
+            } else {
+              item.invoice = response.data.id; // Updates the invoice data in item
 
-                InvoiceService
-                 .addItems(item)
-                 .then(function (response) {
-                    self.success = false;
+              InvoiceService
+               .addItems(item)
+               .then(function (response) {
+                  self.success = false;
                }).catch(function(error){
                     self.errorItems = false;
                });
 
-              }
+            }
 
-            });
+          });
 
        });
 
@@ -89,7 +93,7 @@
 
     /* Total of all items
      */
-     self.total = function(){
+     self.getTotal = function(){
       var total = 0;
 
       _.map(self.invoice.items, function(item){
