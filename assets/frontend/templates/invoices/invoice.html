@@ -56,7 +56,7 @@
                 Successfully save as draft.
               </div>
               <div class="alert alert-danger" role="alert" ng-hide="ctrl.errorItems">
-                Valid number is required in adding items.
+                Check the fields in adding item.
               </div>
                 <div class="invoice-container">
                   <div class="invoice-header d-flex justify-content-between align-items-end">
@@ -67,7 +67,7 @@
                       <div>
                         <label>Invoice number</label>
                         <h3>
-                            <input type="text" name="" class="form-control" ng-model="ctrl.invoice.code">
+                            <input type="text" name="" class="form-control" ng-model="ctrl.form.code">
                         </h3>
                     </div>
                   </div>
@@ -79,7 +79,7 @@
                               <span>Bill to</span>
                               <a href="#">+ New Client</a>
                             </label>
-                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.customer" ng-options="customer.id as customer.company for customer in ctrl.invoice.customers">
+                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.form.customer" ng-options="customer.id as customer.company for customer in ctrl.invoice.customers">
                             </select>
                           </div>
                         </div>
@@ -88,7 +88,7 @@
                         <div class="col-6">
                           <div class="form-group">
                             <label>Order number</label>
-                            <input type="text" name="" class="form-control" ng-model="ctrl.invoice.order_id">
+                            <input type="text" name="" class="form-control" ng-model="ctrl.form.order_id">
                           </div>
                         </div>
                       </div>
@@ -96,21 +96,20 @@
                         <div class="col-4">
                           <div class="form-group">
                             <label> Invoice Date</label>
-                            <input type="date" name="" id="startDate" class="" placeholder="Select date" ng-model="ctrl.invoice.invoice_date">
+                            <input type="date" name="" id="startDate" class="" placeholder="Select date" ng-model="ctrl.form.invoice_date">
                           </div>
                         </div>
                         <div class="col-4">
                           <div class="form-group">
                             <label>Terms</label>
-                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.invoice.terms">
-                                <option ng-repeat="term in ctrl.invoiceService.terms" value="{{term[0]}}">{{term[1]}}</option>
+                            <select class="select-options" data-live-search="true" title="Select Client" ng-model="ctrl.form.terms" ng-options="term[0] as term[1] for term in ctrl.invoiceService.terms">
                             </select>
                           </div>
                         </div>
                         <div class="col-4">
                           <div class="form-group">
                             <label>Due Date</label>
-                            <input type="date" name="" id="endDate" class="" placeholder="Select Due date" ng-model="ctrl.invoice.due_date"> 
+                            <input type="date" name="" id="endDate" class="" placeholder="Select Due date" ng-model="ctrl.form.due_date"> 
                           </div>
                         </div>
                       </div>
@@ -139,7 +138,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="text" name="" placeholder="$0.00" class="form-control" ng-model="item.rate" ng-change="ctrl.total()">
+                                        <input type="text" name="" placeholder="$0.00" class="form-control" ng-model="item.rate" ng-change="ctrl.getTotal()">
                                       </div>
                                     </span>
                                   </div>
@@ -148,7 +147,7 @@
                                   <div class="input-container">
                                     <span>
                                       <div>
-                                        <input type="text" name="" placeholder="0" class="form-control" ng-model="item.quantity" ng-change="ctrl.total()">
+                                        <input type="text" name="" placeholder="0" class="form-control" ng-model="item.quantity" ng-change="ctrl.getTotal()">
                                       </div>
                                     </span>
                                   </div>

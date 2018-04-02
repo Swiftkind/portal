@@ -8,7 +8,7 @@
 
   /* INVOICE SERVICE: this wil fetch data from the backend
    */
-  function InvoiceService($http, $httpParamSerializer, API_URL) {
+  function InvoiceService($http, API_INVOICE_URL ,$httpParamSerializer) {
 
     // Local variable
     var services = {
@@ -21,7 +21,7 @@
       update     : update,
       addItems   : addItems,
       updateItems: updateItems,
-      deleteInv     : deleteInv
+      deleteInv  : deleteInv
     }
 
     getList();
@@ -32,7 +32,7 @@
     /* Gets list of all invoices
      */
     function getList (params) {
-      return $http.get(API_URL + 'invoices/' + $httpParamSerializer(params))
+      return $http.get(API_INVOICE_URL + $httpParamSerializer(params))
         .then(function (response) {
           services.list = response.data.result;
         });
@@ -41,13 +41,13 @@
    /* Gets detail of the invoice by id
     */
     function getDetail (id) {
-      return $http.get(API_URL + 'invoices/' + id + '/');
+      return $http.get(API_INVOICE_URL + id + '/');
     }
 
    /* Gets the terms of the invoice
     */
     function getTerms () {
-      return $http.get(API_URL + 'invoices/terms/')
+      return $http.get(API_INVOICE_URL + 'terms/')
         .then(function (response){
           services.terms = response.data;
         });
@@ -56,37 +56,37 @@
    /* Gets the latest invoice
     */
     function getLatest () {
-      return $http.get(API_URL + 'invoices/latest/');
+      return $http.get(API_INVOICE_URL + 'latest/');
     }
 
     /* Create new invoice
      */
     function create (data) {
-      return $http.post(API_URL + 'invoices/', data);
+      return $http.post(API_INVOICE_URL, data);
     }
 
     /* Update invoice
      */
     function update (id, data) {
-      return $http.patch(API_URL + 'invoices/' + id + '/', data);
+      return $http.patch(API_INVOICE_URL + id + '/', data);
     }
 
     /* Delete invoice
      */
     function deleteInv (id) {
-      return $http.delete(API_URL + 'invoices/' + id + '/');
+      return $http.delete(API_INVOICE_URL + id + '/');
     }
 
     /* Add items in invoice
      */
      function addItems (data) {
-      return $http.post(API_URL + 'invoices/items/', data);
+      return $http.post(API_INVOICE_URL + 'items/', data);
      }
 
     /* Edit items in invoice
      */
      function updateItems (id, data) {
-      return $http.patch(API_URL + 'invoices/items/' + id + '/', data);
+      return $http.patch(API_INVOICE_URL + 'items/' + id + '/', data);
      }
 
   }
