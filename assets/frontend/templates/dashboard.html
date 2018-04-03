@@ -16,7 +16,7 @@
             <thead>
               <tr>
                 <th id="client">
-                  <a class="d-flex align-items-center" >
+                  <a class="d-flex align-items-center" ng-click="order = order == 0 ? 1 : 0; ctrl.sortBy('customer', order == 0 ? 'asc' : 'desc')">
                     Client
                     <i data-feather="chevron-down"></i>
                   </a>

@@ -12,8 +12,8 @@
       self.invoiceService = InvoiceService;
       feather.replace();
 
-      self.sortByClient = function () {
-        
+      self.sortBy = function (field, order) {
+        self.invoiceService.getList('', field, order);
       }
     }
 
