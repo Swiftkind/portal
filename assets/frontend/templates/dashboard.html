@@ -16,25 +16,25 @@
             <thead>
               <tr>
                 <th id="client">
-                  <a class="d-flex align-items-center" ng-click="order = order == 0 ? 1 : 0; ctrl.sortBy('customer', order == 0 ? 'asc' : 'desc')">
+                  <a class="d-flex align-items-center" ng-click="ctrl.sort('customer')">
                     Client
                     <i data-feather="chevron-down"></i>
                   </a>
                 </th>
                 <th id="invoice-number">
-                  <a class="d-flex align-items-center" >
+                  <a class="d-flex align-items-center" ng-click="ctrl.sort('code')">
                     Invoice number
                     <i data-feather="chevron-down"></i>
                   </a>
                 </th>
                 <th id="due-date">
-                  <a class="d-flex align-items-center">
+                  <a class="d-flex align-items-center" ng-click="ctrl.sort('due_date')">
                     Due date
                     <i data-feather="chevron-down"></i>
                   </a>
                 </th>
                 <th id="payment-status">
-                  <a class="d-flex align-items-center">
+                  <a class="d-flex align-items-center" ng-click="ctrl.sort('status')">
                     Payment Status
                     <i data-feather="chevron-down"></i>
                   </a>
