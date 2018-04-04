@@ -9,12 +9,13 @@
   /* User Services
    * @desc: A function that gets the user data from the endpoint
    */
-  function UserService($http, API_URL) {
+  function UserService($http, $state, API_URL) {
     var service = {
       user: null,
       updateProfile: updateProfile,
       userLogin: userLogin,
       userLogout: userLogout,
+      userSignUp: userSignUp,
     };
     usersDetail();
     return service;
@@ -45,6 +46,13 @@
     function userLogout() {
       return $http.get(API_URL + 'logout/')
     };
+
+    function userSignUp (data) {
+      return $http.post(API_URL + 'signup/', data)
+      .then(function (resp) {
+        $state.go('login');
+      });
+    }; // end of userSignUp
 
   }; // End of UserServices
 
