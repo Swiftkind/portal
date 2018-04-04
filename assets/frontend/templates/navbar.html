@@ -1,5 +1,5 @@
 <!-- NAV START -->
-<nav class="main-nav navbar navbar-expand-lg">
+<nav class="main-nav navbar navbar-expand-lg" ng-hide="ctrl.state.$current.hideNavbar">
     <a href="#" class="navbar-brand">Swift Invoice</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a href="#" class="dropdown-item" ng-click="ctrl.onProfileClick()">Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log out</a>
+                            <a href="#" class="dropdown-item" ng-click="ctrl.onLogoutClick()">Log out</a>
                         </div>
                     </div>
                 </li>

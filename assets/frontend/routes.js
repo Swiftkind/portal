@@ -9,7 +9,7 @@
                   $httpProvider, $urlMatcherFactoryProvider, TEMPLATE_URL) {
 
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login/');
     $urlMatcherFactoryProvider.strictMode(false);
     $locationProvider.html5Mode(true);
 

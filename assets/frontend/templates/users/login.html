@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col p-0">
+            <div class="signup-form authenticate-form h-100 d-flex align-items-center justify-content-center ">
+                <div>
+                    <h3 class="mb-4">Login</h3>
+                    <form name="loginForm" ng-submit="loginForm.$valid && ctrl.loginUser(form)" novalidate>
+
+                        <div class="form-group" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email1" class="form-control" ng-model="form.email" required>
+                            <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                        </div> <!-- end of email form-group -->
+
+                        <div class="form-group" ng-class="{ 'has-error': loginForm.password.$invalid && !loginForm.password.$pristine && submitted }">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" ng-model="form.password" required>
+                            <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">This field is required!</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-sm btn-icon m-auto">
+                            Log in
+                            <i data-feather="arrow-right"></i>
+                        </button>
+                    </form>
+                    <p class="text-center">
+                        I don't have an account. <a href="#">Sign up.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col p-0">
+
+            <div class="img-bg-full d-flex align-items-end">
+                <h2>Automate your invoices</h2>
+            </div>
+        </div>
+    </div>
+</div>
