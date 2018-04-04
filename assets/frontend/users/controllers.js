@@ -6,6 +6,7 @@
     .controller('navBarController', navBarController)
     .controller('asideController', asideController)
     .controller('LoginController', LoginController)
+    .controller('SignUpController', SignUpController)
   ;
 
   /* navBarController
@@ -82,5 +83,18 @@
     };
 
   }; // end of LoginController
+
+  function SignUpController($scope, $state, UserService) {
+    var self = this;
+    feather.replace();
+
+    self.UserService = UserService;
+    console.log("sample",  UserService);
+
+    self.signUpUser = function (form) {
+      console.log(form, "User form")
+      UserService.userSignUp(form);
+    }
+  }; // end of SignUpController
 
 })();

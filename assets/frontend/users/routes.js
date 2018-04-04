@@ -14,6 +14,13 @@
           controller: 'LoginController',
           controllerAs: 'ctrl',
           hideNavbar: true,
+      })
+      .state('signup', {
+        url: '/signup/',
+        templateUrl: TEMPLATE_URL + 'signup.html',
+        controller: 'SignUpController',
+        controllerAs: 'ctrl',
+        hideNavbar: true,
       });
   };
 

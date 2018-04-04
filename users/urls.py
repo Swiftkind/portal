@@ -13,4 +13,7 @@ urlpatterns = [
     path('logout/', AuthAPI.as_view({
         'get': 'logout',
         }), name='logout'),
+    path('signup/', AuthAPI.as_view({
+        'post': 'signup',
+        }), name="signup")
 ]
