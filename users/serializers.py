@@ -12,6 +12,29 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'email',
+            'password',
+            'first_name',
+            'last_name',
+            'image',
+        )
+        read_only_fields = ('image',)
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
+class UpdateUserSerializer(serializers.ModelSerializer):
+    """ Update User Serializer
+    """
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'email',
             'first_name',
             'last_name',
             'image',
@@ -24,15 +47,15 @@ class LoginSerializer(serializers.Serializer):
     """
     email = serializers.EmailField()
     password = serializers.CharField(min_length=8)
-    token = serializers.ReadOnlyField()
+    token = serializers.ReadOnlyField(required=False)
+    user_cache = None
 
 
     def validate(self, user_data):
         user = authenticate(**user_data)
-
         if not user:
             raise serializers.ValidationError('Invalid Email or Password.')
-
-        token = Token.objects.get_or_create(user=user)
-        user_data['token']= token[0].key
+        self.user_cache = user
+        token, create = Token.objects.get_or_create(user=user)
+        user_data['token'] = token.key
         return user_data
