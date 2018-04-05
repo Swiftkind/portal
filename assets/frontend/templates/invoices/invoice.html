@@ -4,23 +4,23 @@
       <div class="col-3 invoice-side-bar ">
         <h4 class="side-bar-subtitle">Invoices</h4>
         <ul class="invoice-list list-unstyled">
-          <li ng-repeat="inv in ctrl.invoiceService.list">
+          <li ng-repeat="inv in ctrl.invoiceService.list.result">
             <a ui-sref="invoiceDetail({id: inv.id})">
               <div class="invoice-item">
                 <div class="delete-item"><i data-feather="x"></i></div>
-                
+
                 <div class="d-flex justify-content-between">
                   <h4 class="strong">{{ inv.customer.company }}</h4>
                   <h4 class="strong">${{ inv.total_amount }}</h4>
                 </div>
-                
+
                 <div class="d-flex justify-content-between">
                   <p>{{ inv.code }}</p>
                   <p> {{ inv.invoice_date | date: "mm/dd/yyyy" }} | <strong>{{ inv.status }}</strong></p>
                 </div>
-              
+
               </div>
-            
+
             </a>
           </li>
 
@@ -109,7 +109,7 @@
                         <div class="col-4">
                           <div class="form-group">
                             <label>Due Date</label>
-                            <input type="date" name="" id="endDate" class="" placeholder="Select Due date" ng-model="ctrl.form.due_date"> 
+                            <input type="date" name="" id="endDate" class="" placeholder="Select Due date" ng-model="ctrl.form.due_date">
                           </div>
                         </div>
                       </div>

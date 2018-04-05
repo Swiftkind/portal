@@ -34,7 +34,7 @@
       InvoiceService
         .create(invoice)
         .then(function (response) {
-          InvoiceService.list.push(response.data);
+          InvoiceService.list.result.push(response.data);
           $state.go('invoiceDetail', {id: response.data.id});
         });
      };
@@ -79,7 +79,7 @@
 
     self.loginUser = function (form) {
       UserService.userLogin(form);
-      $state.go('invoices');
+      $state.go('dashboard');
     };
 
   }; // end of LoginController

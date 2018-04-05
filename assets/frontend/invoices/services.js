@@ -31,12 +31,12 @@
 
     /* Gets list of all invoices
      */
-    function getList (params) {
-      return $http.get(API_INVOICE_URL + $httpParamSerializer(params))
+    function getList (params, field, order) {
+      return $http.get(API_INVOICE_URL + '?' + $httpParamSerializer(params) + (field ? 'sort='+field : '') + (order ? '&order='+order : ''))
         .then(function (response) {
-          services.list = response.data.result;
+          services.list = response.data;
         });
-    }
+    };
 
    /* Gets detail of the invoice by id
     */
