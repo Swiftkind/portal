@@ -92,6 +92,7 @@
 
     self.signUpUser = function (form) {
       UserService.userSignUp(form);
+      $state.go('login');
     }
   }; // end of SignUpController
 

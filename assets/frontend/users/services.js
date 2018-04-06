@@ -50,7 +50,6 @@
     function userSignUp (data) {
       return $http.post(API_URL + 'signup/', data)
       .then(function (resp) {
-        $state.go('login');
       });
     }; // end of userSignUp
 
