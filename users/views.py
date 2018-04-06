@@ -44,10 +44,4 @@ class AuthAPI(ViewSet):
     def signup(self, *args, **kwargs):
         serializer = SignUpSerializer(data=self.request.data)
         serializer.is_valid(raise_exception=True)
-        instance = User.objects.create_user(
-            email=self.request.data.get('email'),
-            password=self.request.data.get('password'),
-            first_name=self.request.data.get('first_name'),
-            last_name=self.request.data.get('last_name'),
-        )
         return Response(serializer.data, status=201)
