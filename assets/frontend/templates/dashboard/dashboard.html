@@ -16,29 +16,33 @@
                                 <th id="client">
                                     <a class="d-flex align-items-center" ng-click="ctrl.sort('customer')">
                                         Client
-                                        <i data-feather="chevron-down"></i>
+                                        <i data-feather="chevron-down" ng-show="!ctrl.sorting['customer']"></i>
+                                        <i data-feather="chevron-up" ng-show="ctrl.sorting['customer']"></i>
                                     </a>
                                 </th>
                                 <th id="invoice-number">
                                     <a class="d-flex align-items-center" ng-click="ctrl.sort('code')">
                                         Invoice number
-                                        <i data-feather="chevron-down"></i>
+                                        <i data-feather="chevron-down" ng-show="!ctrl.sorting['code']"></i>
+                                        <i data-feather="chevron-up" ng-show="ctrl.sorting['code']"></i>
                                     </a>
                                 </th>
                                 <th id="due-date">
                                     <a class="d-flex align-items-center" ng-click="ctrl.sort('due_date')">
                                         Due date
-                                        <i data-feather="chevron-down"></i>
+                                        <i data-feather="chevron-down" ng-show="!ctrl.sorting['due_date']"></i>
+                                        <i data-feather="chevron-up" ng-show="ctrl.sorting['due_date']"></i>
                                     </a>
                                 </th>
                                 <th id="payment-status">
                                     <a class="d-flex align-items-center" ng-click="ctrl.sort('status')">
                                         Payment Status
-                                        <i data-feather="chevron-down"></i>
+                                        <i data-feather="chevron-down" ng-show="!ctrl.sorting['status']"></i>
+                                        <i data-feather="chevron-up" ng-show="ctrl.sorting['status']"></i>
                                     </a>
                                 </th>
                                 <th id="amount">
-                                    <a class="d-flex align-items-center">
+                                    <a class="d-flex align-items-center"">
                                         Amount
                                         <i data-feather="chevron-down"></i>
                                     </a>
