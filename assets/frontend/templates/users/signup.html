@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col p-0">
+            <div class="signup-form authenticate-form h-100 d-flex align-items-center justify-content-center ">
+                <div>
+                    <h3 class="mb-4">Sign up</h3>
+                    <form name="signupForm" ng-submit="signupForm.$valid && ctrl.signUpUser(form)" novalidate>
+
+                        <div class="form-group" ng-class="{'has-error': signupForm.first_name.$invalid && !signupForm.first_name.$pristine }">
+                            <label for="first_name">First name</label>
+                            <input type="text" name="first_name" id="first_name2" class="form-control" ng-model="form.first_name" required>
+                            <p ng-show="signupForm.first_name.$invalid && signupForm.first_name.$touched" class="help-block">Please enter your First Name</p>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.last_name.$invalid && !signupForm.last_name.$pristine }">
+                            <label for="last_name">Last name</label>
+                            <input type="text" name="last_name" id="last_name2" class="form-control" ng-model="form.last_name" required>
+                            <p ng-show="signupForm.last_name.$invalid && signupForm.last_name.$touched" class="help-block">Please enter your Last Name</p>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.email.$invalid && !signupForm.email.$pristine }">
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" id="email2" class="form-control" ng-model="form.email" required>
+                            <p ng-show="signupForm.email.$invalid && signupForm.email.$touched">Please enter a valid email</p>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.password.$invalid && !signupForm.password.$pristine }">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password2" class="form-control" ng-model="form.password" required>
+                            <p ng-show="signupForm.password.$invalid && signupForm.password.$touched">Please enter a valid password</p>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.password_confirm.$invalid && !signupForm.password_confirm.$pristine }">
+                            <label for="password_confirm">Confirm Password</label>
+                            <input type="password" name="password_confirm" id="password_confirm" class="form-control mb-4" ng-model="form.password_confirm" ng-pattern="form.password" required>
+                            <p ng-show="signupForm.password_confirm.$invalid && signupForm.password_confirm.$touched">Please confirm your password</p>
+                            <span ng-show="signupForm.password_confirm.$error.pattern">Passwords do not match.</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm btn-icon m-auto">
+                            Sign up
+                            <i data-feather="arrow-right"></i>
+                        </button>
+                    </form>
+                    <p class="text-center">
+                        I already have an account. <a ui-sref="login">Log in.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col p-0">
+
+            <div class="img-bg-full d-flex align-items-end">
+                <h2>Automate your invoices</h2>
+            </div>
+        </div>
+    </div>
+</div>

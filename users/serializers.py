@@ -59,3 +59,31 @@ class LoginSerializer(serializers.Serializer):
         token, create = Token.objects.get_or_create(user=user)
         user_data['token'] = token.key
         return user_data
+
+
+class SignUpSerializer(serializers.Serializer):
+    """ User SignUp Serializer
+    """
+    email = serializers.EmailField()
+    first_name = serializers.CharField(required=False)
+    last_name = serializers.CharField(required=False)
+    password = serializers.CharField()
+    confirm_password = serializers.CharField()
+
+    def create(self, validated_data):
+        return User.objects.create(**validated_data)
+
+    def validate_email(self, email):
+        existing = User.objects.filter(email=email).first()
+        if existing:
+            raise serializers.ValidationError("Someone have already own that email", status=400)
+        return email
+
+    def validate(self, data):
+        if not data.get('password') or not data.get('confirm_password'):
+            raise serializers.ValidationError("Please enter your password", status=400)
+
+        if data.get('password') != data.get('confirm_password'):
+            raise serializers.ValidationError("Password don't match!" "Please confirm it", status=400)
+        return data
+
