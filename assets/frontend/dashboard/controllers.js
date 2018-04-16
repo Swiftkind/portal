@@ -4,18 +4,18 @@
   angular
     .module('dashboard.portal')
     .controller('DashBoardController', DashBoardController)
+    .controller('asideInvoiceController', asideInvoiceController)
   ;
 
   /* DashBoardController
    * @ desc: This will displat the list of user invoices
    */
-   function DashBoardController($scope, InvoiceService) {
+  function DashBoardController($scope, $rootScope, InvoiceService) {
     feather.replace();
     var self = this;
     var order = 'asc';
 
     self.invoiceService = InvoiceService;
-
     self.sorting = {
       'customer': false,
       'code': false,
@@ -42,7 +42,42 @@
       };
     };
 
-   }; // end of DashBoardController
+    // this will trigger the filter button
+    self.onFilterClick = function () {
+      $rootScope.isSideBarActive = true;
+    };
 
+    $scope.$watch('ctrl.invoiceService.filter', function (newItem, oldItem){
+      self.invoiceService.filter = newItem;
+    }, true);
+
+  }; // end of DashBoardController
+
+   /* aside Controller
+    * @desc: this will display the sidebar for invoice filter
+    */
+  function asideInvoiceController($scope, $rootScope, InvoiceService) {
+    var self = this;
+    feather.replace();
+    self.invoiceService = InvoiceService;
+
+    self.onsideBarClose = function() {
+      $rootScope.isSideBarActive = false;
+    };
+
+    self.onSelectFilter = function(data, key) {
+      console.log(data, "filtered datas")
+      self.invoiceService.filter[key] = data[key];
+    };
+
+    self.resetFilter = function() {
+      self.invoiceService.filter = {};
+      $scope.filter = undefined;
+      $scope.filter_due_date = undefined;
+      $scope.filter_status = undefined;
+      $scope.filter_total_amount = undefined;
+    };
+
+  }; // end of asideInvoiceController
 
 })();

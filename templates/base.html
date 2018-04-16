@@ -21,6 +21,7 @@
 <body ng-app="portal">
     <nav-bar></nav-bar>
     <profile-bar active="isProfileBarActive"></profile-bar>
+    <side-bar active="isSideBarActive"></side-bar>
     <ui-view></ui-view>
 
     <script type="text/javascript" src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
@@ -30,12 +31,17 @@
     <script type="text/javascript" src="{% static 'node_modules/popper.js/dist/umd/popper.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/feather-icons/dist/feather.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/moment/min/moment.min.js' %}"></script>
     <script type="text/javascript">
     feather.replace();
     </script>
 
     <script type="text/javascript" src="{% static 'node_modules/angular/angular.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/@uirouter/angularjs/release/angular-ui-router.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/angular-animate/angular-animate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/angular-sanitize/angular-sanitize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/angular-touch/angular-touch.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js' %}"></script>
     <script type="text/javascript" src="{% static 'node_modules/underscore/underscore-min.js' %}"></script>
 
     {% include 'includes/angular_modules.html' %}

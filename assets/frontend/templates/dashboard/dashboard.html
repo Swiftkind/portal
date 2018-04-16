@@ -8,11 +8,77 @@
                     {{ ctrl.invoiceService.list.page.count }} invoices total with {{ ctrl.invoiceService.list.due_dates }} on due and {{ ctrl.invoiceService.list.drafts }} drafts
                 </p>
             </div>
+            <div class="table-filters row">
+                <div class="col">
+                    <div class="filter-tag d-inline-flex align-items-center">
+                        <span ng-repeat="item in ctrl.invoiceService.filter"></span>
+                        <a href="#" class="btn-link align-items-center d-flex justify-content-center cirle ">
+                            <i data-feather="x"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                    <div class="clear-filter">
+                        <a href="#">Clear Filters</a>
+                    </div>
+                </div>
+            </div>
+            <div class="list-invoice-bar d-flex align-items-center justify-content-between">
+                <div class="">
+                    <ul class="nav">
+                        <li class="">
+                            <a href="#" class="d-flex align-items-center btn-icon-left">
+                                <i data-feather="copy"></i>
+                                <span>Duplicate</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <span class="v-divider"></span>
+                        </li>
+                        <li class="">
+                            <a href="#" class="d-flex align-items-center btn-icon-left">
+                                <i data-feather="printer"></i>
+                                <span>Print</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <span class="v-divider"></span>
+                        </li>
+                        <li class="">
+                            <a href="#" class="d-flex align-items-center btn-icon-left">
+                                <i data-feather="download"></i>
+                                <span>Download</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="">
+                    <ul class="nav">
+                        <li class="d-flex">
+                            <span>0 seleted</span>
+                        </li>
+                        <li class="">
+                            <span class="v-divider"></span>
+                        </li>
+                        <li class="">
+                            <a href="#" ng-click="ctrl.onFilterClick()" class="d-flex align-items-center btn-icon-left">
+                                <i class="icon dripicons-scale"></i>
+                                <span>Show Filters</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="invoices">
                 <div class="list-invoice-client table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" name="">
+                                    </label>
+                                </th>
                                 <th id="client">
                                     <a class="d-flex align-items-center" ng-click="ctrl.sort('customer')">
                                         Client
@@ -50,7 +116,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="invoice in ctrl.invoiceService.list.result">
+                            <tr ng-repeat="invoice in ctrl.invoiceService.list.result | filter: ctrl.invoiceService.filter">
+                                <td>
+                                    <label>
+                                        <input type="checkbox" name="">
+                                    </label>
+                                </td>
                                 <td>
                                     <span>{{ invoice.customer_detail.company }}</span>
                                 </td>

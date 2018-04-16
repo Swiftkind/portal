@@ -21,7 +21,13 @@
       update     : update,
       addItems   : addItems,
       updateItems: updateItems,
-      deleteInv  : deleteInv
+      deleteInv  : deleteInv,
+      filter     : {
+        customer : undefined,
+        due_date : undefined,
+        status   : undefined,
+        total_amount : undefined,
+      },
     }
 
     getList();
