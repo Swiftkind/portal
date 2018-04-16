@@ -780,15 +780,31 @@ label {
 
 /* line 166, ../sass/_base.scss */
 #filter-side-bar {
+  display: block;
   padding: 3.6rem 5rem;
+  width: 350px;
+  right: -350px;
+  transition: 0.2s ease right;
+}
+/* line 172, ../sass/_base.scss */
+#filter-side-bar.active {
+  right: 0;
+  transition: 0.2s ease all;
+}
+/* line 177, ../sass/_base.scss */
+#filter-side-bar .uib-datepicker .btn-sm {
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
 
-/* line 173, ../sass/_base.scss */
+/* line 189, ../sass/_base.scss */
 .panel-container {
   height: 100vh;
   padding-top: 10vh;
 }
-/* line 176, ../sass/_base.scss */
+/* line 192, ../sass/_base.scss */
 .panel-container .panel-body {
   width: 500px;
   border-radius: 4px;
@@ -799,7 +815,7 @@ label {
   -moz-box-shadow: 0 2px 6px rgba(153, 170, 190, 0.16);
   box-shadow: 0 2px 6px rgba(153, 170, 190, 0.16);
 }
-/* line 183, ../sass/_base.scss */
+/* line 199, ../sass/_base.scss */
 .panel-container .panel-body .panel-title {
   letter-spacing: 0.03rem;
   color: #5d58de;
@@ -807,27 +823,27 @@ label {
   margin-bottom: 1.5rem;
 }
 
-/* line 194, ../sass/_base.scss */
+/* line 210, ../sass/_base.scss */
 .modal .modal-dialog .modal-content {
   border: none;
   border-radius: 6px;
 }
-/* line 198, ../sass/_base.scss */
+/* line 214, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-header {
   border-bottom: none;
 }
-/* line 201, ../sass/_base.scss */
+/* line 217, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-body {
   padding: 2rem 3rem;
   min-height: 200px;
 }
-/* line 203, ../sass/_base.scss */
+/* line 219, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-body h3 {
   font-family: 'Roboto-Medium', sans-serif;
   color: #221d76;
   margin-bottom: 3rem;
 }
-/* line 210, ../sass/_base.scss */
+/* line 226, ../sass/_base.scss */
 .modal .modal-dialog .modal-content .modal-footer {
   border-top: none;
   padding-bottom: 4rem;

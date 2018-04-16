@@ -164,7 +164,15 @@
 }
 
 #filter-side-bar {
+    display: block;
     padding: 3.6rem 5rem;
+    width: 350px;
+    right:-350px;
+    transition: 0.2s ease right;
+    &.active {
+        right: 0;
+        transition: 0.2s ease all;
+    }
 }
 
 
