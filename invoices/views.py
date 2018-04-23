@@ -40,7 +40,13 @@ class InvoicesAPI(LoginRequiredMixin, Paginate ,ViewSet):
     serializer_class = InvoiceSerializer
 
     def list(self, *args, **kwargs):
+        query = self.request.query_params.get('sort')
+        order = self.request.query_params.get('order')
         invoices = self.serializer_class.Meta.model.objects.all()
+        if order == 'asc':
+            invoices = invoices.order_by('-' + query)
+        elif order == 'desc':
+            invoices = invoices.order_by(query)
         data = self.paginate(invoices)
 
         return Response(data, status=200)

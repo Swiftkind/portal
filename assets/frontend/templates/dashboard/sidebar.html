@@ -1,0 +1,45 @@
+<div class="side-bar fixed-index-right d-flex align-items-center hide" ng-class="{'active': ctrl.active}" id="filter-side-bar">
+    <div class="w-100">
+        <a href="#" class="side-bar-toggle" ng-click="ctrl.onsideBarClose()">
+            <img src="/static/images/svg/arrow-right.svg">
+        </a>
+        <div class="header-info">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="text-dark">Filter invoices</h3>
+                <a ui-sref="#" ng-click="ctrl.resetFilter()">Reset Filters</a>
+            </div>
+        </div>
+        <div class="side-bar-form">
+            <form class="form">
+                <div class="form-group">
+                    <label class="d-flex align-items-center justify-content-between">
+                        <span>Bill to</span>
+                    </label>
+                    <select class="select-options form-control" data-live-search="true" title="Select Client(s)" ng-model="filter" ng-change="ctrl.onSelectFilter(filter, 'customer')"
+                    ng-options="invoice.customer_detail.company for invoice in ctrl.invoiceService.list.result">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Inclusive dates</label>
+                        <select class="select-options form-control" title="Select a status" ng-model="filter_due_date" ng-change="ctrl.onSelectFilter(filter_due_date, 'due_date')"
+                        ng-options="(invoice.due_date|date:'MMMM dd yy') for invoice in ctrl.invoiceService.list.result">
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label class="d-flex align-items-center justify-content-between">
+                        <span>Payment Status</span>
+                    </label>
+                    <select class="select-options form-control" title="Select a status" ng-model="filter_status" ng-change="ctrl.onSelectFilter(filter_status, 'status')"
+                    ng-options="invoice.status for invoice in ctrl.invoiceService.list.result">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <select class="select-options form-control" title="Select a status" ng-model="filter_total_amount" ng-change="ctrl.onSelectFilter(filter_total_amount, 'total_amount')"
+                    ng-options="invoice.total_amount | currency for invoice in ctrl.invoiceService.list.result">
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

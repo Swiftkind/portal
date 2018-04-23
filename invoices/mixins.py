@@ -39,4 +39,6 @@ class Paginate(PageNumberPagination):
                 'number': self.page.number,
             },
             'result': serializer.data,
+            'drafts': Invoice.objects.drafts().count(),
+            'due_dates': Invoice.objects.past_due().count(),
         }
