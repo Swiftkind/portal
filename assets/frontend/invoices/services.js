@@ -28,6 +28,12 @@
         status   : undefined,
         total_amount : undefined,
       },
+      navData : {
+        customer : undefined,
+        due_date : undefined,
+        status   : undefined,
+        total_amount : undefined,
+      },
     }
 
     getList();

@@ -51,6 +51,18 @@
       self.invoiceService.filter = newItem;
     }, true);
 
+    self.deleteItem = function() {
+      self.invoiceService.filter = {};
+
+      self.invoiceService.navData = {};
+    };
+
+    self.clearItem = function() {
+      self.invoiceService.filter = {};
+
+      self.invoiceService.navData = {};
+    };
+
   }; // end of DashBoardController
 
    /* aside Controller
@@ -66,8 +78,23 @@
     };
 
     self.onSelectFilter = function(data, key) {
-      console.log(data, "filtered datas")
+      feather.replace();
       self.invoiceService.filter[key] = data[key];
+
+      self.invoiceService.navData[key] = data[key];
+
+      if(key === 'due_date') {
+        self.invoiceService.navData['due_date'] = moment(data['due_date']).format("ll")
+      };
+
+      if(key === 'total_amount') {
+        self.invoiceService.navData['total_amount'] = data['total_amount']
+        .toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'USD',
+        })
+      };
+
     };
 
     self.resetFilter = function() {

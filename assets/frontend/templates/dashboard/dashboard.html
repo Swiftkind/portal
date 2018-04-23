@@ -9,17 +9,17 @@
                 </p>
             </div>
             <div class="table-filters row">
-                <div class="col">
-                    <div class="filter-tag d-inline-flex align-items-center">
-                        <span ng-repeat="item in ctrl.invoiceService.filter"></span>
-                        <a href="#" class="btn-link align-items-center d-flex justify-content-center cirle ">
+                <div class="col ">
+                    <div class="filter-tag d-inline-flex align-items-center" ng-repeat="selected in ctrl.invoiceService.navData" ng-show="selected">
+                        <span>{{ selected }}</span>
+                        <a ng-click="ctrl.deleteItem()" class="btn-link align-items-center d-flex justify-content-center cirle" >
                             <i data-feather="x"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-1 d-flex align-items-center">
                     <div class="clear-filter">
-                        <a href="#">Clear Filters</a>
+                        <a ng-click="ctrl.clearItem()">Clear Filters</a>
                     </div>
                 </div>
             </div>

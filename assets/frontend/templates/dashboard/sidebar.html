@@ -1,15 +1,3 @@
-<style>
-  .full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
-  }
-  .partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
-  }
-</style>
 <div class="side-bar fixed-index-right d-flex align-items-center hide" ng-class="{'active': ctrl.active}" id="filter-side-bar">
     <div class="w-100">
         <a href="#" class="side-bar-toggle" ng-click="ctrl.onsideBarClose()">
@@ -48,7 +36,7 @@
                 <div class="form-group">
                     <label>Amount</label>
                     <select class="select-options form-control" title="Select a status" ng-model="filter_total_amount" ng-change="ctrl.onSelectFilter(filter_total_amount, 'total_amount')"
-                    ng-options="invoice.total_amount for invoice in ctrl.invoiceService.list.result">
+                    ng-options="invoice.total_amount | currency for invoice in ctrl.invoiceService.list.result">
                     </select>
                 </div>
             </form>
